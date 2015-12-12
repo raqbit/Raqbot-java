@@ -4,31 +4,28 @@ import java.io.IOException;
 
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
-import org.pircbotx.User;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import tk.justramon.ircbot.justlogbotx.cmds.CommandSwitch;
 
-public class Core extends ListenerAdapter
+public class Core extends ListenerAdapter<PircBotX>
 {
 	@Override
-	public void onGenericMessage(GenericMessageEvent event) throws IOException
+	public void onGenericMessage(GenericMessageEvent<PircBotX> event) throws IOException
 	{
 		String[] args = event.getMessage().split(" ");
-		String msg = event.getMessage();
-		User user = event.getUser();
+
 		if(args[0].startsWith("?"))
-		{
 			CommandSwitch.exe(event, args);
-			
-		}
+
 		Log.exe(event, args);
 	}
+	
 	public static void main(String[] args) throws Exception
 	{
 		//Configure what we want our bot to do
-		Configuration configuration = new Configuration.Builder()
+		Configuration<PircBotX> configuration = new Configuration.Builder<PircBotX>()
 				.setName("JustLogBotX") //Set the nick of the bot. CHANGE IN YOUR CODE
 				.setServerHostname("irc.esper.net") //Join the freenode network
 				.addAutoJoinChannel("#bl4ckb0tTest") //Join the official #pircbotx channel

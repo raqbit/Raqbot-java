@@ -3,6 +3,7 @@ package tk.justramon.ircbot.justlogbotx.cmds;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
+import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import tk.justramon.ircbot.justlogbotx.Log;
@@ -10,7 +11,7 @@ import tk.justramon.ircbot.justlogbotx.Log;
 public class Clear
 {
 
-	public static void exe(GenericMessageEvent event, String[] args) throws IOException
+	public static void exe(GenericMessageEvent<PircBotX> event, String[] args) throws IOException
 	{
 		if(event.getUser().getNick().equals("JustRamon"))
 		{
