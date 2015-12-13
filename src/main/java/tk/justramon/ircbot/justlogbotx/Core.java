@@ -5,14 +5,13 @@ import java.io.IOException;
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
-import org.pircbotx.hooks.types.GenericMessageEvent;
+import org.pircbotx.hooks.events.MessageEvent;
 
 import tk.justramon.ircbot.justlogbotx.cmds.CommandSwitch;
 
 public class Core extends ListenerAdapter<PircBotX>
 {
-	@Override
-	public void onGenericMessage(GenericMessageEvent<PircBotX> event) throws IOException
+	public void onMessage(MessageEvent<PircBotX> event) throws IOException
 	{
 		String[] args = event.getMessage().split(" ");
 
@@ -29,6 +28,7 @@ public class Core extends ListenerAdapter<PircBotX>
 				.setName("JustLogBotX")
 				.setServerHostname("irc.esper.net")
 				.addAutoJoinChannel("#JustRamon")
+				.addAutoJoinChannel("#bl4ckb0tTest")
 				.addListener(new Core())
 				.buildConfiguration();
 

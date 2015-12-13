@@ -3,11 +3,11 @@ package tk.justramon.ircbot.justlogbotx.cmds;
 import java.io.IOException;
 
 import org.pircbotx.PircBotX;
-import org.pircbotx.hooks.types.GenericMessageEvent;
+import org.pircbotx.hooks.events.MessageEvent;
 
 public class CommandSwitch
 {
-	public static void exe(GenericMessageEvent<PircBotX> event, String[] args) throws IOException
+	public static void exe(MessageEvent<PircBotX> event, String[] args) throws IOException
 	{
 		switch(args[0].substring(1))
 		{

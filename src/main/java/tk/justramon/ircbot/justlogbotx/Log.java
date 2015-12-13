@@ -5,52 +5,62 @@ import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
-import org.pircbotx.hooks.types.GenericMessageEvent;
+import org.pircbotx.hooks.events.MessageEvent;
 
 public class Log
 {
-	static File log = new File("log" + ".txt");
-	static File exeptionsfile = new File("exeptions" + ".txt");
-	public static void exe(GenericMessageEvent<PircBotX> event, String[] args) throws IOException
+	private static File exceptionsfile = new File("exceptions" + ".txt");
+	
+	public static void exe(MessageEvent<PircBotX> event, String[] args) throws IOException
 	{
+		File logfolder = new File("logs");
+		
+		if(!logfolder.exists())
+			logfolder.mkdirs();
+		
+		File log = getLog(event.getChannel());
+		
 		if(!log.exists())
 			log.createNewFile();
+
+		if(!exceptionsfile.exists())
+			exceptionsfile.createNewFile();
 		
-		if(!exeptionsfile.exists())
-			exeptionsfile.createNewFile();
+		List<String> exceptions = FileUtils.readLines(exceptionsfile);
 		
-		List<String> exeptions = FileUtils.readLines(exeptionsfile);
-		if(startsWithAndContains(exeptions, event.getMessage()))
+		if(startsWithAndContains(exceptions, event.getMessage()))
 			return;
-		
+
 		if(args[0].startsWith("?") || event.getUser().getNick().endsWith("esper.net"))
 			return;
 
 		List<String> msglist = FileUtils.readLines(log);
-		
+
 		msglist.add(event.getTimestamp() + " <" + event.getUser().getNick() + "> " + event.getMessage());
-		FileUtils.writeLines(log,msglist);
+		FileUtils.writeLines(log, msglist);
 	}
 
-	public static File getLog()
+	public static File getLog(Channel channel)
 	{
-		return log;
+		return new File("logs/" + channel.getName().substring(1) + ".txt");
 	}
 
-public static boolean startsWithAndContains(List<String> list, String line)
-{
-    for(String s : list)
-    {
-        if(line.startsWith(s))
-            return true;
-    }
+	/**
+	 * Checks wether the line starts with an element from the list
+	 * @param list The list
+	 * @param line The line
+	 * @return True if the line starts with an element from the list, false if not
+	 */
+	public static boolean startsWithAndContains(List<String> list, String line)
+	{
+		for(String s : list)
+		{
+			if(line.startsWith(s))
+				return true;
+		}
 
-    return false;
-}
-
-
- 
-
- 
+		return false;
+	}
 }
