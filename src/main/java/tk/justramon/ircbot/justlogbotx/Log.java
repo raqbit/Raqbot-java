@@ -11,13 +11,21 @@ import org.pircbotx.hooks.types.GenericMessageEvent;
 public class Log
 {
 	static File log = new File("log" + ".txt");
+	static File exeptionsfile = new File("exeptions" + ".txt");
 	public static void exe(GenericMessageEvent<PircBotX> event, String[] args) throws IOException
 	{
-		if(args[0].startsWith("?") || event.getUser().getNick().endsWith("esper.net"))
-			return;
-		
 		if(!log.exists())
 			log.createNewFile();
+		
+		if(!exeptionsfile.exists())
+			exeptionsfile.createNewFile();
+		
+		List<String> exeptions = FileUtils.readLines(exeptionsfile);
+		if(startsWithAndContains(exeptions, event.getMessage()))
+			return;
+		
+		if(args[0].startsWith("?") || event.getUser().getNick().endsWith("esper.net"))
+			return;
 
 		List<String> msglist = FileUtils.readLines(log);
 		
@@ -29,4 +37,20 @@ public class Log
 	{
 		return log;
 	}
+
+public static boolean startsWithAndContains(List<String> list, String line)
+{
+    for(String s : list)
+    {
+        if(line.startsWith(s))
+            return true;
+    }
+
+    return false;
+}
+
+
+ 
+
+ 
 }

@@ -26,10 +26,10 @@ public class Core extends ListenerAdapter<PircBotX>
 	{
 		//Configure what we want our bot to do
 		Configuration<PircBotX> configuration = new Configuration.Builder<PircBotX>()
-				.setName("JustLogBotX") //Set the nick of the bot. CHANGE IN YOUR CODE
-				.setServerHostname("irc.esper.net") //Join the freenode network
-				.addAutoJoinChannel("#bl4ckb0tTest") //Join the official #pircbotx channel
-				.addListener(new Core()) //Add our listener that will be called on Events
+				.setName("JustLogBotX")
+				.setServerHostname("irc.esper.net")
+				.addAutoJoinChannel("#JustRamon")
+				.addListener(new Core())
 				.buildConfiguration();
 
 		//Create our bot with the configuration

@@ -19,7 +19,7 @@ public class Request
 			case "m": evaluate(args, event, "m"); break;
 			case "h": evaluate(args, event, "h"); break;
 			case "d": evaluate(args, event, "d"); break;
-			default: event.respond("That's not a valid argument. Use \"d\" for days or \"h\" for hours"); break;
+			default: event.respond("That's not a valid argument. Use \"d\" for days, \"h\" for hours or \"m\" for minutes"); break;
 		}
 	}
 	
