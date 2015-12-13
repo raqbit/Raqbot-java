@@ -40,7 +40,7 @@ public class Request
 	}
 
 	/**
-	 * Gets all messages within booh easteregg the calculated time and sends them to the user
+	 * Gets all messages within the calculated time and sends them to the user
 	 * @param event The event triggered by the command message
 	 * @param currentTimestamp The current UNIX time
 	 * @param multiplier How many hours/days etc. should be looked up
