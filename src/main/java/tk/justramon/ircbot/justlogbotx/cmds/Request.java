@@ -16,10 +16,10 @@ public class Request
 	{
 		switch(args[1].toLowerCase())
 		{
-			case "m": evaluate(args, event, "m"); break;
-			case "h": evaluate(args, event, "h"); break;
-			case "d": evaluate(args, event, "d"); break;
-			default: event.respond("That's not a valid argument. Use \"d\" for days, \"h\" for hours or \"m\" for minutes"); break;
+		case "m": evaluate(args, event, "m"); break;
+		case "h": evaluate(args, event, "h"); break;
+		case "d": evaluate(args, event, "d"); break;
+		default: event.respond("That's not a valid argument. Use \"d\" for days, \"h\" for hours or \"m\" for minutes"); break;
 		}
 	}
 
@@ -32,11 +32,17 @@ public class Request
 	public static void evaluate(String[] args, MessageEvent<PircBotX> event, String type) throws IOException
 	{
 		long currentTimestamp = event.getTimestamp();
-
-		if(args[2] != null && Integer.parseInt(args[2]) > 1)
-			sendLines(event, currentTimestamp, Integer.parseInt(args[2]), getTypeSpan(type));
-		else
-			sendLines(event, currentTimestamp, 1, getTypeSpan(type));
+		try
+		{
+			if(args[2] != null && Integer.parseInt(args[2]) > 1)
+				sendLines(event, currentTimestamp, Integer.parseInt(args[2]), getTypeSpan(type));
+			else
+				sendLines(event, currentTimestamp, 1, getTypeSpan(type));
+		}
+		catch(NumberFormatException e)
+		{
+			event.respond("That's not a valid amount.");
+		}
 	}
 
 	/**
@@ -73,12 +79,12 @@ public class Request
 		else
 		{
 			String extraDashes = "";
-			
+
 			for(int i = 0; i < event.getChannel().getName().length(); i++)
 			{
 				extraDashes += "-";
 			}
-			
+
 			event.getUser().send().message("--------------------" + extraDashes + "--------------------");
 		}
 	}
@@ -120,10 +126,10 @@ public class Request
 	{
 		switch(type)
 		{
-			case "m": return 60;
-			case "h": return 3600;
-			case "d": return 86400;
-			default: return 0;
+		case "m": return 60;
+		case "h": return 3600;
+		case "d": return 86400;
+		default: return 0;
 		}
 	}
 }
