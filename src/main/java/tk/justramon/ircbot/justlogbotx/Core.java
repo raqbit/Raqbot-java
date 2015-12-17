@@ -24,8 +24,6 @@ public class Core extends ListenerAdapter<PircBotX>
 		Log.exe(event, args);
 	}
 	
-	private static File devFile = new File("dev" + ".txt");
-	
 	public static void main(String[] args) throws Exception
 	{
 		if(args.length > 0 && args[0].equals("-wip"))
