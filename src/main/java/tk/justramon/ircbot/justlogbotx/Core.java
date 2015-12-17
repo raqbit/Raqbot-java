@@ -28,10 +28,10 @@ public class Core extends ListenerAdapter<PircBotX>
 	
 	public static void main(String[] args) throws Exception
 	{
-		if(devFile.exists())
+		if(args.length > 0 && args[0].equals("-wip"))
 		{
 			Configuration<PircBotX> configuration = new Configuration.Builder<PircBotX>()
-					.setName(FileUtils.readFileToString(devFile))
+					.setName(args.length > 1 ? args[1] : "JustLogBotDev")
 					.setServerHostname("irc.esper.net")
 					.addAutoJoinChannel("#bl4ckb0tTest")
 					.addListener(new Core())
