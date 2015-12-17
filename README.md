@@ -7,7 +7,7 @@ Basic usage is like this:
 
 **?clear**: Clears the log for the chan the command is executed in. (Only works for people whitelisted in ops.txt)
 
-**?request <d/h/m> [int]**: Sends you the messages in the specified timeframe in a pm.
+**?request [d/h/m] [int]**: Sends you the messages in the specified timeframe in a pm.
 
 **?about**: Sends info about the bot.
 
