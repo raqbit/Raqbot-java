@@ -9,6 +9,8 @@ Basic usage is like this:
 
 **?request <d/h/m> [int]**: Sends you the messages in the specified timeframe in a pm.
 
+**?about**: Sends info about the bot.
+
 ##Exeptions
 **JustLogBotX** will ignore:
 * His own commands
