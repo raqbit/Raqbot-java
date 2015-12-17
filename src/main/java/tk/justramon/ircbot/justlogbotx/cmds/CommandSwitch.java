@@ -13,6 +13,7 @@ public class CommandSwitch
 		{
 			case "request": Request.exe(event, args); break;
 			case "clear": Clear.exe(event, args); break;
+			case "about": About.exe(event, args); break;
 			default: break;
 		}
 	}

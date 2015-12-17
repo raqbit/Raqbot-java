@@ -1,7 +1,10 @@
 package tk.justramon.ircbot.justlogbotx;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
@@ -21,20 +24,33 @@ public class Core extends ListenerAdapter<PircBotX>
 		Log.exe(event, args);
 	}
 	
+	private static File devFile = new File("dev" + ".txt");
+	
 	public static void main(String[] args) throws Exception
 	{
+		if(devFile.exists())
+		{
+			Configuration<PircBotX> configuration = new Configuration.Builder<PircBotX>()
+					.setName(FileUtils.readFileToString(devFile))
+					.setServerHostname("irc.esper.net")
+					.addAutoJoinChannel("#bl4ckb0tTest")
+					.addListener(new Core())
+					.buildConfiguration();
+			PircBotX bot = new PircBotX(configuration);
+			bot.startBot();
+		}
+		else
+		{
 		//Configure what we want our bot to do
 		Configuration<PircBotX> configuration = new Configuration.Builder<PircBotX>()
 				.setName("JustLogBotX")
 				.setServerHostname("irc.esper.net")
 				.addAutoJoinChannel("#JustRamon")
-				.addAutoJoinChannel("#bl4ckb0tTest")
+				.addAutoJoinChannel("#bl4ckscor3")
 				.addListener(new Core())
 				.buildConfiguration();
-
-		//Create our bot with the configuration
 		PircBotX bot = new PircBotX(configuration);
-		//Connect to the server
 		bot.startBot();
+		}
 	}
 }
