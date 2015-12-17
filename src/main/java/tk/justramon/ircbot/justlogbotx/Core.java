@@ -1,10 +1,7 @@
 package tk.justramon.ircbot.justlogbotx;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
-import org.apache.commons.io.FileUtils;
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
