@@ -14,6 +14,7 @@ public class CommandSwitch
 			case "request": Request.exe(event, args); break;
 			case "clear": Clear.exe(event, args); break;
 			case "about": About.exe(event, args); break;
+			case "help": Help.exe(event, args);
 			default: break;
 		}
 	}

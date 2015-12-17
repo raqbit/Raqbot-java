@@ -42,6 +42,7 @@ public class Core extends ListenerAdapter<PircBotX>
 				.setServerHostname("irc.esper.net")
 				.addAutoJoinChannel("#JustRamon")
 				.addAutoJoinChannel("#bl4ckscor3")
+				.addAutoJoinChannel("#shadowchild")
 				.addListener(new Core())
 				.buildConfiguration();
 		PircBotX bot = new PircBotX(configuration);
