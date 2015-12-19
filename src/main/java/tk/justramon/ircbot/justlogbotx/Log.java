@@ -11,7 +11,6 @@ import org.pircbotx.hooks.events.MessageEvent;
 
 public class Log
 {
-	private static File exceptionsfile = new File("exceptions" + ".txt");
 	
 	public static void exe(MessageEvent<PircBotX> event, String[] args) throws IOException
 	{
@@ -24,14 +23,6 @@ public class Log
 		
 		if(!log.exists())
 			log.createNewFile();
-
-		if(!exceptionsfile.exists())
-			exceptionsfile.createNewFile();
-		
-		List<String> exceptions = FileUtils.readLines(exceptionsfile);
-		
-		if(startsWithAndContains(exceptions, event.getMessage()))
-			return;
 
 		if(args[0].startsWith("?") || event.getUser().getNick().endsWith("esper.net"))
 			return;
@@ -53,14 +44,4 @@ public class Log
 	 * @param line The line
 	 * @return True if the line starts with an element from the list, false if not
 	 */
-	public static boolean startsWithAndContains(List<String> list, String line)
-	{
-		for(String s : list)
-		{
-			if(line.startsWith(s))
-				return true;
-		}
-
-		return false;
-	}
 }
