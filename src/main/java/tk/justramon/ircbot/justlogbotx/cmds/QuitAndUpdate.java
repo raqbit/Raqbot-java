@@ -52,10 +52,6 @@ public class QuitAndUpdate
 			new ProcessBuilder(updatecommand).start();
 			quit(event);
 		}
-		else
-		{
-			event.getChannel().send().message("You do not have permission to use that command");
-		}
 	}
 
 	public static int getJarInt(Boolean opposite) throws URISyntaxException
