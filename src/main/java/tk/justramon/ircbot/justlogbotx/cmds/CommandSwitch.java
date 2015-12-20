@@ -1,7 +1,5 @@
 package tk.justramon.ircbot.justlogbotx.cmds;
 
-import java.io.IOException;
-
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.events.MessageEvent;
 

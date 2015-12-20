@@ -12,7 +12,6 @@ import java.util.List;
 
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.events.MessageEvent;
-import org.pircbotx.output.OutputIRC;
 
 import tk.justramon.ircbot.justlogbotx.Core;
 import tk.justramon.ircbot.justlogbotx.Ops;
@@ -25,8 +24,7 @@ public class QuitAndUpdate
 		{
 			event.respond("bye!");
 			Thread.sleep(2000);
-			OutputIRC irc = new OutputIRC(Core.bot);
-			irc.quitServer();
+			Core.bot.sendIRC().quitServer();
 		}
 	}
 
@@ -46,8 +44,7 @@ public class QuitAndUpdate
 			file.getChannel().transferFrom(url, 0, Long.MAX_VALUE);
 			file.close();
 			new ProcessBuilder(updatecommand).start();
-			OutputIRC irc = new OutputIRC(Core.bot);
-			irc.quitServer();
+			Core.bot.sendIRC().quitServer();
 			//quit(event);
 		}
 	}
