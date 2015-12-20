@@ -1,16 +1,19 @@
 package tk.justramon.ircbot.justlogbotx;
 
-import java.io.IOException;
+import java.io.File;
 
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 
+import tk.justramon.ircbot.justlogbotx.NotImportant.Passwords;
 import tk.justramon.ircbot.justlogbotx.cmds.CommandSwitch;
+import tk.justramon.ircbot.justlogbotx.cmds.QuitAndUpdate;
 
 public class Core extends ListenerAdapter<PircBotX>
 {
+	public static PircBotX bot;
 	public void onMessage(MessageEvent<PircBotX> event) throws Exception
 	{
 		String[] args = event.getMessage().split(" ");
@@ -23,6 +26,9 @@ public class Core extends ListenerAdapter<PircBotX>
 	
 	public static void main(String[] args) throws Exception
 	{
+		File oldJar = new File("JustLogBotX" + QuitAndUpdate.getJarInt(true) + ".jar");
+		Thread.sleep(3000);
+		oldJar.delete();
 		if(args.length > 0 && args[0].equals("-wip"))
 		{
 			Configuration<PircBotX> configuration = new Configuration.Builder<PircBotX>()
@@ -31,21 +37,23 @@ public class Core extends ListenerAdapter<PircBotX>
 					.addAutoJoinChannel("#bl4ckb0tTest")
 					.addListener(new Core())
 					.buildConfiguration();
-			PircBotX bot = new PircBotX(configuration);
+			bot = new PircBotX(configuration);
 			bot.startBot();
 		}
 		else
 		{
+			
 		//Configure what we want our bot to do
 		Configuration<PircBotX> configuration = new Configuration.Builder<PircBotX>()
 				.setName("JustLogBotX")
+				.setNickservPassword(Passwords.NICKSERV.getPassword())
 				.setServerHostname("irc.esper.net")
 				.addAutoJoinChannel("#JustRamon")
 				.addAutoJoinChannel("#bl4ckscor3")
 				.addAutoJoinChannel("#shadowchild")
 				.addListener(new Core())
 				.buildConfiguration();
-		PircBotX bot = new PircBotX(configuration);
+		bot = new PircBotX(configuration);
 		bot.startBot();
 		}
 	}

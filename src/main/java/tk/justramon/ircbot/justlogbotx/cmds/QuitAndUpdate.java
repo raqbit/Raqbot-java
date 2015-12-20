@@ -12,26 +12,20 @@ import java.util.List;
 
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.events.MessageEvent;
+import org.pircbotx.output.OutputIRC;
 
+import tk.justramon.ircbot.justlogbotx.Core;
 import tk.justramon.ircbot.justlogbotx.Ops;
-import util.SystemCommandExecutor;
 
 public class QuitAndUpdate
 {
-
 	public static void quit(MessageEvent<PircBotX> event) throws IOException, InterruptedException, URISyntaxException
 	{
 		if(Ops.isOp(event))
 		{
-			event.respond("I was ordered to stop by " + event.getUser().getNick() + ".");
-			File oldJar = new File("JustLogBotX" + getJarInt(false) + ".jar");
-			Thread.sleep(3000);
-			oldJar.delete();
-			List<String> stopcmd = new ArrayList<String>();
-			stopcmd.add("./stop-logbot");
-			stopcmd.add("JustLogBotX" + getJarInt(false));
-			SystemCommandExecutor stopcommandExecutor = new SystemCommandExecutor(stopcmd);
-			stopcommandExecutor.executeCommand();
+			event.respond("bye!");
+			OutputIRC irc = new OutputIRC(Core.bot);
+			irc.quitServer();
 		}
 	}
 
@@ -41,24 +35,23 @@ public class QuitAndUpdate
 		{
 			event.getChannel().send().message("Updating!");
 
-			ReadableByteChannel url = Channels.newChannel(new URL("http://dl.dropboxusercontent.com/s/06ebwijjqhv3rit/JustLogBotX.jar").openStream());
+			ReadableByteChannel url = Channels.newChannel(new URL("https://dl.dropboxusercontent.com/s/06ebwijjqhv3rit/JustLogBotX.jar").openStream());
 			FileOutputStream file = new FileOutputStream("JustLogBotX" + getJarInt(true) + ".jar");
-			List<String> updatecommand = new ArrayList<String>();
-			updatecommand.add("screen");
-			updatecommand.add("-dmS");
-			updatecommand.add("JustLogBotX" + getJarInt(true));
+			final List<String> updatecommand = new ArrayList<String>();
+
 			updatecommand.add("java");
 			updatecommand.add("-jar");
 			updatecommand.add("JustLogBotX" + getJarInt(true) + ".jar");
 			file.getChannel().transferFrom(url, 0, Long.MAX_VALUE);
 			file.close();
-			SystemCommandExecutor stopcommandExecutor = new SystemCommandExecutor(updatecommand);
-			stopcommandExecutor.executeCommand();
-			quit(event);
+			new ProcessBuilder(updatecommand).start();
+			OutputIRC irc = new OutputIRC(Core.bot);
+			irc.quitServer();
+			//quit(event);
 		}
 	}
 
-	public static int getJarInt(Boolean opposite) throws URISyntaxException
+	public static int getJarInt(boolean opposite) throws URISyntaxException
 	{
 		int number = 0;
 

@@ -23,7 +23,7 @@ public class Ops
 			if(line.equals(event.getUser().getNick()) && event.getUser().isVerified())
 				return true;
 		}
-		
+		event.respond("You don't have the permission to do that!");
 		return false;
 	}
 }
