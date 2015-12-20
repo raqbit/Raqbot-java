@@ -33,8 +33,13 @@ public class Core extends ListenerAdapter<PircBotX>
 		{
 			Configuration<PircBotX> configuration = new Configuration.Builder<PircBotX>()
 					.setName(args.length > 1 ? args[1] : "JustLogBotDev")
+					.setLogin("JustLogBotX")
+					.setRealName("Just LogBot X.")
+					.setAutoReconnect(true)
 					.setServerHostname("irc.esper.net")
 					.addAutoJoinChannel("#bl4ckb0tTest")
+					.setAutoNickChange(true)
+					.setCapEnabled(true)
 					.addListener(new Core())
 					.buildConfiguration();
 			bot = new PircBotX(configuration);
@@ -47,10 +52,15 @@ public class Core extends ListenerAdapter<PircBotX>
 		Configuration<PircBotX> configuration = new Configuration.Builder<PircBotX>()
 				.setName("JustLogBotX")
 				.setNickservPassword(Passwords.NICKSERV.getPassword())
+				.setLogin("JustLogBotX")
+				.setRealName("Just LogBot X.")
+				.setAutoReconnect(true)
 				.setServerHostname("irc.esper.net")
 				.addAutoJoinChannel("#JustRamon")
 				.addAutoJoinChannel("#bl4ckscor3")
 				.addAutoJoinChannel("#shadowchild")
+				.setAutoNickChange(true)
+				.setCapEnabled(true)
 				.addListener(new Core())
 				.buildConfiguration();
 		bot = new PircBotX(configuration);
