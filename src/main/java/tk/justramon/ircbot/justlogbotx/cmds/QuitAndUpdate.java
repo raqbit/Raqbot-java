@@ -24,6 +24,7 @@ public class QuitAndUpdate
 		if(Ops.isOp(event))
 		{
 			event.respond("bye!");
+			Thread.sleep(2000);
 			OutputIRC irc = new OutputIRC(Core.bot);
 			irc.quitServer();
 		}
