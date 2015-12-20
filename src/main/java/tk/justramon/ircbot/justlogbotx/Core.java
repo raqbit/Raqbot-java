@@ -11,7 +11,7 @@ import tk.justramon.ircbot.justlogbotx.cmds.CommandSwitch;
 
 public class Core extends ListenerAdapter<PircBotX>
 {
-	public void onMessage(MessageEvent<PircBotX> event) throws IOException
+	public void onMessage(MessageEvent<PircBotX> event) throws Exception
 	{
 		String[] args = event.getMessage().split(" ");
 

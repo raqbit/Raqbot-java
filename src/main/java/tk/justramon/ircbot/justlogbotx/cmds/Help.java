@@ -6,7 +6,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 
 public class Help
 {
-	public static void exe(MessageEvent<PircBotX> event, String[] args)
+	public static void exe(MessageEvent<PircBotX> event)
 	{
 		event.getUser().send().message("--------------------" + "Help" + "--------------------");
 		event.getUser().send().message(Colors.BOLD + "?request <d,h,m> <int>" + Colors.NORMAL + " - Sends the user the messages sent in the current channel, in the specified timeframe.");
