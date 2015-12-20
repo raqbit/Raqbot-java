@@ -19,14 +19,17 @@ import util.SystemCommandExecutor;
 public class QuitAndUpdate
 {
 
-	public static void quit(MessageEvent<PircBotX> event) throws IOException, InterruptedException
+	public static void quit(MessageEvent<PircBotX> event) throws IOException, InterruptedException, URISyntaxException
 	{
 		if(Ops.isOp(event))
 		{
 			event.respond("I was ordered to stop by " + event.getUser().getNick() + ".");
+			File oldJar = new File("JustLogBotX" + getJarInt(false) + ".jar");
+			Thread.sleep(3000);
+			oldJar.delete();
 			List<String> stopcmd = new ArrayList<String>();
 			stopcmd.add("./stop-logbot");
-
+			stopcmd.add("JustLogBotX" + getJarInt(false));
 			SystemCommandExecutor stopcommandExecutor = new SystemCommandExecutor(stopcmd);
 			stopcommandExecutor.executeCommand();
 		}
@@ -40,7 +43,7 @@ public class QuitAndUpdate
 
 			ReadableByteChannel url = Channels.newChannel(new URL("http://dl.dropboxusercontent.com/s/06ebwijjqhv3rit/JustLogBotX.jar").openStream());
 			FileOutputStream file = new FileOutputStream("JustLogBotX" + getJarInt(true) + ".jar");
-			final ArrayList<String> updatecommand = new ArrayList<String>();
+			List<String> updatecommand = new ArrayList<String>();
 			updatecommand.add("screen");
 			updatecommand.add("-dmS");
 			updatecommand.add("JustLogBotX" + getJarInt(true));
@@ -49,7 +52,8 @@ public class QuitAndUpdate
 			updatecommand.add("JustLogBotX" + getJarInt(true) + ".jar");
 			file.getChannel().transferFrom(url, 0, Long.MAX_VALUE);
 			file.close();
-			new ProcessBuilder(updatecommand).start();
+			SystemCommandExecutor stopcommandExecutor = new SystemCommandExecutor(updatecommand);
+			stopcommandExecutor.executeCommand();
 			quit(event);
 		}
 	}
