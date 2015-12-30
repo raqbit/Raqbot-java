@@ -12,9 +12,9 @@ public class CommandSwitch
 			case "request": Request.exe(event, args); break;
 			case "clear": Clear.exe(event, args); break;
 			case "about": About.exe(event); break;
-			case "help": Help.exe(event);
-			case "quit": QuitAndUpdate.quit(event);
-			case "update": QuitAndUpdate.update(event);
+			case "help": Help.exe(event); break;
+			case "quit": QuitAndUpdate.quit(event); break;
+			case "update": QuitAndUpdate.update(event); break;
 			default: break;
 		}
 	}
