@@ -16,8 +16,12 @@ public class Core extends ListenerAdapter<PircBotX>
 	public static PircBotX bot;
 	public void onMessage(MessageEvent<PircBotX> event) throws Exception
 	{
-		if(event.getMessage().toLowerCase().contains("*lennyface*") || event.getMessage().toLowerCase().contains("*lenny face*"))
-			event.respond("( ͡° ͜ʖ ͡°)");
+		if(XtraFunc.isAllowed(event))
+		{
+			if(event.getMessage().toLowerCase().contains("*lennyface*") || event.getMessage().toLowerCase().contains("*lenny face*"))
+				event.respond("( ͡° ͜ʖ ͡°)");
+		}
+
 		String[] args = event.getMessage().split(" ");
 
 		if(args[0].startsWith("?"))
@@ -25,7 +29,7 @@ public class Core extends ListenerAdapter<PircBotX>
 
 		Log.exe(event, args);
 	}
-	
+
 	public static void main(String[] args) throws Exception
 	{
 		File oldJar = new File("JustLogBotX" + QuitAndUpdate.getJarInt(true) + ".jar");
@@ -49,24 +53,24 @@ public class Core extends ListenerAdapter<PircBotX>
 		}
 		else
 		{
-			
-		//Configure what we want our bot to do
-		Configuration<PircBotX> configuration = new Configuration.Builder<PircBotX>()
-				.setName("JustABotX")
-				.setNickservPassword(Passwords.NICKSERV.getPassword())
-				.setLogin("JustABotX")
-				.setRealName("Just a Bot X.")
-				.setAutoReconnect(true)
-				.setServerHostname("irc.esper.net")
-				.addAutoJoinChannel("#JustRamon")
-				.addAutoJoinChannel("#bl4ckscor3")
-				.addAutoJoinChannel("#shadowchild")
-				.setAutoNickChange(true)
-				.setCapEnabled(true)
-				.addListener(new Core())
-				.buildConfiguration();
-		bot = new PircBotX(configuration);
-		bot.startBot();
+
+			//Configure what we want our bot to do
+			Configuration<PircBotX> configuration = new Configuration.Builder<PircBotX>()
+					.setName("JustABotX")
+					.setNickservPassword(Passwords.NICKSERV.getPassword())
+					.setLogin("JustABotX")
+					.setRealName("Just a Bot X.")
+					.setAutoReconnect(true)
+					.setServerHostname("irc.esper.net")
+					.addAutoJoinChannel("#JustRamon")
+					.addAutoJoinChannel("#bl4ckscor3")
+					.addAutoJoinChannel("#shadowchild")
+					.setAutoNickChange(true)
+					.setCapEnabled(true)
+					.addListener(new Core())
+					.buildConfiguration();
+			bot = new PircBotX(configuration);
+			bot.startBot();
 		}
 	}
 }
