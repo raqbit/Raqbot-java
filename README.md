@@ -14,6 +14,4 @@ Basic usage is like this:
 **?help**: Sends you the help menu.
 
 ##Exeptions
-**JustABotX** will ignore logging:
-* His own commands
-* EsperNet logon messages.
+**JustABotX** will ignore logging messages with his own commands and EsperNet logon messages.
