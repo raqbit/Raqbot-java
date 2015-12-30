@@ -1,4 +1,4 @@
-package tk.justramon.ircbot.justlogbotx.cmds;
+package tk.justramon.ircbot.justabotx.cmds;
 
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.events.MessageEvent;

@@ -1,4 +1,4 @@
-package tk.justramon.ircbot.justlogbotx;
+package tk.justramon.ircbot.justabotx;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package tk.justramon.ircbot.justlogbotx;
+package tk.justramon.ircbot.justabotx;
 
 import java.io.File;
 
@@ -7,9 +7,9 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 
-import tk.justramon.ircbot.justlogbotx.NotImportant.Passwords;
-import tk.justramon.ircbot.justlogbotx.cmds.CommandSwitch;
-import tk.justramon.ircbot.justlogbotx.cmds.QuitAndUpdate;
+import tk.justramon.ircbot.justabotx.NotImportant.Passwords;
+import tk.justramon.ircbot.justabotx.cmds.CommandSwitch;
+import tk.justramon.ircbot.justabotx.cmds.QuitAndUpdate;
 
 public class Core extends ListenerAdapter<PircBotX>
 {
@@ -34,7 +34,7 @@ public class Core extends ListenerAdapter<PircBotX>
 		if(args.length > 0 && args[0].equals("-wip"))
 		{
 			Configuration<PircBotX> configuration = new Configuration.Builder<PircBotX>()
-					.setName(args.length > 1 ? args[1] : "JustLogBotDev")
+					.setName(args.length > 1 ? args[1] : "JustABotDev")
 					.setLogin("JustLogBotX")
 					.setRealName("Just LogBot X.")
 					.setAutoReconnect(true)
@@ -52,10 +52,10 @@ public class Core extends ListenerAdapter<PircBotX>
 			
 		//Configure what we want our bot to do
 		Configuration<PircBotX> configuration = new Configuration.Builder<PircBotX>()
-				.setName("JustLogBotX")
+				.setName("JustABotX")
 				.setNickservPassword(Passwords.NICKSERV.getPassword())
-				.setLogin("JustLogBotX")
-				.setRealName("Just LogBot X.")
+				.setLogin("JustABotX")
+				.setRealName("Just a Bot X.")
 				.setAutoReconnect(true)
 				.setServerHostname("irc.esper.net")
 				.addAutoJoinChannel("#JustRamon")

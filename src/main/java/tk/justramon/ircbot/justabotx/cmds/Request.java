@@ -1,4 +1,4 @@
-package tk.justramon.ircbot.justlogbotx.cmds;
+package tk.justramon.ircbot.justabotx.cmds;
 
 import java.io.IOException;
 import java.util.Date;
@@ -8,7 +8,7 @@ import org.apache.commons.io.FileUtils;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.events.MessageEvent;
 
-import tk.justramon.ircbot.justlogbotx.Log;
+import tk.justramon.ircbot.justabotx.Log;
 
 public class Request
 {

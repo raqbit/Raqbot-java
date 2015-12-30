@@ -1,4 +1,4 @@
-package tk.justramon.ircbot.justlogbotx.cmds;
+package tk.justramon.ircbot.justabotx.cmds;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,8 +13,8 @@ import java.util.List;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.events.MessageEvent;
 
-import tk.justramon.ircbot.justlogbotx.Core;
-import tk.justramon.ircbot.justlogbotx.Ops;
+import tk.justramon.ircbot.justabotx.Core;
+import tk.justramon.ircbot.justabotx.Ops;
 
 public class QuitAndUpdate
 {
@@ -25,6 +25,7 @@ public class QuitAndUpdate
 			event.respond("bye!");
 			Thread.sleep(2000);
 			Core.bot.sendIRC().quitServer();
+			System.exit(1);
 		}
 	}
 
@@ -35,12 +36,12 @@ public class QuitAndUpdate
 			event.getChannel().send().message("Updating!");
 
 			ReadableByteChannel url = Channels.newChannel(new URL("https://dl.dropboxusercontent.com/s/06ebwijjqhv3rit/JustLogBotX.jar").openStream());
-			FileOutputStream file = new FileOutputStream("JustLogBotX" + getJarInt(true) + ".jar");
+			FileOutputStream file = new FileOutputStream("JustABotX" + getJarInt(true) + ".jar");
 			final List<String> updatecommand = new ArrayList<String>();
 
 			updatecommand.add("java");
 			updatecommand.add("-jar");
-			updatecommand.add("JustLogBotX" + getJarInt(true) + ".jar");
+			updatecommand.add("JustABotX" + getJarInt(true) + ".jar");
 			file.getChannel().transferFrom(url, 0, Long.MAX_VALUE);
 			file.close();
 			new ProcessBuilder(updatecommand).start();
