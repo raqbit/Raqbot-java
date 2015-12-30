@@ -16,6 +16,8 @@ public class Core extends ListenerAdapter<PircBotX>
 	public static PircBotX bot;
 	public void onMessage(MessageEvent<PircBotX> event) throws Exception
 	{
+		if(event.getMessage().toLowerCase().contains("*lennyface*") || event.getMessage().toLowerCase().contains("*lenny face*"));
+			event.respond("( ͡° ͜ʖ ͡°)");
 		String[] args = event.getMessage().split(" ");
 
 		if(args[0].startsWith("?"))
