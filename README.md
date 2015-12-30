@@ -13,5 +13,7 @@ Basic usage is like this:
 
 **?help**: Sends you the help menu.
 
+He'll also react on "*lenny face*" or any variation of that (with/without space and with higher case letters) by putting a real lenny face in chat.
+
 ##Exeptions
 **JustABotX** will ignore logging messages with his own commands and EsperNet logon messages.
