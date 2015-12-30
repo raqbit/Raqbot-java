@@ -1,8 +1,8 @@
-# JustLogBotX
+# JustABotX
 Logs every channel it's in and allows you to request back every message logged!
 
 ## About
-JustLogBotX is a bot that logs, and can take log requests.
+JustABotX is a bot that logs, and can take log requests.
 Basic usage is like this:
 
 **?clear**: Clears the log for the chan the command is executed in. (Only works for people whitelisted in ops.txt)
@@ -11,8 +11,9 @@ Basic usage is like this:
 
 **?about**: Sends info about the bot.
 
+**?help**: Sends you the help menu.
+
 ##Exeptions
-**JustLogBotX** will ignore:
+**JustABotX** will ignore logging:
 * His own commands
-* Prefixes put into the exeptions.txt file (one exeption per line)
 * EsperNet logon messages.
