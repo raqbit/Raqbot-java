@@ -12,7 +12,7 @@ public class XtraFunc
 {
 	public static boolean isAllowed(MessageEvent<PircBotX> event) throws IOException
 	{
-		File xtrafile = new File("XtraFunk.txt");
+		File xtrafile = new File("XtraFunc.txt");
 		
 		if(!xtrafile.exists())
 			xtrafile.createNewFile();
