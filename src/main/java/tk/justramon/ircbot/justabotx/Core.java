@@ -14,11 +14,13 @@ import tk.justramon.ircbot.justabotx.cmds.QuitAndUpdate;
 public class Core extends ListenerAdapter<PircBotX>
 {
 	public static PircBotX bot;
+	public static boolean enabled = true;
+	public static boolean wip = false;
 	public void onMessage(MessageEvent<PircBotX> event) throws Exception
 	{
 		if(XtraFunc.isAllowed(event))
 		{
-			if(event.getMessage().toLowerCase().contains("*lennyface*") || event.getMessage().toLowerCase().contains("*lenny face*"))
+			if((event.getMessage().toLowerCase().contains("*lennyface*") || event.getMessage().toLowerCase().contains("*lenny face*")) && enabled)
 				event.respond("( ͡° ͜ʖ ͡°)");
 		}
 
@@ -37,6 +39,7 @@ public class Core extends ListenerAdapter<PircBotX>
 		oldJar.delete();
 		if(args.length > 0 && args[0].equals("-wip"))
 		{
+			wip = true;
 			Configuration<PircBotX> configuration = new Configuration.Builder<PircBotX>()
 					.setName(args.length > 1 ? args[1] : "JustABotDev")
 					.setLogin("JustLogBotX")
@@ -72,5 +75,12 @@ public class Core extends ListenerAdapter<PircBotX>
 			bot = new PircBotX(configuration);
 			bot.startBot();
 		}
+	}
+	public static void setState(boolean state)
+	{
+		if(state)
+			enabled = true;
+		else
+			enabled = false;
 	}
 }
