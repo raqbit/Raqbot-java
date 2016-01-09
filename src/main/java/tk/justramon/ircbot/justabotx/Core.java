@@ -3,6 +3,7 @@ package tk.justramon.ircbot.justabotx;
 import java.io.File;
 
 import org.pircbotx.Configuration;
+import org.pircbotx.Configuration.Builder;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -65,14 +66,12 @@ public class Core extends ListenerAdapter<PircBotX>
 					.setRealName("Just a Bot X.")
 					.setAutoReconnect(true)
 					.setServerHostname("irc.esper.net")
-					.addAutoJoinChannel("#JustRamon")
-					.addAutoJoinChannel("#bl4ckscor3")
-					.addAutoJoinChannel("#shadowchild")
 					.setAutoNickChange(true)
 					.setCapEnabled(true)
 					.addListener(new Core())
 					.buildConfiguration();
 			bot = new PircBotX(configuration);
+			Channels.joinAll(bot);
 			bot.startBot();
 		}
 	}
