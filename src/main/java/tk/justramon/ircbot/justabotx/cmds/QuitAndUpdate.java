@@ -36,7 +36,7 @@ public class QuitAndUpdate
 		{
 			event.getChannel().send().message("Updating!");
 
-			ReadableByteChannel url = Channels.newChannel(new URL("https://www.dropbox.com/s/2bfzzat1s9s6363/JustABotX.jar").openStream());
+			ReadableByteChannel url = Channels.newChannel(new URL("https://dl.dropboxusercontent.com/s/2bfzzat1s9s6363/JustABotX.jar").openStream());
 			FileOutputStream file = new FileOutputStream("JustABotX" + getJarInt(true) + ".jar");
 			final List<String> updatecommand = new ArrayList<String>();
 
