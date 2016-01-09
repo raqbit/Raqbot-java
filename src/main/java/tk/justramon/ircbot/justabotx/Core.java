@@ -71,8 +71,9 @@ public class Core extends ListenerAdapter<PircBotX>
 					.addListener(new Core())
 					.buildConfiguration();
 			bot = new PircBotX(configuration);
-			Channels.joinAll(bot);
 			bot.startBot();
+			Thread.sleep(1000);
+			Channels.joinAll(bot);
 		}
 	}
 	public static void setState(boolean state)
