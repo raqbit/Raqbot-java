@@ -1,11 +1,12 @@
 package tk.justramon.ircbot.justabotx;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.pircbotx.Configuration;
-import org.pircbotx.Configuration.Builder;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
+import org.pircbotx.hooks.events.ConnectEvent;
 import org.pircbotx.hooks.events.MessageEvent;
 
 import tk.justramon.ircbot.justabotx.NotImportant.Passwords;
@@ -19,11 +20,8 @@ public class Core extends ListenerAdapter<PircBotX>
 	public static boolean wip = false;
 	public void onMessage(MessageEvent<PircBotX> event) throws Exception
 	{
-		if(XtraFunc.isAllowed(event))
-		{
-			if((event.getMessage().toLowerCase().contains("*lennyface*") || event.getMessage().toLowerCase().contains("*lenny face*")) && enabled)
+			if((event.getMessage().toLowerCase().contains("*lennyface*") || event.getMessage().toLowerCase().contains("*lenny face*")) && enabled && XtraFunc.isAllowed(event))
 				event.respond("( ͡° ͜ʖ ͡°)");
-		}
 
 		String[] args = event.getMessage().split(" ");
 
@@ -31,6 +29,13 @@ public class Core extends ListenerAdapter<PircBotX>
 			CommandSwitch.exe(event, args);
 
 		Log.exe(event, args);
+	}
+	public void onConnect(ConnectEvent<PircBotX> event) throws IOException
+	{
+		if(wip)
+			event.getBot().sendIRC().joinChannel("#bl4ckb0tTest");
+		else
+			Channels.joinAll(event.getBot());
 	}
 
 	public static void main(String[] args) throws Exception
@@ -47,18 +52,15 @@ public class Core extends ListenerAdapter<PircBotX>
 					.setRealName("Just LogBot X.")
 					.setAutoReconnect(true)
 					.setServerHostname("irc.esper.net")
-					.addAutoJoinChannel("#bl4ckb0tTest")
 					.setAutoNickChange(true)
 					.setCapEnabled(true)
 					.addListener(new Core())
 					.buildConfiguration();
-			bot = new PircBotX(configuration);
-			bot.startBot()/*.addLove(Integer.MAX_VALUE)*/;
+					bot = new PircBotX(configuration);
+					bot.startBot()/*.addLove(Integer.MAX_VALUE)*/;
 		}
 		else
 		{
-
-			//Configure what we want our bot to do
 			Configuration<PircBotX> configuration = new Configuration.Builder<PircBotX>()
 					.setName("JustABotX")
 					.setNickservPassword(Passwords.NICKSERV.getPassword())
@@ -70,10 +72,8 @@ public class Core extends ListenerAdapter<PircBotX>
 					.setCapEnabled(true)
 					.addListener(new Core())
 					.buildConfiguration();
-			bot = new PircBotX(configuration);
-			bot.startBot();
-			Thread.sleep(1000);
-			Channels.joinAll(bot);
+					bot = new PircBotX(configuration);
+					bot.startBot();
 		}
 	}
 	public static void setState(boolean state)
