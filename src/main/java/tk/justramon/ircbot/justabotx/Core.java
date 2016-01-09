@@ -49,7 +49,7 @@ public class Core extends ListenerAdapter<PircBotX>
 					.addListener(new Core())
 					.buildConfiguration();
 			bot = new PircBotX(configuration);
-			bot.startBot();
+			bot.startBot()/*.addLove(Integer.MAX_VALUE)*/;
 		}
 		else
 		{
