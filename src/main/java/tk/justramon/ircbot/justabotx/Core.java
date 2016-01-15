@@ -10,6 +10,7 @@ import org.pircbotx.hooks.events.ConnectEvent;
 import org.pircbotx.hooks.events.MessageEvent;
 
 import tk.justramon.ircbot.justabotx.NotImportant.Passwords;
+import tk.justramon.ircbot.justabotx.cmds.ChangeState;
 import tk.justramon.ircbot.justabotx.cmds.CommandSwitch;
 import tk.justramon.ircbot.justabotx.cmds.QuitAndUpdate;
 
@@ -20,15 +21,21 @@ public class Core extends ListenerAdapter<PircBotX>
 	public static boolean wip = false;
 	public void onMessage(MessageEvent<PircBotX> event) throws Exception
 	{
+		String[] args = event.getMessage().split(" ");
+		
+		if(args[0].substring(1).equals("enable"))
+			ChangeState.enable(event);
+		
+		if(Core.enabled)
+		{
+			if(args[0].startsWith("?"))
+				CommandSwitch.exe(event, args);
+			
 			if((event.getMessage().toLowerCase().contains("*lennyface*") || event.getMessage().toLowerCase().contains("*lenny face*")) && enabled && XtraFunc.isAllowed(event))
 				event.respond("( ͡° ͜ʖ ͡°)");
-
-		String[] args = event.getMessage().split(" ");
-
-		if(args[0].startsWith("?"))
-			CommandSwitch.exe(event, args);
-
-		Log.exe(event, args);
+			
+			Log.exe(event, args);
+		}
 	}
 	public void onConnect(ConnectEvent<PircBotX> event) throws IOException
 	{

@@ -42,6 +42,7 @@ public class Request
 		catch(NumberFormatException e)
 		{
 			event.respond("That's not a valid amount.");
+			e.printStackTrace();
 		}
 	}
 
