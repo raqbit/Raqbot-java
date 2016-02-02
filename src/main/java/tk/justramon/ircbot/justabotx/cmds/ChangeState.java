@@ -6,7 +6,7 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.events.MessageEvent;
 
 import tk.justramon.ircbot.justabotx.Core;
-import tk.justramon.ircbot.justabotx.Ops;
+import tk.justramon.ircbot.justabotx.util.Ops;
 
 public class ChangeState
 {
