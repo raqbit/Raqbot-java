@@ -25,7 +25,7 @@ public class Core extends ListenerAdapter<PircBotX>
 	{
 		String[] args = event.getMessage().split(" ");
 		
-		if(args[0].substring(1).equals("enable"))
+		if(args[0].equalsIgnoreCase("?enable"))
 			ChangeState.enable(event);
 		
 		if(Core.enabled)
