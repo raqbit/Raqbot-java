@@ -42,9 +42,7 @@ public class Core extends ListenerAdapter<PircBotX>
 	}
 	public void onConnect(ConnectEvent<PircBotX> event) throws IOException
 	{
-		if(wip)
-			event.getBot().sendIRC().joinChannel("#bl4ckb0tTest");
-		else
+		if(!wip)
 			Channels.joinAll(event.getBot());
 	}
 
@@ -58,8 +56,9 @@ public class Core extends ListenerAdapter<PircBotX>
 			wip = true;
 			Configuration<PircBotX> configuration = new Configuration.Builder<PircBotX>()
 					.setName(args.length > 1 ? args[1] : "JustABotDev")
-					.setLogin("JustLogBotX")
-					.setRealName("Just LogBot X.")
+					.addAutoJoinChannel(args.length > 2 ? args[2] : "#bl4ckb0tTest")
+					.setLogin("JustABotX")
+					.setRealName("Just A Bot X.")
 					.setAutoReconnect(true)
 					.setServerHostname("irc.esper.net")
 					.setAutoNickChange(true)
