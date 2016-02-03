@@ -47,6 +47,7 @@ public class QuitAndUpdate
 			file.close();
 			new ProcessBuilder(updatecommand).start();
 			Core.bot.sendIRC().quitServer();
+			System.exit(0);
 		}
 	}
 
