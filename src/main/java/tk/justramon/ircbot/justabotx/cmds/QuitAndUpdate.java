@@ -40,6 +40,9 @@ public class QuitAndUpdate
 			FileOutputStream file = new FileOutputStream("JustABotX" + getJarInt(true) + ".jar");
 			final List<String> updatecommand = new ArrayList<String>();
 
+			updatecommand.add("screen");
+			updatecommand.add("-dmS");
+			updatecommand.add("JustABotX");
 			updatecommand.add("java");
 			updatecommand.add("-jar");
 			updatecommand.add("JustABotX" + getJarInt(true) + ".jar");

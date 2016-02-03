@@ -48,9 +48,10 @@ public class Core extends ListenerAdapter<PircBotX>
 
 	public static void main(String[] args) throws Exception
 	{
-		File oldJar = new File("JustLogBotX" + QuitAndUpdate.getJarInt(true) + ".jar");
+		File oldJar = new File("JustABotX" + QuitAndUpdate.getJarInt(true) + ".jar");
 		Thread.sleep(3000);
 		oldJar.delete();
+		
 		if(args.length > 0 && args[0].equals("-wip"))
 		{
 			wip = true;
