@@ -26,7 +26,7 @@ public class QuitAndUpdate
 		{
 			event.respond("bye!");
 			Thread.sleep(2000);
-			Core.bot.sendIRC().quitServer();
+			Core.bot.sendIRC().quitServer("I was ordered to quit.");
 			Thread.sleep(2000);
 			System.exit(1);
 		}
