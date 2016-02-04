@@ -26,6 +26,7 @@ public class MsgCmds
 		event.getUser().send().message(Colors.BOLD + "?request <d,h,m> <int>" + Colors.NORMAL + " - Sends the user the messages sent in the current channel, in the specified timeframe.");
 		event.getUser().send().message(Colors.BOLD + "?clear" + Colors.NORMAL + " - Clears the log of the current channel." + Colors.RED + Colors.BOLD + " [op]");
 		event.getUser().send().message(Colors.BOLD + "?help" + Colors.NORMAL + " - Sends this help dialog.");
+		event.getUser().send().message(Colors.BOLD + "?version" + Colors.NORMAL + " - Sends the current JABX version.");
 		event.getUser().send().message(Colors.BOLD + "?about" + Colors.NORMAL + " - Sends an info message.");
 		event.getUser().send().message(Colors.BOLD + "?enable" + Colors.NORMAL + " - Enables JustABotX" + Colors.RED + Colors.BOLD + " [op]");
 		event.getUser().send().message(Colors.BOLD + "?disable" + Colors.NORMAL + " - Disables JustABotX" + Colors.RED + Colors.BOLD + " [op]");
