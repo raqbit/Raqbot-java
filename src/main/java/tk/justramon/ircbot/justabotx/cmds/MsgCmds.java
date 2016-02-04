@@ -36,6 +36,6 @@ public class MsgCmds
 
 	public static void sendVersion(MessageEvent<PircBotX> event)
 	{
-		event.respond("Current version:" + Colors.RED + Core.version);
+		event.getChannel().send().message("Current version: " + Colors.RED + Core.version);
 	}
 }

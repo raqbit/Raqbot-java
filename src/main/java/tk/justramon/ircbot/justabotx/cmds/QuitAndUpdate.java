@@ -120,6 +120,7 @@ public class QuitAndUpdate
 					Core.bot.sendIRC().quitServer();
 					System.exit(0);
 				}
+				versiontxtfile.delete();
 			}
 			catch (IOException | URISyntaxException e)
 			{
