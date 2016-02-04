@@ -1,10 +1,8 @@
 package tk.justramon.ircbot.justabotx.features;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-import org.apache.commons.io.FileUtils;
 import org.pircbotx.Colors;
 
 import com.rometools.rome.feed.synd.SyndEntry;

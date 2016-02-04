@@ -16,7 +16,7 @@ public class MsgCmds
 		}
 		else
 		{
-		event.respond("JustABotX was made by JustRamon with lots of help from bl4ckscor3.");
+		event.respond(Colors.BOLD + "JustABotX" + Colors.NORMAL + "(JABX) was made by JustRamon with lots of help from bl4ckscor3.");
 		}
 	}
 	
@@ -27,16 +27,22 @@ public class MsgCmds
 		event.getUser().send().message(Colors.BOLD + "?clear" + Colors.NORMAL + " - Clears the log of the current channel." + Colors.RED + Colors.BOLD + " [op]");
 		event.getUser().send().message(Colors.BOLD + "?help" + Colors.NORMAL + " - Sends this help dialog.");
 		event.getUser().send().message(Colors.BOLD + "?version" + Colors.NORMAL + " - Sends the current JABX version.");
+		event.getUser().send().message(Colors.BOLD + "?source" + Colors.NORMAL + " - Gives you the link for JABX's source.");
 		event.getUser().send().message(Colors.BOLD + "?about" + Colors.NORMAL + " - Sends an info message.");
-		event.getUser().send().message(Colors.BOLD + "?enable" + Colors.NORMAL + " - Enables JustABotX" + Colors.RED + Colors.BOLD + " [op]");
-		event.getUser().send().message(Colors.BOLD + "?disable" + Colors.NORMAL + " - Disables JustABotX" + Colors.RED + Colors.BOLD + " [op]");
-		event.getUser().send().message(Colors.BOLD + "?update" + Colors.NORMAL + " - Gets the latest version of JustABotX." + Colors.RED + Colors.BOLD + " [op]");
-		event.getUser().send().message(Colors.BOLD + "?quit" + Colors.NORMAL + " - Stops JustABotX" + Colors.RED + Colors.BOLD + " [op]");
+		event.getUser().send().message(Colors.BOLD + "?enable" + Colors.NORMAL + " - Enables JABX" + Colors.RED + Colors.BOLD + " [op]");
+		event.getUser().send().message(Colors.BOLD + "?disable" + Colors.NORMAL + " - Disables JABX" + Colors.RED + Colors.BOLD + " [op]");
+		event.getUser().send().message(Colors.BOLD + "?update" + Colors.NORMAL + " - Gets the latest version of JABX." + Colors.RED + Colors.BOLD + " [op]");
+		event.getUser().send().message(Colors.BOLD + "?quit" + Colors.NORMAL + " - Stops JABX" + Colors.RED + Colors.BOLD + " [op]");
 		event.getUser().send().message("--------------------------------------------");
 	}
 
 	public static void sendVersion(MessageEvent<PircBotX> event)
 	{
 		event.getChannel().send().message("Current version: " + Colors.RED + Core.version);
+	}
+	
+	public static void sendSource(MessageEvent<PircBotX> event)
+	{
+		event.respond("https://github.com/justramon/JustABotX");
 	}
 }

@@ -14,6 +14,7 @@ public class CommandSwitch
 		case "about": MsgCmds.sendAbout(event); break;
 		case "help": MsgCmds.sendHelp(event); break;
 		case "version": MsgCmds.sendVersion(event); break;
+		case "source": MsgCmds.sendSource(event); break;
 		case "quit": QuitAndUpdate.quit(event); break;
 		case "update": QuitAndUpdate.update(event); break;
 		case "disable": ChangeState.disable(event); break;
