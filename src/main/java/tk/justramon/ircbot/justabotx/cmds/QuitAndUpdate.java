@@ -1,8 +1,10 @@
 package tk.justramon.ircbot.justabotx.cmds;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.channels.Channels;
@@ -31,27 +33,12 @@ public class QuitAndUpdate
 		}
 	}
 
-	public static void update(MessageEvent<PircBotX> event) throws Exception
+	public static void update(MessageEvent<PircBotX> event) throws MalformedURLException, IOException, URISyntaxException
 	{
 		if (Ops.isOp(event))
 		{
 			event.getChannel().send().message("Updating!");
-
-			ReadableByteChannel url = Channels.newChannel(new URL("https://dl.dropboxusercontent.com/s/2bfzzat1s9s6363/JustABotX.jar").openStream());
-			FileOutputStream file = new FileOutputStream("JustABotX" + getJarInt(true) + ".jar");
-			final List<String> updatecommand = new ArrayList<String>();
-
-			updatecommand.add("screen");
-			updatecommand.add("-dmS");
-			updatecommand.add("JustABotX");
-			updatecommand.add("java");
-			updatecommand.add("-jar");
-			updatecommand.add("JustABotX" + getJarInt(true) + ".jar");
-			file.getChannel().transferFrom(url, 0, Long.MAX_VALUE);
-			file.close();
-			new ProcessBuilder(updatecommand).start();
-			Core.bot.sendIRC().quitServer();
-			System.exit(0);
+			updateSequence();
 		}
 	}
 
@@ -104,21 +91,7 @@ public class QuitAndUpdate
 				{
 					versiontxtfile.delete();
 					Core.bot.sendIRC().message("#JustRamon", "Update was automatically detected. Updating.");
-					ReadableByteChannel url = Channels.newChannel(new URL("https://dl.dropboxusercontent.com/s/2bfzzat1s9s6363/JustABotX.jar").openStream());
-					FileOutputStream file = new FileOutputStream("JustABotX" + getJarInt(true) + ".jar");
-					final List<String> updatecommand = new ArrayList<String>();
-
-					updatecommand.add("screen");
-					updatecommand.add("-dmS");
-					updatecommand.add("JustABotX");
-					updatecommand.add("java");
-					updatecommand.add("-jar");
-					updatecommand.add("JustABotX" + getJarInt(true) + ".jar");
-					file.getChannel().transferFrom(url, 0, Long.MAX_VALUE);
-					file.close();
-					new ProcessBuilder(updatecommand).start();
-					Core.bot.sendIRC().quitServer();
-					System.exit(0);
+					updateSequence();
 				}
 				versiontxtfile.delete();
 			}
@@ -128,4 +101,23 @@ public class QuitAndUpdate
 			}
 		}
 	};
+	
+	static void updateSequence() throws URISyntaxException, MalformedURLException, IOException
+	{
+		ReadableByteChannel url = Channels.newChannel(new URL("https://dl.dropboxusercontent.com/s/2bfzzat1s9s6363/JustABotX.jar").openStream());
+		FileOutputStream file = new FileOutputStream("JustABotX" + getJarInt(true) + ".jar");
+		final List<String> updatecommand = new ArrayList<String>();
+
+		updatecommand.add("screen");
+		updatecommand.add("-dmS");
+		updatecommand.add("JustABotX");
+		updatecommand.add("java");
+		updatecommand.add("-jar");
+		updatecommand.add("JustABotX" + getJarInt(true) + ".jar");
+		file.getChannel().transferFrom(url, 0, Long.MAX_VALUE);
+		file.close();
+		new ProcessBuilder(updatecommand).start();
+		Core.bot.sendIRC().quitServer();
+		System.exit(0);
+	}
 }
