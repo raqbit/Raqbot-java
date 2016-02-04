@@ -33,7 +33,7 @@ public class MojangUpdates
 				String lastTitle = FileUtils.readFileToString(saveFile);
 				if (!latestPost.getTitle().equals(lastTitle) && !lastTitle.equals("") && !latestPost.getTitle().equals(""))
 				{
-					Core.bot.sendIRC().message("#JustRamon", Colors.BOLD + "New Mojang Blog Post titled: " + Colors.RED + latestPost.getTitle());
+					Core.bot.sendIRC().message("#JustRamon", Colors.BOLD + "New Mojang blog post titled: " + Colors.RED + latestPost.getTitle());
 					Core.bot.sendIRC().message("#JustRamon", Colors.BOLD + "Link: " + Colors.PURPLE + latestPost.getLink());
 				}
 				FileUtils.write(saveFile, latestPost.getTitle());
