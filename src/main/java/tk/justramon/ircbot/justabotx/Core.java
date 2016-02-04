@@ -14,6 +14,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 import tk.justramon.ircbot.justabotx.cmds.ChangeState;
 import tk.justramon.ircbot.justabotx.cmds.CommandSwitch;
 import tk.justramon.ircbot.justabotx.cmds.QuitAndUpdate;
+import tk.justramon.ircbot.justabotx.features.MojangUpdates;
 import tk.justramon.ircbot.justabotx.features.XtraFunc;
 import tk.justramon.ircbot.justabotx.util.Channels;
 import tk.justramon.ircbot.justabotx.util.NotImportant.Passwords;
@@ -23,7 +24,7 @@ public class Core extends ListenerAdapter<PircBotX>
 	public static PircBotX bot;
 	public static boolean enabled = true;
 	public static boolean wip = false;
-	public static String version = "1.8.0.3";
+	public static String version = "1.8.1";
 	public void onMessage(MessageEvent<PircBotX> event) throws Exception
 	{
 		String[] args = event.getMessage().split(" ");
@@ -54,6 +55,7 @@ public class Core extends ListenerAdapter<PircBotX>
 		Thread.sleep(3000);
 		oldJar.delete();
 		Executors.newScheduledThreadPool(1).scheduleWithFixedDelay(QuitAndUpdate.updateTimer, 1, 1, TimeUnit.MINUTES);
+		Executors.newScheduledThreadPool(1).scheduleWithFixedDelay(MojangUpdates.timer, 1, 1, TimeUnit.MINUTES);
 		if(args.length > 0 && args[0].equals("-wip"))
 		{
 			wip = true;
