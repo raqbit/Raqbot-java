@@ -94,7 +94,7 @@ public class QuitAndUpdate
 		{
 			try
 			{
-				ReadableByteChannel versiontxturl = Channels.newChannel(new URL("https://dl.dropboxusercontent.com/s/2bfzzat1s9s6363/JustABotX.jar").openStream());
+				ReadableByteChannel versiontxturl = Channels.newChannel(new URL("https://raw.githubusercontent.com/JustRamon/JustABotX/master/versioncheck.txt").openStream());
 				FileOutputStream versiontxtfilestream = new FileOutputStream("versioncheck.txt");
 				versiontxtfilestream.getChannel().transferFrom(versiontxturl, 0, Long.MAX_VALUE);
 				versiontxtfilestream.close();
