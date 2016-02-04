@@ -1,7 +1,6 @@
 package tk.justramon.ircbot.justabotx.cmds;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -117,7 +116,7 @@ public class QuitAndUpdate
 		file.getChannel().transferFrom(url, 0, Long.MAX_VALUE);
 		file.close();
 		new ProcessBuilder(updatecommand).start();
-		Core.bot.sendIRC().quitServer();
+		Core.bot.sendIRC().quitServer("Updating!");
 		System.exit(0);
 	}
 }
