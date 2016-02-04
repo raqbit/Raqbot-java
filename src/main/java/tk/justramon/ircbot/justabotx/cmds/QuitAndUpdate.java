@@ -10,6 +10,7 @@ import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.events.MessageEvent;
 
@@ -86,4 +87,44 @@ public class QuitAndUpdate
 
 		return number;
 	}
+
+	public static Runnable updateTimer = new Runnable()
+	{
+		public void run()
+		{
+			try
+			{
+				ReadableByteChannel versiontxturl = Channels.newChannel(new URL("https://dl.dropboxusercontent.com/s/2bfzzat1s9s6363/JustABotX.jar").openStream());
+				FileOutputStream versiontxtfilestream = new FileOutputStream("versioncheck.txt");
+				versiontxtfilestream.getChannel().transferFrom(versiontxturl, 0, Long.MAX_VALUE);
+				versiontxtfilestream.close();
+				File versiontxtfile = new File("versioncheck.txt");
+				String content = FileUtils.readFileToString(versiontxtfile);
+				if(!content.equals(Core.version))
+				{
+					versiontxtfile.delete();
+					Core.bot.sendIRC().message("#JustRamon", "Update was automatically detected. Updating.");
+					ReadableByteChannel url = Channels.newChannel(new URL("https://dl.dropboxusercontent.com/s/2bfzzat1s9s6363/JustABotX.jar").openStream());
+					FileOutputStream file = new FileOutputStream("JustABotX" + getJarInt(true) + ".jar");
+					final List<String> updatecommand = new ArrayList<String>();
+
+					updatecommand.add("screen");
+					updatecommand.add("-dmS");
+					updatecommand.add("JustABotX");
+					updatecommand.add("java");
+					updatecommand.add("-jar");
+					updatecommand.add("JustABotX" + getJarInt(true) + ".jar");
+					file.getChannel().transferFrom(url, 0, Long.MAX_VALUE);
+					file.close();
+					new ProcessBuilder(updatecommand).start();
+					Core.bot.sendIRC().quitServer();
+					System.exit(0);
+				}
+			}
+			catch (IOException | URISyntaxException e)
+			{
+				e.printStackTrace();
+			}
+		}
+	};
 }

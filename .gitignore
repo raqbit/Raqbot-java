@@ -3,4 +3,6 @@
 *.prefs
 .project
 *.classpath
-*.txt
+/channels.txt
+/XtraFunc.txt
+/ops.txt

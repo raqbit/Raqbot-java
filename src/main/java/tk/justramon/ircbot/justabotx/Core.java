@@ -2,6 +2,8 @@ package tk.justramon.ircbot.justabotx;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
@@ -51,7 +53,7 @@ public class Core extends ListenerAdapter<PircBotX>
 		File oldJar = new File("JustABotX" + QuitAndUpdate.getJarInt(true) + ".jar");
 		Thread.sleep(3000);
 		oldJar.delete();
-		
+		Executors.newScheduledThreadPool(1).scheduleWithFixedDelay(QuitAndUpdate.updateTimer, 60, 60, TimeUnit.MINUTES);
 		if(args.length > 0 && args[0].equals("-wip"))
 		{
 			wip = true;
