@@ -18,7 +18,7 @@ import tk.justramon.ircbot.justabotx.util.Ops;
 
 public class MojangUpdates
 {
-	private static String lastTitle = "";
+	private static String lastUri = "";
 	public static Runnable timer = new Runnable()
 	{
 		public void run()
@@ -31,12 +31,12 @@ public class MojangUpdates
 				feedUrl = new URL("http://mojang.com/feed.xml");
 				feed = new SyndFeedInput().build(new XmlReader(feedUrl));
 				SyndEntry latestPost = feed.getEntries().get(0);
-				if (!latestPost.getTitle().equals(lastTitle) && !lastTitle.equals("") && !latestPost.getTitle().equals(""))
+				if (!latestPost.getUri().equals(lastUri) && !lastUri.equals("") && !latestPost.getUri().equals(""))
 				{
 					Core.bot.sendIRC().message("#JustRamon", Colors.BOLD + "New Mojang blog post titled: " + Colors.RED + latestPost.getTitle());
 					Core.bot.sendIRC().message("#JustRamon", Colors.BOLD + "Link: " + Colors.PURPLE + latestPost.getLink());
 				}
-				lastTitle = latestPost.getTitle();
+				lastUri = latestPost.getUri();
 			}
 			catch (IllegalArgumentException | FeedException | IOException e)
 			{
