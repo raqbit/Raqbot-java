@@ -1,10 +1,13 @@
 package tk.justramon.ircbot.justabotx.cmds;
 
+import java.io.IOException;
+
 import org.pircbotx.Colors;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.events.MessageEvent;
 
 import tk.justramon.ircbot.justabotx.Core;
+import tk.justramon.ircbot.justabotx.features.XtraFunc;
 
 public class MsgCmds
 {
@@ -44,5 +47,13 @@ public class MsgCmds
 	public static void sendSource(MessageEvent<PircBotX> event)
 	{
 		event.respond("https://github.com/justramon/JustABotX");
+	}
+
+	public static void itsme(MessageEvent<PircBotX> event) throws IOException
+	{
+		if(XtraFunc.isAllowed(event))
+		{
+		event.respond("Hello, it's me, I was wondering if after all these years you'd like to meet.");
+		}
 	}
 }

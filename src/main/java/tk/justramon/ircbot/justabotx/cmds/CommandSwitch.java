@@ -12,6 +12,7 @@ public class CommandSwitch
 		switch(args[0].substring(1).toLowerCase())
 		{
 		case "request": Request.exe(event, args); break;
+		case "hello": MsgCmds.itsme(event); break;
 		case "clear": Clear.exe(event, args); break;
 		case "about": MsgCmds.sendAbout(event); break;
 		case "help": MsgCmds.sendHelp(event); break;
