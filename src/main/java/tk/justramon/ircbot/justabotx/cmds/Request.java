@@ -88,6 +88,7 @@ public class Request
 
 			event.getUser().send().message("--------------------" + extraDashes + "--------------------");
 		}
+		msglist = null;
 	}
 
 	/**
