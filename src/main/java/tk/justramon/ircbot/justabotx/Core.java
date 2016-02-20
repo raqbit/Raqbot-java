@@ -24,7 +24,7 @@ public class Core extends ListenerAdapter<PircBotX>
 	public static PircBotX bot;
 	public static boolean enabled = true;
 	public static boolean wip = false;
-	public static String version = "1.8.1.6";
+	public static String version = "1.8.1.7";
 	public void onMessage(MessageEvent<PircBotX> event) throws Exception
 	{
 		String[] args = event.getMessage().split(" ");

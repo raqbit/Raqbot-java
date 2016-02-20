@@ -34,6 +34,10 @@ public class MojangUpdates
 				if (!latestPost.getUri().equals(lastUri) && !lastUri.equals("") && !latestPost.getUri().equals(""))
 				{
 					Core.bot.sendIRC().message("#JustRamon", Colors.BOLD + "New Mojang blog post titled: " + Colors.RED + latestPost.getTitle());
+					if(latestPost.getTitle().toLowerCase().contains("snapshot"))
+					{
+						Core.bot.sendIRC().message("#JustRamon", Colors.BOLD + Colors.GREEN + "Minecraft Snapshot! (Ping: JustRamon)");
+					}
 					Core.bot.sendIRC().message("#JustRamon", Colors.BOLD + "Link: " + Colors.PURPLE + latestPost.getLink());
 				}
 				lastUri = latestPost.getUri();
@@ -48,21 +52,25 @@ public class MojangUpdates
 	{
 		if(Core.wip && Ops.isOp(event))
 		{
-		URL feedUrl;
-		SyndFeed feed = null;
+			URL feedUrl;
+			SyndFeed feed = null;
 
-		try
-		{
-			feedUrl = new URL("http://mojang.com/feed.xml");
-			feed = new SyndFeedInput().build(new XmlReader(feedUrl));
-			SyndEntry latestPost = feed.getEntries().get(0);
-			Core.bot.sendIRC().message("#JustRamon", Colors.BOLD + "New Mojang blog post titled: " + Colors.RED + latestPost.getTitle());
-			Core.bot.sendIRC().message("#JustRamon", Colors.BOLD + "Link: " + Colors.PURPLE + latestPost.getLink());
-		}
-		catch (IllegalArgumentException | FeedException | IOException e)
-		{
-			e.printStackTrace();
-		}
+			try
+			{
+				feedUrl = new URL("http://mojang.com/feed.xml");
+				feed = new SyndFeedInput().build(new XmlReader(feedUrl));
+				SyndEntry latestPost = feed.getEntries().get(0);
+				Core.bot.sendIRC().message("#JustRamon", Colors.BOLD + "New Mojang blog post titled: " + Colors.RED + latestPost.getTitle());
+				if(latestPost.getTitle().toLowerCase().contains("snapshot"))
+				{
+					Core.bot.sendIRC().message("#JustRamon", Colors.BOLD + Colors.GREEN + "Minecraft Snapshot! (Ping: JustRamon)");
+				}
+				Core.bot.sendIRC().message("#JustRamon", Colors.BOLD + "Link: " + Colors.PURPLE + latestPost.getLink());
+			}
+			catch (IllegalArgumentException | FeedException | IOException e)
+			{
+				e.printStackTrace();
+			}
 		}
 		else
 		{
