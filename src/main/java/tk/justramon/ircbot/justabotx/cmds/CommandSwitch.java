@@ -3,6 +3,7 @@ package tk.justramon.ircbot.justabotx.cmds;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.events.MessageEvent;
 
+import tk.justramon.ircbot.justabotx.features.JRWUpdates;
 import tk.justramon.ircbot.justabotx.features.MojangUpdates;
 
 public class CommandSwitch
@@ -21,6 +22,7 @@ public class CommandSwitch
 		case "quit": QuitAndUpdate.quit(event); break;
 		case "update": QuitAndUpdate.update(event); break;
 		case "forceshowmojangupdate": MojangUpdates.debugForceShow(event); break;
+		case "forceshowjrupdate": JRWUpdates.debugForceShow(event); break;
 		case "disable": ChangeState.disable(event); break;
 		default: break;
 		}
