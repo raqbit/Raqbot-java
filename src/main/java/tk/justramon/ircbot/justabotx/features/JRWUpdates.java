@@ -14,7 +14,6 @@ import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
 
 import tk.justramon.ircbot.justabotx.Core;
-import tk.justramon.ircbot.justabotx.util.Ops;
 
 public class JRWUpdates
 {
@@ -47,31 +46,22 @@ public class JRWUpdates
 
 	public static void debugForceShow(MessageEvent<PircBotX> event) throws IOException
 	{
-		if(Core.wip && Ops.isOp(event))
-		{
-			URL feedUrl;
-			SyndFeed feed = null;
+		URL feedUrl;
+		SyndFeed feed = null;
 
-			try
-			{
-				feedUrl = new URL("http://justramon.me/feed.xml");
-				feed = new SyndFeedInput().build(new XmlReader(feedUrl));
-				SyndEntry latestPost = feed.getEntries().get(0);
-				if (!latestPost.getUri().equals(lastUri) && !lastUri.equals("") && !latestPost.getUri().equals(""))
-				{
-					Core.bot.sendIRC().message("#JustRamon",  Colors.BOLD + "New" + Colors.GREEN + Colors.BOLD + " JustRamon.me " + Colors.BOLD + "Blogpost called:" + Colors.GREEN + latestPost.getTitle());
-					Core.bot.sendIRC().message("#JustRamon",  Colors.BOLD + "Link:" + Colors.PURPLE + latestPost.getLink());
-				}
-				lastUri = latestPost.getUri();
-			}
-			catch (IllegalArgumentException | FeedException | IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
-		else
+		try
 		{
-			event.respond("This is a debug command and can only be used by ops in wip mode.");
+			feedUrl = new URL("http://justramon.me/feed.xml");
+			feed = new SyndFeedInput().build(new XmlReader(feedUrl));
+			SyndEntry latestPost = feed.getEntries().get(0);
+			Core.bot.sendIRC().message("#JustRamon",  Colors.NORMAL + Colors.BOLD + "New" + Colors.GREEN + Colors.BOLD + " JustRamon.me " + Colors.NORMAL + Colors.BOLD + "Blogpost called: " + Colors.GREEN + latestPost.getTitle());
+			Core.bot.sendIRC().message("#JustRamon", Colors.NORMAL + Colors.BOLD + "Link: " + Colors.PURPLE + "http://justramon.me" + latestPost.getLink());
+			lastUri = latestPost.getUri();
 		}
+		catch (IllegalArgumentException | FeedException | IOException e)
+		{
+			e.printStackTrace();
+		}
+
 	}
 }
