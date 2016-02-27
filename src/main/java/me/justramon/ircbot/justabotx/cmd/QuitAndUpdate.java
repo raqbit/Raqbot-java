@@ -72,35 +72,8 @@ public class QuitAndUpdate
 		}
 
 		return number;
-	}
-
-	public static Runnable updateTimer = new Runnable()
-	{
-		public void run()
-		{
-			try
-			{
-				ReadableByteChannel versiontxturl = Channels.newChannel(new URL("https://raw.githubusercontent.com/JustRamon/JustABotX/master/versioncheck.txt").openStream());
-				FileOutputStream versiontxtfilestream = new FileOutputStream("versioncheck.txt");
-				versiontxtfilestream.getChannel().transferFrom(versiontxturl, 0, Long.MAX_VALUE);
-				versiontxtfilestream.close();
-				File versiontxtfile = new File("versioncheck.txt");
-				String content = FileUtils.readFileToString(versiontxtfile);
-				if(!content.equals(Core.version))
-				{
-					versiontxtfile.delete();
-					Core.bot.sendIRC().message("#JustRamon", "Update was automatically detected. Updating.");
-					updateSequence();
-				}
-				versiontxtfile.delete();
-			}
-			catch (IOException | URISyntaxException e)
-			{
-				e.printStackTrace();
-			}
-		}
 	};
-	
+
 	static void updateSequence() throws URISyntaxException, MalformedURLException, IOException
 	{
 		ReadableByteChannel url = Channels.newChannel(new URL("https://dl.dropboxusercontent.com/s/2bfzzat1s9s6363/JustABotX.jar").openStream());

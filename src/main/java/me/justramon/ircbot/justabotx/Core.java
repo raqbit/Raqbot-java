@@ -55,7 +55,6 @@ public class Core extends ListenerAdapter<PircBotX>
 		File oldJar = new File("JustABotX" + QuitAndUpdate.getJarInt(true) + ".jar");
 		Thread.sleep(3000);
 		oldJar.delete();
-		Executors.newScheduledThreadPool(1).scheduleWithFixedDelay(QuitAndUpdate.updateTimer, 1, 1, TimeUnit.MINUTES);
 		Executors.newScheduledThreadPool(1).scheduleWithFixedDelay(MojangUpdates.timer, 1, 1, TimeUnit.MINUTES);
 		Executors.newScheduledThreadPool(1).scheduleWithFixedDelay(JRWUpdates.timer, 1, 1, TimeUnit.MINUTES);
 		if(args.length > 0 && args[0].equals("-wip"))
@@ -93,6 +92,7 @@ public class Core extends ListenerAdapter<PircBotX>
 					configuration = null;
 					bot.startBot();
 		}
+		System.gc();
 	}
 	public static void setState(boolean state)
 	{
