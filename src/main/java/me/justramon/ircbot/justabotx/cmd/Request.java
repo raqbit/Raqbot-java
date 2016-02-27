@@ -1,4 +1,4 @@
-package tk.justramon.ircbot.justabotx.cmds;
+package me.justramon.ircbot.justabotx.cmd;
 
 import java.io.IOException;
 import java.util.Date;

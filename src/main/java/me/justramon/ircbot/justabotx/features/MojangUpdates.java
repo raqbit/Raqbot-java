@@ -1,4 +1,4 @@
-package tk.justramon.ircbot.justabotx.features;
+package me.justramon.ircbot.justabotx.features;
 
 import java.io.IOException;
 import java.net.URL;

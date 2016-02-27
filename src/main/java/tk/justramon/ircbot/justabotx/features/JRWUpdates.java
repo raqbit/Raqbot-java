@@ -13,7 +13,7 @@ import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
 
-import tk.justramon.ircbot.justabotx.Core;
+import me.justramon.ircbot.justabotx.Core;
 
 public class JRWUpdates
 {
