@@ -7,7 +7,7 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.events.MessageEvent;
 
 import me.justramon.ircbot.justabotx.Core;
-import tk.justramon.ircbot.justabotx.features.XtraFunc;
+import me.justramon.ircbot.justabotx.features.XtraFunc;
 
 public class MsgCmds
 {

@@ -7,7 +7,7 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.events.MessageEvent;
 
 import me.justramon.ircbot.justabotx.Log;
-import tk.justramon.ircbot.justabotx.util.Ops;
+import me.justramon.ircbot.justabotx.util.Ops;
 
 public class Clear
 {

@@ -11,14 +11,14 @@ import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.ConnectEvent;
 import org.pircbotx.hooks.events.MessageEvent;
 
-import tk.justramon.ircbot.justabotx.cmds.ChangeState;
-import tk.justramon.ircbot.justabotx.cmds.CommandSwitch;
-import tk.justramon.ircbot.justabotx.cmds.QuitAndUpdate;
-import tk.justramon.ircbot.justabotx.features.JRWUpdates;
-import tk.justramon.ircbot.justabotx.features.MojangUpdates;
-import tk.justramon.ircbot.justabotx.features.XtraFunc;
-import tk.justramon.ircbot.justabotx.util.Channels;
-import tk.justramon.ircbot.justabotx.util.NotImportant.Passwords;
+import me.justramon.ircbot.justabotx.cmd.ChangeState;
+import me.justramon.ircbot.justabotx.cmd.CommandSwitch;
+import me.justramon.ircbot.justabotx.cmd.QuitAndUpdate;
+import me.justramon.ircbot.justabotx.features.JRWUpdates;
+import me.justramon.ircbot.justabotx.features.MojangUpdates;
+import me.justramon.ircbot.justabotx.features.XtraFunc;
+import me.justramon.ircbot.justabotx.util.Channels;
+import me.justramon.ircbot.justabotx.util.NotImportant.Passwords;
 
 public class Core extends ListenerAdapter<PircBotX>
 {

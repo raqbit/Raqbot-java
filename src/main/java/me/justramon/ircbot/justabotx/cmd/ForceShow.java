@@ -6,9 +6,9 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.events.MessageEvent;
 
 import me.justramon.ircbot.justabotx.Core;
-import tk.justramon.ircbot.justabotx.features.JRWUpdates;
-import tk.justramon.ircbot.justabotx.features.MojangUpdates;
-import tk.justramon.ircbot.justabotx.util.Ops;
+import me.justramon.ircbot.justabotx.features.JRWUpdates;
+import me.justramon.ircbot.justabotx.features.MojangUpdates;
+import me.justramon.ircbot.justabotx.util.Ops;
 
 public class ForceShow
 {
