@@ -25,7 +25,7 @@ public class Core extends ListenerAdapter<PircBotX>
 	public static PircBotX bot;
 	public static boolean enabled = true;
 	public static boolean wip = false;
-	public static String version = "1.8.3";
+	public static String version = "1.8.3.1";
 	public void onMessage(MessageEvent<PircBotX> event) throws Exception
 	{
 		String[] args = event.getMessage().split(" ");
@@ -73,6 +73,7 @@ public class Core extends ListenerAdapter<PircBotX>
 					.addListener(new Core())
 					.buildConfiguration();
 					bot = new PircBotX(configuration);
+					configuration = null;
 					bot.startBot()/*.addLove(Integer.MAX_VALUE)*/;
 		}
 		else
@@ -89,6 +90,7 @@ public class Core extends ListenerAdapter<PircBotX>
 					.addListener(new Core())
 					.buildConfiguration();
 					bot = new PircBotX(configuration);
+					configuration = null;
 					bot.startBot();
 		}
 	}
