@@ -25,6 +25,7 @@ public class Log
 		loglist.add(event.getTimestamp() + " <" + event.getUser().getNick() + "> " + event.getMessage());
 		FileUtils.writeLines(log, loglist);
 		loglist = null;
+		System.gc();
 	}
 	
 	public static void logAction(ActionEvent<PircBotX> event) throws IOException
@@ -36,6 +37,8 @@ public class Log
 
 		loglist.add(event.getTimestamp() + " * " + event.getUser().getNick() + " " + event.getAction());
 		FileUtils.writeLines(log, loglist);
+		loglist = null;
+		System.gc();
 	}
 	
 
