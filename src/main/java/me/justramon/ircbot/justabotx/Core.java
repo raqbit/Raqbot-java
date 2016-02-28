@@ -10,6 +10,7 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.ConnectEvent;
 import org.pircbotx.hooks.events.MessageEvent;
+import org.pircbotx.hooks.events.ActionEvent;
 
 import me.justramon.ircbot.justabotx.cmd.ChangeState;
 import me.justramon.ircbot.justabotx.cmd.CommandSwitch;
@@ -25,7 +26,8 @@ public class Core extends ListenerAdapter<PircBotX>
 	public static PircBotX bot;
 	public static boolean enabled = true;
 	public static boolean wip = false;
-	public static String version = "1.8.3.1";
+	public static String version = "1.8.3.2";
+	
 	public void onMessage(MessageEvent<PircBotX> event) throws Exception
 	{
 		String[] args = event.getMessage().split(" ");
@@ -41,9 +43,15 @@ public class Core extends ListenerAdapter<PircBotX>
 			if((event.getMessage().toLowerCase().contains("*lennyface*") || event.getMessage().toLowerCase().contains("*lenny face*")) && enabled && XtraFunc.isAllowed(event))
 				event.respond("( ͡° ͜ʖ ͡°)");
 			
-			Log.exe(event, args);
+			Log.logMessage(event, args);
 		}
 	}
+	
+	public void onAction(ActionEvent<PircBotX> event) throws IOException
+	{
+		Log.logAction(event);
+	}
+	
 	public void onConnect(ConnectEvent<PircBotX> event) throws IOException
 	{
 		if(!wip)
