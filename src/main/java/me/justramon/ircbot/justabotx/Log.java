@@ -13,6 +13,12 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Log
 {
 
+	/**
+	 * Adds the message to the log.
+	 * @param event
+	 * @param args
+	 * @throws IOException
+	 */
 	public static void logMessage(MessageEvent<PircBotX> event, String[] args) throws IOException
 	{
 		File log = getLog(event.getChannel());
@@ -28,6 +34,11 @@ public class Log
 		System.gc();
 	}
 	
+	/**
+	 * Adds the action to the log.
+	 * @param event
+	 * @throws IOException
+	 */
 	public static void logAction(ActionEvent<PircBotX> event) throws IOException
 	{
 		File log = getLog(event.getChannel());
@@ -42,11 +53,20 @@ public class Log
 	}
 	
 
+	/**
+	 * @param channel
+	 * @return the logfile.
+	 */
 	public static File getLog(Channel channel)
 	{
 		return new File("logs/" + channel.getName().substring(1) + ".txt");
 	}
 
+	/**
+	 * Checks if the log file & folder exist.
+	 * @param log
+	 * @throws IOException
+	 */
 	static void checkFiles(File log) throws IOException
 	{
 		File logfolder = new File("logs");

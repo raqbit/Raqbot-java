@@ -11,8 +11,16 @@ import me.justramon.ircbot.justabotx.util.Ops;
 
 public class Clear
 {
+	/**
+	 * Clears the log of the channel the executor is in.
+	 * 
+	 * @param event
+	 * @param args
+	 * @throws IOException
+	 */
 	public static void exe(MessageEvent<PircBotX> event, String[] args) throws IOException
 	{	
+		//Check if the user actually has the permission to clear the log.
 		if(Ops.isOp(event))
 		{
 			FileUtils.write(Log.getLog(event.getChannel()), "");

@@ -12,11 +12,20 @@ public class Ops
 {
 	private static File opfile = new File("ops" + ".txt");
 	
+	/**
+	 * Returns if the user that sent the message is Op or not (In the ops file or not)
+	 * 
+	 * @param event
+	 * @return boolean
+	 * @throws IOException
+	 */
 	public static boolean isOp(MessageEvent<PircBotX> event) throws IOException
 	{
+		//Creating the file if it doesn't exist
 		if(!opfile.exists())
 			opfile.createNewFile();
 		
+		//Enumerating through the file to check if one of the lines contains the user's name & is verified.
 		List<String> ops = FileUtils.readLines(opfile);
 		for(String line : ops)
 		{

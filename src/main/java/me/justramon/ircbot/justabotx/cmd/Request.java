@@ -12,6 +12,12 @@ import me.justramon.ircbot.justabotx.Log;
 
 public class Request
 {
+	/**
+	 * Parses the timeunit the user wants to request in.
+	 * @param event
+	 * @param args
+	 * @throws IOException
+	 */
 	public static void exe(MessageEvent<PircBotX> event, String[] args) throws IOException
 	{
 		switch(args[1].toLowerCase())

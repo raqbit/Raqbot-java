@@ -18,6 +18,10 @@ import me.justramon.ircbot.justabotx.Core;
 public class JRWUpdates
 {
 	private static String lastUri = "";
+	
+	/**
+	 * Runnable for the JustRamonWeb updater.
+	 */
 	public static Runnable timer = new Runnable()
 	{
 		public void run()
@@ -43,7 +47,10 @@ public class JRWUpdates
 			}
 		}
 	};
-
+	
+	/**
+	 * Force-show for the JustRamonWeb updater.
+	 */
 	public static void debugForceShow(MessageEvent<PircBotX> event) throws IOException
 	{
 		URL feedUrl;

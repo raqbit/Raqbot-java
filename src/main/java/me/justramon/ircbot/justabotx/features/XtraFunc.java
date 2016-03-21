@@ -10,6 +10,12 @@ import org.pircbotx.hooks.events.MessageEvent;
 
 public class XtraFunc
 {
+	/**
+	 * Checks if the channel has xtrafunc turned on.
+	 * @param event
+	 * @return
+	 * @throws IOException
+	 */
 	public static boolean isAllowed(MessageEvent<PircBotX> event) throws IOException
 	{
 		File xtrafile = new File("XtraFunc.txt");

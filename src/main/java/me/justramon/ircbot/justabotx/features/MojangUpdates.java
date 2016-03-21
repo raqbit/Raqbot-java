@@ -16,6 +16,9 @@ import me.justramon.ircbot.justabotx.Core;
 public class MojangUpdates
 {
 	private static String lastUri = "";
+	/**
+	 * Runnable for the Mojang updater.
+	 */
 	public static Runnable timer = new Runnable()
 	{
 		public void run()
@@ -45,6 +48,10 @@ public class MojangUpdates
 			}
 		}
 	};
+	
+	/**
+	 * Force-show for the Mojang updater.
+	 */
 	public static void debugForceShow() throws IOException
 	{
 		URL feedUrl;

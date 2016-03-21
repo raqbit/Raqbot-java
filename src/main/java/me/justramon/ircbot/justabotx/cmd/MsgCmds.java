@@ -11,6 +11,10 @@ import me.justramon.ircbot.justabotx.features.XtraFunc;
 
 public class MsgCmds
 {
+	/**
+	 * Returns the about menu in the channel. Will respond with a seperate message if in WIP mode.
+	 * @param event
+	 */
 	public static void sendAbout(MessageEvent<PircBotX> event)
 	{
 		if(Core.wip)
@@ -23,6 +27,10 @@ public class MsgCmds
 		}
 	}
 	
+	/**
+	 * Returns the help menu in private message.
+	 * @param event
+	 */
 	public static void sendHelp(MessageEvent<PircBotX> event)
 	{
 		event.getUser().send().message("--------------------" + "Help" + "--------------------");
@@ -39,16 +47,29 @@ public class MsgCmds
 		event.getUser().send().message("--------------------------------------------");
 	}
 
+	/**
+	 * Returns the version of JABX.
+	 * @param event
+	 */
 	public static void sendVersion(MessageEvent<PircBotX> event)
 	{
 		event.getChannel().send().message("Current version: " + Colors.RED + Core.version);
 	}
 	
+	/**
+	 * Returns the JABX github link in the channel.
+	 * @param event
+	 */
 	public static void sendSource(MessageEvent<PircBotX> event)
 	{
 		event.respond("https://github.com/justramon/JustABotX");
 	}
 
+	/**
+	 * Hello, it's me. (Only works with XtraFunc)
+	 * @param event
+	 * @throws IOException
+	 */
 	public static void itsme(MessageEvent<PircBotX> event) throws IOException
 	{
 		if(XtraFunc.isAllowed(event))

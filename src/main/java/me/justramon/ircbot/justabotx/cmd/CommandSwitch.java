@@ -5,6 +5,13 @@ import org.pircbotx.hooks.events.MessageEvent;
 
 public class CommandSwitch
 {
+	/**
+	 * Main command switch for JABX.
+	 * 
+	 * @param event
+	 * @param args
+	 * @throws Exception
+	 */
 	public static void exe(MessageEvent<PircBotX> event, String[] args) throws Exception
 	{		
 		switch(args[0].substring(1).toLowerCase())
