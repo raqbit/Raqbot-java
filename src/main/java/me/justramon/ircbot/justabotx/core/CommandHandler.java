@@ -8,6 +8,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 
 import me.justramon.ircbot.justabotx.commands.Disable;
 import me.justramon.ircbot.justabotx.commands.Enable;
+import me.justramon.ircbot.justabotx.commands.Help;
 import me.justramon.ircbot.justabotx.commands.Quit;
 import me.justramon.ircbot.justabotx.commands.TestCommand;
 import me.justramon.ircbot.justabotx.util.IDevCommand;
@@ -15,8 +16,8 @@ import me.justramon.ircbot.justabotx.util.Operators;
 
 public class CommandHandler extends ListenerAdapter<PircBotX>
 {
-	private LinkedList<ICommand<MessageEvent>> opcommands = new LinkedList<ICommand<MessageEvent>>();
-	private LinkedList<ICommand<MessageEvent>> commands = new LinkedList<ICommand<MessageEvent>>();
+	public static LinkedList<ICommand<MessageEvent>> opcommands = new LinkedList<ICommand<MessageEvent>>();
+	public static LinkedList<ICommand<MessageEvent>> commands = new LinkedList<ICommand<MessageEvent>>();
 	private LinkedList<IDevCommand<MessageEvent>> devcommands = new LinkedList<IDevCommand<MessageEvent>>();
 
 	public CommandHandler()
@@ -25,36 +26,22 @@ public class CommandHandler extends ListenerAdapter<PircBotX>
 		opcommands.add(new Disable());
 		opcommands.add(new Quit());
 		devcommands.add(new TestCommand());
+		commands.add(new Help());
 	}
 
 	public void onMessage(MessageEvent event) throws Exception
 	{
 		String cmdName = event.getMessage().split(" ")[0];
-
-		for (ICommand<MessageEvent> cmd : commands)
+		
+		if(cmdName.startsWith("?"))
 		{
-			if (Core.enabled)
+			for (ICommand<MessageEvent> cmd : commands)
 			{
-				for (String s : cmd.getAliases())
+				if (Core.enabled)
 				{
-					if (cmdName.equalsIgnoreCase("?" + s))
+					for (String s : cmd.getAliases())
 					{
-						cmd.exe(event);
-						return;
-					}
-				}
-			}
-		}
-
-		for(ICommand<MessageEvent> cmd : opcommands)
-		{
-			if(Core.enabled || cmd instanceof Enable || cmd instanceof Disable)
-			{
-				for(String s : cmd.getAliases())
-				{
-					if (cmdName.equalsIgnoreCase("?" + s))
-					{
-						if(Operators.isOp(event))
+						if (cmdName.equalsIgnoreCase("?" + s))
 						{
 							cmd.exe(event);
 							return;
@@ -62,22 +49,40 @@ public class CommandHandler extends ListenerAdapter<PircBotX>
 					}
 				}
 			}
-		}
 
-		for(IDevCommand<MessageEvent> cmd : devcommands)
-		{
-			if(Core.enabled || cmd instanceof Enable || cmd instanceof Disable)
+			for(ICommand<MessageEvent> cmd : opcommands)
 			{
-				for(String s : cmd.getAliases())
+				if(Core.enabled || cmd instanceof Enable || cmd instanceof Disable)
 				{
-					if (cmdName.equalsIgnoreCase("?" + s))
+					for(String s : cmd.getAliases())
 					{
-						if(Operators.isOp(event))
+						if (cmdName.equalsIgnoreCase("?" + s))
 						{
-							if(Core.dev)
+							if(Operators.isOp(event))
 							{
 								cmd.exe(event);
 								return;
+							}
+						}
+					}
+				}
+			}
+
+			for(IDevCommand<MessageEvent> cmd : devcommands)
+			{
+				if(Core.enabled || cmd instanceof Enable || cmd instanceof Disable)
+				{
+					for(String s : cmd.getAliases())
+					{
+						if (cmdName.equalsIgnoreCase("?" + s))
+						{
+							if(Operators.isOp(event))
+							{
+								if(Core.dev)
+								{
+									cmd.exe(event);
+									return;
+								}
 							}
 						}
 					}

@@ -7,7 +7,7 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.exception.IrcException;
 
 import me.justramon.ircbot.justabotx.config.ConfigHandler;
-import me.justramon.ircbot.justabotx.features.logging.LogListeners;
+import me.justramon.ircbot.justabotx.features.Logging;
 import me.justramon.ircbot.justabotx.util.NotImportant.Passwords;
 
 public class Core
@@ -39,7 +39,7 @@ public class Core
 					.setCapEnabled(true)
 
 					//Listeners
-					.addListener(new LogListeners())
+					.addListener(new Logging())
 					.addListener(new CommandHandler())
 					.addListener(new ConnectionHandler())
 
@@ -64,7 +64,7 @@ public class Core
 					.setCapEnabled(true)
 
 					//Listeners
-					.addListener(new LogListeners())
+					.addListener(new Logging())
 					.addListener(new CommandHandler())
 					.addListener(new ConnectionHandler())
 
