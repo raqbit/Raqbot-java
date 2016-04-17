@@ -1,20 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>me.justramon.justabotx</groupId>
-	<artifactId>JustBotX</artifactId>
-	<version>1.8.3.4</version>
-	<name>JustBotX</name>
+	<groupId>me.justramon.ircbot.JustABotX</groupId>
+	<artifactId>JustABotXRewrite</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
 	<dependencies>
 		<dependency>
 			<groupId>org.pircbotx</groupId>
 			<artifactId>pircbotx</artifactId>
 			<version>2.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -25,6 +19,11 @@
 			<groupId>com.rometools</groupId>
 			<artifactId>rome</artifactId>
 			<version>1.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.esotericsoftware.yamlbeans</groupId>
+			<artifactId>yamlbeans</artifactId>
+			<version>1.09</version>
 		</dependency>
 	</dependencies>
 </project>
