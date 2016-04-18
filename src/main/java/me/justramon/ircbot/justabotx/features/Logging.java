@@ -20,7 +20,6 @@ public class Logging extends ListenerAdapter
 
 	public void onMessage(MessageEvent event)
 	{
-		System.out.println("Logging message to log.");
 		File log = new File("logs/" + event.getChannel().getName() + ".jabxlog");
 		checkFiles(log);
 		
@@ -35,7 +34,6 @@ public class Logging extends ListenerAdapter
 
 	public void onAction(ActionEvent event)
 	{
-		System.out.println("Logging action to log");
 		File log = new File("logs/" + event.getChannel().getName() + ".jabxlog");
 		checkFiles(log);
 		
@@ -68,7 +66,7 @@ public class Logging extends ListenerAdapter
 		}
 	}
 
-	private static List<String> readLogLines(File log)
+	public static List<String> readLogLines(File log)
 	{
 		try
 		{
@@ -121,5 +119,10 @@ public class Logging extends ListenerAdapter
 		
 		List<String> loglines = new ArrayList<String>();
 		writeLogLines(log, loglines);
+	}
+	
+	public static File getLog(String channelname)
+	{
+		return new File("logs/" + channelname + ".jabxlog");
 	}
 }

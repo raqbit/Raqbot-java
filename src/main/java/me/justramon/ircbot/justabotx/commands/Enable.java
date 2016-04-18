@@ -9,7 +9,7 @@ public class Enable implements ICommand<MessageEvent>
 {
 
 	@Override
-	public void exe(MessageEvent event) throws Exception
+	public void exe(MessageEvent event, String[] args) throws Exception
 	{
 			if(!Core.enabled)
 			{

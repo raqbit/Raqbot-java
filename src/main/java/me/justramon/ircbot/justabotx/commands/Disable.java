@@ -9,7 +9,7 @@ public class Disable implements ICommand<MessageEvent>
 {
 
 	@Override
-	public void exe(MessageEvent event) throws Exception
+	public void exe(MessageEvent event, String[] args) throws Exception
 	{
 			if(Core.enabled)
 			{
@@ -33,7 +33,7 @@ public class Disable implements ICommand<MessageEvent>
 	@Override
 	public String getInfo()
 	{
-		return "Disables JABX to where he won't listen to commands.";
+		return "Disables the bot to where he won't listen to commands.";
 	}
 
 }

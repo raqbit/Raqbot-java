@@ -8,8 +8,12 @@ import org.pircbotx.hooks.events.MessageEvent;
 import me.justramon.ircbot.justabotx.commands.Clear;
 import me.justramon.ircbot.justabotx.commands.Disable;
 import me.justramon.ircbot.justabotx.commands.Enable;
+import me.justramon.ircbot.justabotx.commands.ForDuckSake;
+import me.justramon.ircbot.justabotx.commands.ForceShow;
 import me.justramon.ircbot.justabotx.commands.Help;
 import me.justramon.ircbot.justabotx.commands.Quit;
+import me.justramon.ircbot.justabotx.commands.Reload;
+import me.justramon.ircbot.justabotx.commands.Request;
 import me.justramon.ircbot.justabotx.commands.TestCommand;
 import me.justramon.ircbot.justabotx.util.IDevCommand;
 import me.justramon.ircbot.justabotx.util.Operators;
@@ -26,14 +30,19 @@ public class CommandHandler extends ListenerAdapter
 		opcommands.add(new Disable());
 		opcommands.add(new Quit());
 		opcommands.add(new Clear());
+		opcommands.add(new Reload());
 		devcommands.add(new TestCommand());
+		devcommands.add(new ForceShow());
 		commands.add(new Help());
+		commands.add(new Request());
+		commands.add(new ForDuckSake());
 	}
 
 	public void onMessage(MessageEvent event) throws Exception
 	{
-		String cmdName = event.getMessage().split(" ")[0];
-		
+		String[] args = event.getMessage().split(" ");
+		String cmdName = args[0];
+
 		if(cmdName.startsWith("?"))
 		{
 			for (ICommand<MessageEvent> cmd : commands)
@@ -44,7 +53,7 @@ public class CommandHandler extends ListenerAdapter
 					{
 						if (cmdName.equalsIgnoreCase("?" + s))
 						{
-							cmd.exe(event);
+							cmd.exe(event, args);
 							System.gc();
 							return;
 						}
@@ -62,7 +71,7 @@ public class CommandHandler extends ListenerAdapter
 						{
 							if(Operators.isOp(event))
 							{
-								cmd.exe(event);
+								cmd.exe(event, args);
 								System.gc();
 								return;
 							}
@@ -83,7 +92,7 @@ public class CommandHandler extends ListenerAdapter
 							{
 								if(Core.dev)
 								{
-									cmd.exe(event);
+									cmd.exe(event, args);
 									System.gc();
 									return;
 								}

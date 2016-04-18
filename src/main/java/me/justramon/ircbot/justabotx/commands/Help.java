@@ -18,7 +18,7 @@ public class Help implements ICommand<MessageEvent>
 	}
 
 	@Override
-	public void exe(MessageEvent event) throws Exception
+	public void exe(MessageEvent event, String[] args) throws Exception
 	{
 		sndmsg(event.getUser(), "------------" + ConfigHandler.config.nick + "-Help------------");
 		for(ICommand<MessageEvent> cmd : CommandHandler.opcommands)

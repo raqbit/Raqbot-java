@@ -9,7 +9,7 @@ public class Quit implements ICommand<MessageEvent>
 {
 
 	@Override
-	public void exe(MessageEvent event) throws Exception
+	public void exe(MessageEvent event, String[] args) throws Exception
 	{
 		event.getBot().sendIRC().action(event.getChannel().getName(), "cries");
 		Thread.sleep(2000);
@@ -31,7 +31,7 @@ public class Quit implements ICommand<MessageEvent>
 	@Override
 	public String getInfo()
 	{
-		return "Stops JABX.";
+		return "Stops the bot.";
 	}
 
 }

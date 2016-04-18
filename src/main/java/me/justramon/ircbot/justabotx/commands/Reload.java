@@ -11,7 +11,7 @@ public class Reload implements ICommand<MessageEvent>
 {
 
 	@Override
-	public void exe(MessageEvent event) throws Exception
+	public void exe(MessageEvent event, String[] args) throws Exception
 	{
 		event.respond("Config Reloaded.");
 		ConfigHandler.loadConfig();

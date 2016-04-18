@@ -9,7 +9,7 @@ public class Clear implements ICommand<MessageEvent>
 {
 
 	@Override
-	public void exe(MessageEvent event) throws Exception
+	public void exe(MessageEvent event, String[] args) throws Exception
 	{
 		event.getChannel().send().message("Threw logfile into igneous extruder.");
 		Logging.clearLog(event.getChannel().getName());

@@ -36,7 +36,7 @@ public class ConfigHandler
 		{
 			e.printStackTrace();
 		}
-
+		System.gc();
 	}
 	
 	static void setupConfig(File configfile)
@@ -69,8 +69,18 @@ public class ConfigHandler
 		config.operators = operators;
 		
 		List<String> xtrafunc = new ArrayList<String>();
-		xtrafunc.add("#whatever");
+		xtrafunc.add("#JustRamon");
 		config.xtrafunc = xtrafunc;
+		
+		List<String> mojangUpdateChans = new ArrayList<String>();
+		mojangUpdateChans.add("#JustRamon");
+		config.mojangUpdateChans = mojangUpdateChans;
+		
+		List<String> jrwUpdateChans = new ArrayList<String>();
+		jrwUpdateChans.add("#JustRamon");
+		config.jrwUpdateChans = jrwUpdateChans;
+		
+		config.updateDevChan = config.devchan;
 		
 		try
 		{

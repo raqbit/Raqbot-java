@@ -1,6 +1,8 @@
 package me.justramon.ircbot.justabotx.core;
 
 import java.io.IOException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
@@ -8,6 +10,7 @@ import org.pircbotx.exception.IrcException;
 
 import me.justramon.ircbot.justabotx.config.ConfigHandler;
 import me.justramon.ircbot.justabotx.features.Logging;
+import me.justramon.ircbot.justabotx.features.blogupdates.BlogUpdateHandler;
 import me.justramon.ircbot.justabotx.util.NotImportant.Passwords;
 
 public class Core
@@ -18,8 +21,12 @@ public class Core
 
 	public static void main(String[] args) throws IOException, IrcException
 	{
+		// Loading the configuration file.
 		ConfigHandler.loadConfig();
 		
+		Executors.newScheduledThreadPool(1).scheduleWithFixedDelay(BlogUpdateHandler.timer, 1, 1, TimeUnit.MINUTES);
+		
+		// Creating the bot.
 		createBot(args);
 	}
 	

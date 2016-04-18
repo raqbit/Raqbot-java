@@ -13,5 +13,8 @@ public class Config
 	public String devchan;
 	public List<String> operators;
 	public List<String> xtrafunc;
+	public List<String> jrwUpdateChans;
+	public List<String> mojangUpdateChans;
+	public String updateDevChan;
 }
 

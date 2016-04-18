@@ -8,7 +8,7 @@ public class TestCommand implements IDevCommand<MessageEvent>
 {
 
 	@Override
-	public void exe(MessageEvent event) throws Exception
+	public void exe(MessageEvent event, String[] args) throws Exception
 	{
 		event.respond("Test succeeded.");
 	}
