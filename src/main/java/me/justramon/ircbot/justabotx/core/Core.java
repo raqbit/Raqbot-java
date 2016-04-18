@@ -15,26 +15,29 @@ public class Core
 	public static PircBotX bot;
 	public static boolean dev = false;
 	public static boolean enabled = true;
-	//public static StopWatch uptime;
 
 	public static void main(String[] args) throws IOException, IrcException
 	{
 		ConfigHandler.loadConfig();
-		//uptime.start();
 		
-		//Bot configs
+		createBot(args);
+	}
+	
+	public static void createBot(String[] args) throws IOException, IrcException
+	{
+		
+		// Bot configs
 		if(args.length > 0 && args[0].equals("-dev"))
 		{
-			//Special config for WIP mode, adding love for obvious reasons.
-			dev = true;
-
-			Configuration<PircBotX> configuration = new Configuration.Builder<PircBotX>()
+			Configuration devconfig;
+			
+			devconfig = new Configuration.Builder()
 					.setName(args.length > 1 ? args[1] : ConfigHandler.config.devnick)
 					.addAutoJoinChannel(args.length > 2 ? args[2] : ConfigHandler.config.devchan)
 					.setLogin(ConfigHandler.config.login)
 					.setRealName(ConfigHandler.config.realname)
 					.setAutoReconnect(true)
-					.setServerHostname(ConfigHandler.config.serverhostname)
+					.addServer(ConfigHandler.config.serverhostname)
 					.setAutoNickChange(true)
 					.setCapEnabled(true)
 
@@ -45,21 +48,24 @@ public class Core
 
 					.buildConfiguration();
 			
-			bot = new PircBotX(configuration);
+			bot = new PircBotX(devconfig);
+			
+			devconfig = null;
+			System.gc();
+			
 			bot.startBot()/*.addLove(Integer.MAX_VALUE)*/;
-
-			configuration = null;
 		}
 		else
 		{
-			//Config for normal mode, adding love for obvious reasons.
-			Configuration<PircBotX> configuration = new Configuration.Builder<PircBotX>()
+			Configuration config;
+			
+			config = new Configuration.Builder()
 					.setName(ConfigHandler.config.nick)
 					.setNickservPassword(Passwords.NICKSERV.getPassword())
 					.setLogin(ConfigHandler.config.login)
 					.setRealName(ConfigHandler.config.realname)
 					.setAutoReconnect(true)
-					.setServerHostname(ConfigHandler.config.serverhostname)
+					.addServer(ConfigHandler.config.serverhostname)
 					.setAutoNickChange(true)
 					.setCapEnabled(true)
 
@@ -69,12 +75,13 @@ public class Core
 					.addListener(new ConnectionHandler())
 
 					.buildConfiguration();
-
-			bot = new PircBotX(configuration);
+			
+			bot = new PircBotX(config);
+			
+			config = null;
+			System.gc();
+			
 			bot.startBot()/*.addLove(Integer.MAX_VALUE)*/;
-
-			configuration = null;
 		}
-		System.gc();
 	}
 }

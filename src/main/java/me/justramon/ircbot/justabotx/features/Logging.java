@@ -11,36 +11,38 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.ActionEvent;
 import org.pircbotx.hooks.events.MessageEvent;
 
-public class Logging extends ListenerAdapter<PircBotX>
+public class Logging extends ListenerAdapter
 {
 
-	public void logMessage(MessageEvent<PircBotX> event)
+	public void onMessage(MessageEvent event)
 	{
 		System.out.println("Logging message to log.");
 		File log = new File("logs/" + event.getChannel().getName() + ".jabxlog");
 		checkFiles(log);
 		
-		List<String> loglines = readLines(log);
+		List<String> loglines = readLogLines(log);
 		
 		loglines.add(event.getTimestamp() + " <" + event.getUser().getNick() + "> " + event.getMessage());
+		
+		writeLogLines(log, loglines);
 		loglines = null;
 		System.gc();
 	}
 
-	public static void logAction(ActionEvent<PircBotX> event)
+	public void onAction(ActionEvent event)
 	{
 		System.out.println("Logging action to log");
 		File log = new File("logs/" + event.getChannel().getName() + ".jabxlog");
 		checkFiles(log);
 		
-		List<String> loglines = readLines(log);
+		List<String> loglines = readLogLines(log);
 		
 		loglines.add(event.getTimestamp() + " * " + event.getUser().getNick() + " " + event.getAction());
+		writeLogLines(log, loglines);
 		loglines = null;
 		System.gc();
 	}
@@ -66,7 +68,7 @@ public class Logging extends ListenerAdapter<PircBotX>
 		}
 	}
 
-	private static List<String> readLines(File log)
+	private static List<String> readLogLines(File log)
 	{
 		try
 		{
@@ -92,7 +94,7 @@ public class Logging extends ListenerAdapter<PircBotX>
 
 	}
 	
-	private static void writeLines(File log, List<String> lines)
+	private static void writeLogLines(File log, List<String> lines)
 	{
 		try
 		{
@@ -111,5 +113,13 @@ public class Logging extends ListenerAdapter<PircBotX>
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	public static void clearLog(String channelname)
+	{
+		File log = new File("logs/" + channelname + ".jabxlog");
+		
+		List<String> loglines = new ArrayList<String>();
+		writeLogLines(log, loglines);
 	}
 }

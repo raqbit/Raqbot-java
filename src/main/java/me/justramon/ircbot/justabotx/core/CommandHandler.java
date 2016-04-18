@@ -2,10 +2,10 @@ package me.justramon.ircbot.justabotx.core;
 
 import java.util.LinkedList;
 
-import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 
+import me.justramon.ircbot.justabotx.commands.Clear;
 import me.justramon.ircbot.justabotx.commands.Disable;
 import me.justramon.ircbot.justabotx.commands.Enable;
 import me.justramon.ircbot.justabotx.commands.Help;
@@ -14,7 +14,7 @@ import me.justramon.ircbot.justabotx.commands.TestCommand;
 import me.justramon.ircbot.justabotx.util.IDevCommand;
 import me.justramon.ircbot.justabotx.util.Operators;
 
-public class CommandHandler extends ListenerAdapter<PircBotX>
+public class CommandHandler extends ListenerAdapter
 {
 	public static LinkedList<ICommand<MessageEvent>> opcommands = new LinkedList<ICommand<MessageEvent>>();
 	public static LinkedList<ICommand<MessageEvent>> commands = new LinkedList<ICommand<MessageEvent>>();
@@ -25,6 +25,7 @@ public class CommandHandler extends ListenerAdapter<PircBotX>
 		opcommands.add(new Enable());
 		opcommands.add(new Disable());
 		opcommands.add(new Quit());
+		opcommands.add(new Clear());
 		devcommands.add(new TestCommand());
 		commands.add(new Help());
 	}
@@ -44,6 +45,7 @@ public class CommandHandler extends ListenerAdapter<PircBotX>
 						if (cmdName.equalsIgnoreCase("?" + s))
 						{
 							cmd.exe(event);
+							System.gc();
 							return;
 						}
 					}
@@ -61,6 +63,7 @@ public class CommandHandler extends ListenerAdapter<PircBotX>
 							if(Operators.isOp(event))
 							{
 								cmd.exe(event);
+								System.gc();
 								return;
 							}
 						}
@@ -81,6 +84,7 @@ public class CommandHandler extends ListenerAdapter<PircBotX>
 								if(Core.dev)
 								{
 									cmd.exe(event);
+									System.gc();
 									return;
 								}
 							}
