@@ -86,3 +86,6 @@ src/main/java/me/justramon/ircbot/justabotx/util/NotImportant.java
 
 # configurations
 config.yml
+
+# logs
+logs/
