@@ -11,8 +11,9 @@ public class XtraFunc
 	{
 		for(String channel : ConfigHandler.config.xtrafunc)
 		{
-			if(channel == channelName)
+			if(channelName.equals(channel))
 			{
+				System.out.println("Success");
 				return true;
 			}
 		}
