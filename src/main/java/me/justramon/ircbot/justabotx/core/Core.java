@@ -16,6 +16,7 @@ import me.justramon.ircbot.justabotx.util.NotImportant.Passwords;
 public class Core
 {
 	public static PircBotX bot;
+	public static String version = "1.9";
 	public static boolean dev = false;
 	public static boolean enabled = true;
 

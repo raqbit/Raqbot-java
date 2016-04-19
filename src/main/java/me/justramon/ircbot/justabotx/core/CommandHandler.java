@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 
+import me.justramon.ircbot.justabotx.commands.About;
 import me.justramon.ircbot.justabotx.commands.Clear;
 import me.justramon.ircbot.justabotx.commands.Disable;
 import me.justramon.ircbot.justabotx.commands.Enable;
@@ -41,6 +42,7 @@ public class CommandHandler extends ListenerAdapter
 		commands.add(new Nick());
 		commands.add(new Source());
 		commands.add(new Nick());
+		commands.add(new About());
 	}
 
 	public void onMessage(MessageEvent event) throws Exception

@@ -24,5 +24,11 @@ public class Source implements ICommand<MessageEvent>
 	{
 		return "Returns you the github link for the sourcecode of this bot.";
 	}
+	
+	@Override
+	public boolean xtraFunc()
+	{
+		return false;
+	}
 
 }

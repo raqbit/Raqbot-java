@@ -35,4 +35,10 @@ public class Nick implements ICommand<MessageEvent>
 		return "?<command> <New Nickname>";
 	}
 
+	
+	@Override
+	public boolean xtraFunc()
+	{
+		return false;
+	}
 }
