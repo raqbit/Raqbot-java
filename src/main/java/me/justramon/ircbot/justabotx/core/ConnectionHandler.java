@@ -9,12 +9,10 @@ import me.justramon.ircbot.justabotx.config.ConfigHandler;
 
 public class ConnectionHandler extends ListenerAdapter
 {
-	public static StopWatch uptime = new StopWatch();
-	
+
 	public void onConnect(ConnectEvent event)
 	{
-		uptime.start();
-		
+
 		if(!Core.dev)
 		{
 			for(String s : ConfigHandler.config.channels)
@@ -22,10 +20,5 @@ public class ConnectionHandler extends ListenerAdapter
 				Core.bot.sendIRC().joinChannel(s);
 			}
 		}
-	}
-	
-	public void onDisconnect(DisconnectEvent event)
-	{
-		uptime.stop();
 	}
 }

@@ -1,10 +1,12 @@
 package me.justramon.ircbot.justabotx.commands;
 
+import java.lang.management.ManagementFactory;
+
 import org.pircbotx.Colors;
 import org.pircbotx.hooks.events.MessageEvent;
 
 import me.justramon.ircbot.justabotx.core.ICommand;
-import me.justramon.ircbot.justabotx.util.OtherUtils;
+import me.justramon.ircbot.justabotx.util.TimeParser;
 
 public class About implements ICommand<MessageEvent>
 {
@@ -13,7 +15,7 @@ public class About implements ICommand<MessageEvent>
 	public void exe(MessageEvent event, String[] args) throws Exception
 	{
 		event.getChannel().send().message("Bleep Bleep - \"I am an IRC-Bot created by JustRamon\"");
-		event.getChannel().send().message("Uptime: " + Colors.BOLD + OtherUtils.getUptime());
+		event.getChannel().send().message("Uptime: " + Colors.BOLD + new TimeParser().lts(ManagementFactory.getRuntimeMXBean().getUptime(), "%s:%s:%s:%s"));
 	}
 
 	@Override
