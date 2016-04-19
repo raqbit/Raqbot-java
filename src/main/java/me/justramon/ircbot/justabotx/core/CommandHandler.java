@@ -11,31 +11,36 @@ import me.justramon.ircbot.justabotx.commands.Enable;
 import me.justramon.ircbot.justabotx.commands.ForDuckSake;
 import me.justramon.ircbot.justabotx.commands.ForceShow;
 import me.justramon.ircbot.justabotx.commands.Help;
+import me.justramon.ircbot.justabotx.commands.Nick;
 import me.justramon.ircbot.justabotx.commands.Quit;
 import me.justramon.ircbot.justabotx.commands.Reload;
 import me.justramon.ircbot.justabotx.commands.Request;
+import me.justramon.ircbot.justabotx.commands.Source;
 import me.justramon.ircbot.justabotx.commands.TestCommand;
+import me.justramon.ircbot.justabotx.features.XtraFunc;
 import me.justramon.ircbot.justabotx.util.IDevCommand;
 import me.justramon.ircbot.justabotx.util.Operators;
 
 public class CommandHandler extends ListenerAdapter
 {
-	public static LinkedList<ICommand<MessageEvent>> opcommands = new LinkedList<ICommand<MessageEvent>>();
 	public static LinkedList<ICommand<MessageEvent>> commands = new LinkedList<ICommand<MessageEvent>>();
 	private LinkedList<IDevCommand<MessageEvent>> devcommands = new LinkedList<IDevCommand<MessageEvent>>();
 
 	public CommandHandler()
 	{
-		opcommands.add(new Enable());
-		opcommands.add(new Disable());
-		opcommands.add(new Quit());
-		opcommands.add(new Clear());
-		opcommands.add(new Reload());
 		devcommands.add(new TestCommand());
 		devcommands.add(new ForceShow());
+		commands.add(new Enable());
+		commands.add(new Disable());
+		commands.add(new Quit());
+		commands.add(new Clear());
+		commands.add(new Reload());
 		commands.add(new Help());
 		commands.add(new Request());
 		commands.add(new ForDuckSake());
+		commands.add(new Nick());
+		commands.add(new Source());
+		commands.add(new Nick());
 	}
 
 	public void onMessage(MessageEvent event) throws Exception
@@ -47,50 +52,30 @@ public class CommandHandler extends ListenerAdapter
 		{
 			for (ICommand<MessageEvent> cmd : commands)
 			{
-				if (Core.enabled)
+				if (Core.enabled || cmd instanceof Enable || cmd instanceof Disable)
 				{
 					for (String s : cmd.getAliases())
 					{
 						if (cmdName.equalsIgnoreCase("?" + s))
 						{
-							cmd.exe(event, args);
-							System.gc();
-							return;
-						}
-					}
-				}
-			}
-
-			for(ICommand<MessageEvent> cmd : opcommands)
-			{
-				if(Core.enabled || cmd instanceof Enable || cmd instanceof Disable)
-				{
-					for(String s : cmd.getAliases())
-					{
-						if (cmdName.equalsIgnoreCase("?" + s))
-						{
-							if(Operators.isOp(event))
+							if(XtraFunc.isExtraFuncCommand(cmd))
 							{
-								cmd.exe(event, args);
-								System.gc();
-								return;
+								if(XtraFunc.hasXtraFuncEnabled(event.getChannel().getName()))
+								{
+									cmd.exe(event, args);
+									System.gc();
+									return;
+								}
 							}
-						}
-					}
-				}
-			}
-
-			for(IDevCommand<MessageEvent> cmd : devcommands)
-			{
-				if(Core.enabled || cmd instanceof Enable || cmd instanceof Disable)
-				{
-					for(String s : cmd.getAliases())
-					{
-						if (cmdName.equalsIgnoreCase("?" + s))
-						{
-							if(Operators.isOp(event))
+							else
 							{
-								if(Core.dev)
+								if(Operators.isOpCommand(cmd) && Operators.isOp(event))
+								{
+										cmd.exe(event, args);
+										System.gc();
+										return;
+								}
+								else
 								{
 									cmd.exe(event, args);
 									System.gc();
@@ -101,7 +86,29 @@ public class CommandHandler extends ListenerAdapter
 					}
 				}
 			}
+
+			for(IDevCommand<MessageEvent> cmd : devcommands)
+			{
+				if(Core.enabled)
+				{
+					for(String s : cmd.getAliases())
+					{
+						if (cmdName.equalsIgnoreCase("?" + s))
+						{
+							if(Core.dev)
+							{
+								if(Operators.isOp(event))
+								{
+									cmd.exe(event, args);
+									System.gc();
+									return;
+								}
+							}
+						}
+					}
+
+				}
+			}
 		}
 	}
 }
-

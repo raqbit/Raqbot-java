@@ -36,6 +36,12 @@ public class Request implements ICommand<MessageEvent>
 		return "/<command> { M | H | D } <int>";
 	}
 	
+	@Override
+	public boolean xtraFunc()
+	{
+		return false;
+	}
+	
 	/**
 	 * Parses the timeunit the user wants to request in.
 	 * @param event

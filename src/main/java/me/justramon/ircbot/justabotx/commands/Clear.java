@@ -26,5 +26,17 @@ public class Clear implements ICommand<MessageEvent>
 	{
 		return "Clears the log of the channel the command is executed in.";
 	}
+	
+	@Override
+	public boolean xtraFunc()
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean isOperatorCommand()
+	{
+		return true;
+	}
 
 }

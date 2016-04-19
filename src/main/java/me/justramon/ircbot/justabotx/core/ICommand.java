@@ -12,4 +12,14 @@ public interface ICommand<MessageEvent>
 	}
 	
 	public String getInfo();
+	
+	public default boolean xtraFunc()
+	{
+		return true;
+	}
+	
+	public default boolean isOperatorCommand()
+	{
+		return false;
+	}
 }

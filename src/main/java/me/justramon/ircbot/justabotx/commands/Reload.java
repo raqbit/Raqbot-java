@@ -13,9 +13,9 @@ public class Reload implements ICommand<MessageEvent>
 	@Override
 	public void exe(MessageEvent event, String[] args) throws Exception
 	{
-		event.respond("Config Reloaded.");
 		ConfigHandler.loadConfig();
 		Core.bot.sendIRC().changeNick(!Core.dev ? ConfigHandler.config.nick : ConfigHandler.config.devnick);
+		event.respond("Config Reloaded.");
 	}
 
 	@Override
@@ -27,7 +27,19 @@ public class Reload implements ICommand<MessageEvent>
 	@Override
 	public String getInfo()
 	{
-		return "Reloads" + Colors.BOLD + Colors.UNDERLINE + "some" + Colors.NORMAL + "config options like for example the bot's nick.";
+		return "Reloads " + Colors.BOLD + Colors.UNDERLINE + "some" + Colors.NORMAL + " config options like for example the bot's nick.";
+	}
+	
+	@Override
+	public boolean xtraFunc()
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean isOperatorCommand()
+	{
+		return true;
 	}
 
 }

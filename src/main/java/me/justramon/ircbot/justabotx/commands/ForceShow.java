@@ -2,6 +2,7 @@ package me.justramon.ircbot.justabotx.commands;
 
 import org.pircbotx.hooks.events.MessageEvent;
 
+import me.justramon.ircbot.justabotx.features.blogupdates.JRWUpdates;
 import me.justramon.ircbot.justabotx.features.blogupdates.MojangUpdates;
 import me.justramon.ircbot.justabotx.util.IDevCommand;
 
@@ -14,7 +15,7 @@ public class ForceShow implements IDevCommand<MessageEvent>
 		switch(args[1])
 		{
 			case "mojang": MojangUpdates.debugForceShow(); break;
-			case "justramon": MojangUpdates.debugForceShow(); break;
+			case "justramon": JRWUpdates.debugForceShow(); break;
 			default: event.respond("That's not a valid blog to force-show updates from."); break;
 		}
 	}

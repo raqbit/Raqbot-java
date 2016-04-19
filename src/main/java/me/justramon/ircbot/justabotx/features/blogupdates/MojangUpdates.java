@@ -53,7 +53,6 @@ public class MojangUpdates
 	 */
 	public static void debugForceShow() throws IOException
 	{
-		System.out.println("debug mojang");
 		URL feedUrl;
 		SyndFeed feed = null;
 

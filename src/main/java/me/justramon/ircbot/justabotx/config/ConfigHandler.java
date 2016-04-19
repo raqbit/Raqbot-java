@@ -13,6 +13,8 @@ import com.esotericsoftware.yamlbeans.YamlException;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
 
+import me.justramon.ircbot.justabotx.core.Core;
+
 public class ConfigHandler
 {
 	public static File configfile;
@@ -81,6 +83,30 @@ public class ConfigHandler
 		config.jrwUpdateChans = jrwUpdateChans;
 		
 		config.updateDevChan = config.devchan;
+		
+		try
+		{
+			YamlWriter writer = new YamlWriter(new FileWriter(configfile));
+			writer.write(config);
+			writer.close();
+		} 
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public static void setNick(String newNick)
+	{
+		if(!configfile.exists())
+		{
+			setupConfig(configfile);
+		}	
+		
+		if(!Core.dev)
+			config.nick = newNick;
+		else
+			config.devnick = newNick;
 		
 		try
 		{

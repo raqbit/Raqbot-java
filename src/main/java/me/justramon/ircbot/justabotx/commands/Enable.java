@@ -34,5 +34,17 @@ public class Enable implements ICommand<MessageEvent>
 	{
 		return "Enables the bot. When executed he will start listening for commands.";
 	}
+	
+	@Override
+	public boolean xtraFunc()
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean isOperatorCommand()
+	{
+		return true;
+	}
 
 }

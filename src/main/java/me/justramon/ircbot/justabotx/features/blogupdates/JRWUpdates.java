@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 
 import org.pircbotx.Colors;
-import org.pircbotx.hooks.events.MessageEvent;
 
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
@@ -48,7 +47,7 @@ public class JRWUpdates
 	/**
 	 * Force-show for the JustRamonWeb updater.
 	 */
-	public static void debugForceShow(MessageEvent event) throws IOException
+	public static void debugForceShow() throws IOException
 	{
 		URL feedUrl;
 		SyndFeed feed = null;

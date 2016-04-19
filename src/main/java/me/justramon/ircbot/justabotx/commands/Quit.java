@@ -33,5 +33,17 @@ public class Quit implements ICommand<MessageEvent>
 	{
 		return "Stops the bot.";
 	}
+	
+	@Override
+	public boolean xtraFunc()
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean isOperatorCommand()
+	{
+		return true;
+	}
 
 }

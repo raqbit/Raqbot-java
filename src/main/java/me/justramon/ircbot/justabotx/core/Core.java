@@ -32,10 +32,11 @@ public class Core
 	
 	public static void createBot(String[] args) throws IOException, IrcException
 	{
-		
 		// Bot configs
 		if(args.length > 0 && args[0].equals("-dev"))
 		{
+			dev = true;
+			
 			Configuration devconfig;
 			
 			devconfig = new Configuration.Builder()
