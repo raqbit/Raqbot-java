@@ -71,11 +71,14 @@ public class CommandHandler extends ListenerAdapter
 							}
 							else
 							{
-								if(Operators.isOpCommand(cmd) && Operators.isOp(event))
+								if(Operators.isOpCommand(cmd))
 								{
+									if(Operators.isOp(event))
+									{
 										cmd.exe(event, args);
 										System.gc();
 										return;
+									}
 								}
 								else
 								{
