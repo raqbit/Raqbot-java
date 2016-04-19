@@ -13,6 +13,11 @@ import me.justramon.ircbot.justabotx.features.Logging;
 import me.justramon.ircbot.justabotx.features.blogupdates.BlogUpdateHandler;
 import me.justramon.ircbot.justabotx.util.NotImportant.Passwords;
 
+/**
+ * Copyright 2016 JustRamon
+ * @author Ramon
+ *
+ */
 public class Core
 {
 	public static PircBotX bot;
