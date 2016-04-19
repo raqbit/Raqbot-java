@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>me.justramon.ircbot.JustABotX</groupId>
-	<artifactId>JustABotXRewrite</artifactId>
+	<artifactId>JustABotX</artifactId>
 	<version>1.9</version>
 	<dependencies>
 		<dependency>
