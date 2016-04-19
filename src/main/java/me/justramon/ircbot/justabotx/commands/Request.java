@@ -1,24 +1,54 @@
-package me.justramon.ircbot.justabotx.cmd;
+package me.justramon.ircbot.justabotx.commands;
 
 import java.io.IOException;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
-import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.events.MessageEvent;
 
-import me.justramon.ircbot.justabotx.Log;
+import me.justramon.ircbot.justabotx.core.ICommand;
+import me.justramon.ircbot.justabotx.features.Logging;
 
-public class Request
+public class Request implements ICommand<MessageEvent>
 {
+
+	@Override
+	public void exe(MessageEvent event, String[] args) throws Exception
+	{
+		parsetimeunit(event, args);
+	}
+
+	@Override
+	public String[] getAliases()
+	{
+		return new String[] {"request", "rq"};
+	}
+
+	@Override
+	public String getInfo()
+	{
+		return "returns you the messages & actions that have been sent between the given moment and now.";
+	}
+	
+	@Override
+	public String getUsage()
+	{
+		return "/<command> { M | H | D } <int>";
+	}
+	
+	@Override
+	public boolean xtraFunc()
+	{
+		return false;
+	}
+	
 	/**
 	 * Parses the timeunit the user wants to request in.
 	 * @param event
 	 * @param args
 	 * @throws IOException
 	 */
-	public static void exe(MessageEvent<PircBotX> event, String[] args) throws IOException
+	public static void parsetimeunit(MessageEvent event, String[] args) throws IOException
 	{
 		switch(args[1].toLowerCase())
 		{
@@ -35,7 +65,7 @@ public class Request
 	 * @param event The event triggered by the command message
 	 * @param type The type of time to look up the log (hours/days etc.)
 	 */
-	public static void evaluate(String[] args, MessageEvent<PircBotX> event, String type) throws IOException
+	public static void evaluate(String[] args, MessageEvent event, String type) throws IOException
 	{
 		long currentTimestamp = event.getTimestamp();
 		try
@@ -59,9 +89,10 @@ public class Request
 	 * @param multiplier How many hours/days etc. should be looked up
 	 * @param timeSpan The type of time (hours/days etc.) in seconds
 	 */
-	private static void sendLines(MessageEvent<PircBotX> event, long currentTimestamp, int multiplier, int timeSpan) throws IOException
+	private static void sendLines(MessageEvent event, long currentTimestamp, int multiplier, int timeSpan) throws IOException
 	{
-		List<String> msglist = FileUtils.readLines(Log.getLog(event.getChannel()));
+		List<String> msglist = Logging.readLogLines(Logging.getLog(event.getChannel().getName()));
+		
 		boolean found = false;
 		boolean sentSpacer = false;
 
@@ -141,4 +172,5 @@ public class Request
 		default: return 0;
 		}
 	}
+
 }

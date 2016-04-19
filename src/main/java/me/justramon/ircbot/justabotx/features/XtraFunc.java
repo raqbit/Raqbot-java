@@ -1,34 +1,28 @@
 package me.justramon.ircbot.justabotx.features;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
-import org.apache.commons.io.FileUtils;
-import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.events.MessageEvent;
+
+import me.justramon.ircbot.justabotx.config.ConfigHandler;
+import me.justramon.ircbot.justabotx.core.ICommand;
 
 public class XtraFunc
 {
-	/**
-	 * Checks if the channel has xtrafunc turned on.
-	 * @param event
-	 * @return
-	 * @throws IOException
-	 */
-	public static boolean isAllowed(MessageEvent<PircBotX> event) throws IOException
+	public static boolean hasXtraFuncEnabled(String channelName)
 	{
-		File xtrafile = new File("XtraFunc.txt");
-		
-		if(!xtrafile.exists())
-			xtrafile.createNewFile();
-		
-		List<String> xtralist = FileUtils.readLines(xtrafile);
-		for(String line : xtralist)
+		for(String channel : ConfigHandler.config.xtrafunc)
 		{
-			if(line.equals(event.getChannel().getName()))
+			if(channel == channelName)
+			{
 				return true;
+			}
 		}
-		return false;		
+		return false;
+	}
+	
+	public static boolean isExtraFuncCommand(ICommand<MessageEvent> command)
+	{
+		if(command.xtraFunc())
+			return true;
+		return false;
 	}
 }
