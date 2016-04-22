@@ -3,6 +3,7 @@ package me.justramon.ircbot.justabotx.commands;
 import org.pircbotx.hooks.events.MessageEvent;
 
 import me.justramon.ircbot.justabotx.core.ICommand;
+import me.justramon.ircbot.justabotx.util.MessageHandler;
 
 public class Source implements ICommand<MessageEvent>
 {
@@ -10,7 +11,7 @@ public class Source implements ICommand<MessageEvent>
 	@Override
 	public void exe(MessageEvent event, String[] args) throws Exception
 	{
-		event.respond("Find my source here: https://github.com/justramon/justabotx");
+		MessageHandler.respond(event, "Find my source here: https://github.com/justramon/justabotx");
 	}
 
 	@Override

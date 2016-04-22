@@ -4,6 +4,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 
 import me.justramon.ircbot.justabotx.core.Core;
 import me.justramon.ircbot.justabotx.core.ICommand;
+import me.justramon.ircbot.justabotx.util.MessageHandler;
 
 public class Disable implements ICommand<MessageEvent>
 {
@@ -13,14 +14,14 @@ public class Disable implements ICommand<MessageEvent>
 	{
 			if(Core.enabled)
 			{
-				event.respond("Why u do dis?");
-				event.getBot().sendIRC().action(event.getChannel().getName(), "walks into the corner.");
+				MessageHandler.respond(event, "Why u do dis?");
+				MessageHandler.channelAction(event, "walks into the corner.");
 				Core.enabled = false;
 			}
 			else
 			{
 				event.respond("I am already disabled!!!");
-				event.getBot().sendIRC().action(event.getChannel().getName(), "walks back into his corner");
+				MessageHandler.channelAction(event, "walks back into his corner");
 			}
 	}
 

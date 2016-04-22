@@ -4,6 +4,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 
 import me.justramon.ircbot.justabotx.core.Core;
 import me.justramon.ircbot.justabotx.core.ICommand;
+import me.justramon.ircbot.justabotx.util.MessageHandler;
 
 public class Quit implements ICommand<MessageEvent>
 {
@@ -11,13 +12,13 @@ public class Quit implements ICommand<MessageEvent>
 	@Override
 	public void exe(MessageEvent event, String[] args) throws Exception
 	{
-		event.getBot().sendIRC().action(event.getChannel().getName(), "cries");
+		MessageHandler.channelAction(event, "cries");
 		Thread.sleep(2000);
-		event.getChannel().send().message("Really?");
+		MessageHandler.sendChannelMessage(event,"Really?");
 		Thread.sleep(2000);
-		event.getChannel().send().message("...");
+		MessageHandler.sendChannelMessage(event, "...");
 		Thread.sleep(1000);
-		event.getChannel().send().message("bye guys :(");
+		MessageHandler.sendChannelMessage(event, "bye guys :(");
 		Core.bot.sendIRC().quitServer();
 		System.exit(1);
 	}

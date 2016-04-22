@@ -6,6 +6,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 import me.justramon.ircbot.justabotx.config.ConfigHandler;
 import me.justramon.ircbot.justabotx.core.Core;
 import me.justramon.ircbot.justabotx.core.ICommand;
+import me.justramon.ircbot.justabotx.util.MessageHandler;
 
 public class Reload implements ICommand<MessageEvent>
 {
@@ -15,7 +16,7 @@ public class Reload implements ICommand<MessageEvent>
 	{
 		ConfigHandler.loadConfig();
 		Core.bot.sendIRC().changeNick(!Core.dev ? ConfigHandler.config.nick : ConfigHandler.config.devnick);
-		event.respond("Config Reloaded.");
+		MessageHandler.respond(event, "Config Reloaded.");
 	}
 
 	@Override

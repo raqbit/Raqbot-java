@@ -4,6 +4,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 
 import me.justramon.ircbot.justabotx.core.ICommand;
 import me.justramon.ircbot.justabotx.features.Logging;
+import me.justramon.ircbot.justabotx.util.MessageHandler;
 
 public class Clear implements ICommand<MessageEvent>
 {
@@ -11,7 +12,7 @@ public class Clear implements ICommand<MessageEvent>
 	@Override
 	public void exe(MessageEvent event, String[] args) throws Exception
 	{
-		event.getChannel().send().message("Threw logfile into igneous extruder.");
+		MessageHandler.sendChannelMessage(event, "Threw logfile into igneous extruder.");
 		Logging.clearLog(event.getChannel().getName());
 	}
 

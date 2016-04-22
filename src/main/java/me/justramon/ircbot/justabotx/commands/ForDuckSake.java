@@ -3,6 +3,7 @@ package me.justramon.ircbot.justabotx.commands;
 import org.pircbotx.hooks.events.MessageEvent;
 
 import me.justramon.ircbot.justabotx.core.ICommand;
+import me.justramon.ircbot.justabotx.util.MessageHandler;
 
 public class ForDuckSake implements ICommand<MessageEvent>
 {
@@ -12,10 +13,10 @@ public class ForDuckSake implements ICommand<MessageEvent>
 	{
 		if(args.length > 1 && args[1] != null)
 		{
-			event.getChannel().send().message("ffs " + args[1] + "!");
+			MessageHandler.sendChannelMessage(event, "ffs " + args[1] + "!");
 		}
 		else
-			event.getChannel().send().message("ffs " + event.getUser().getNick() + " please use this command right!!");
+			MessageHandler.sendChannelMessage(event, "ffs " + event.getUser().getNick() + " please use this command right!!");
 	}
 
 	@Override

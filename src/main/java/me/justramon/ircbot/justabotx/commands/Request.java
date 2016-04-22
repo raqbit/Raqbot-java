@@ -8,6 +8,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 
 import me.justramon.ircbot.justabotx.core.ICommand;
 import me.justramon.ircbot.justabotx.features.Logging;
+import me.justramon.ircbot.justabotx.util.MessageHandler;
 
 public class Request implements ICommand<MessageEvent>
 {
@@ -55,7 +56,7 @@ public class Request implements ICommand<MessageEvent>
 		case "m": evaluate(args, event, "m"); break;
 		case "h": evaluate(args, event, "h"); break;
 		case "d": evaluate(args, event, "d"); break;
-		default: event.respond("That's not a valid argument. Use \"d\" for days, \"h\" for hours or \"m\" for minutes"); break;
+		default: MessageHandler.respond(event, "That's not a valid argument. Use \"d\" for days, \"h\" for hours or \"m\" for minutes"); break;
 		}
 	}
 
@@ -77,7 +78,7 @@ public class Request implements ICommand<MessageEvent>
 		}
 		catch(NumberFormatException e)
 		{
-			event.respond("That's not a valid amount.");
+			MessageHandler.respond(event, "That's not a valid amount.");
 			e.printStackTrace();
 		}
 	}
@@ -111,7 +112,7 @@ public class Request implements ICommand<MessageEvent>
 
 		if(!found)
 		{
-			event.respond("There wasn't a message in the specified timeframe.");
+			MessageHandler.respond(event, "There wasn't a message in the specified timeframe.");
 			return;
 		}
 		else

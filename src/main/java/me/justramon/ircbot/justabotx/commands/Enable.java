@@ -4,6 +4,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 
 import me.justramon.ircbot.justabotx.core.Core;
 import me.justramon.ircbot.justabotx.core.ICommand;
+import me.justramon.ircbot.justabotx.util.MessageHandler;
 
 public class Enable implements ICommand<MessageEvent>
 {
@@ -13,13 +14,13 @@ public class Enable implements ICommand<MessageEvent>
 	{
 			if(!Core.enabled)
 			{
-				event.respond("TY m8 for enabling me :D");
+				MessageHandler.respond(event, "TY m8 for enabling me :D");
 				Core.enabled = true;
 			}
 			else
 			{
-				event.respond("I am already enabled!!!");
-				event.respond("What do you want from me? D:");
+				MessageHandler.respond(event, "I am already enabled!!!");
+				MessageHandler.respond(event, "What do you want from me? D:");
 			}
 		}
 

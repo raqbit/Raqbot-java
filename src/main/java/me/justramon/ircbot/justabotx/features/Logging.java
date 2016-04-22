@@ -15,6 +15,9 @@ import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.ActionEvent;
 import org.pircbotx.hooks.events.MessageEvent;
 
+import me.justramon.ircbot.justabotx.config.ConfigHandler;
+import me.justramon.ircbot.justabotx.core.Core;
+
 public class Logging extends ListenerAdapter
 {
 
@@ -26,6 +29,48 @@ public class Logging extends ListenerAdapter
 		List<String> loglines = readLogLines(log);
 		
 		loglines.add(event.getTimestamp() + " <" + event.getUser().getNick() + "> " + event.getMessage());
+		
+		writeLogLines(log, loglines);
+		loglines = null;
+		System.gc();
+	}
+	
+	public static void logMyRespondMessage(MessageEvent event, String message)
+	{
+		File log = new File("logs/" + event.getChannel().getName() + ".jabxlog");
+		checkFiles(log);
+		
+		List<String> loglines = readLogLines(log);
+		
+		loglines.add(System.currentTimeMillis() + " <" + (!Core.dev ? ConfigHandler.config.nick : ConfigHandler.config.devnick) + "> " +  event.getUser() + ", " + message);
+		
+		writeLogLines(log, loglines);
+		loglines = null;
+		System.gc();
+	}
+	
+	public static void logMyChannelMessage(MessageEvent event, String message)
+	{
+		File log = new File("logs/" + event.getChannel().getName() + ".jabxlog");
+		checkFiles(log);
+		
+		List<String> loglines = readLogLines(log);
+		
+		loglines.add(System.currentTimeMillis() + " <" + (!Core.dev ? ConfigHandler.config.nick : ConfigHandler.config.devnick) + "> " + message);
+		
+		writeLogLines(log, loglines);
+		loglines = null;
+		System.gc();
+	}
+	
+	public static void logMyAction(MessageEvent event, String action)
+	{
+		File log = new File("logs/" + event.getChannel().getName() + ".jabxlog");
+		checkFiles(log);
+		
+		List<String> loglines = readLogLines(log);
+		
+		loglines.add(System.currentTimeMillis() + " * " + (!Core.dev ? ConfigHandler.config.nick : ConfigHandler.config.devnick) + " " + action);
 		
 		writeLogLines(log, loglines);
 		loglines = null;
