@@ -4,6 +4,7 @@ import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.ConnectEvent;
 
 import me.justramon.ircbot.justabotx.config.ConfigHandler;
+import me.justramon.ircbot.justabotx.features.RequestBlackListHandler;
 
 public class ConnectionHandler extends ListenerAdapter
 {
@@ -16,6 +17,7 @@ public class ConnectionHandler extends ListenerAdapter
 			for(String s : ConfigHandler.config.channels)
 			{
 				Core.bot.sendIRC().joinChannel(s);
+				RequestBlackListHandler.loadBlackList(s);
 			}
 		}
 	}

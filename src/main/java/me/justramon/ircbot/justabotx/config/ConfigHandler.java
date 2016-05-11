@@ -7,13 +7,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import com.esotericsoftware.yamlbeans.YamlException;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
 
 import me.justramon.ircbot.justabotx.core.Core;
+import me.justramon.ircbot.justabotx.util.StringUtils;
 
 public class ConfigHandler
 {
@@ -67,7 +67,7 @@ public class ConfigHandler
 		config.devchan = "#bl4ckb0tTest";
 		
 		List<String> operators = new ArrayList<String>();
-		operators.add(genrandstring(10));
+		operators.add(StringUtils.genrandstring(10));
 		config.operators = operators;
 		
 		List<String> xtrafunc = new ArrayList<String>();
@@ -118,20 +118,5 @@ public class ConfigHandler
 		{
 			e.printStackTrace();
 		}
-	}
-	
-	private static String genrandstring(int length)
-	{
-		int leftLimit = 97; // letter 'a'
-	    int rightLimit = 122; // letter 'z'
-	    StringBuilder buffer = new StringBuilder(length);
-	    for (int i = 0; i < length; i++) {
-	        int randomLimitedInt = leftLimit + (int) 
-	          (new Random().nextFloat() * (rightLimit - leftLimit));
-	        buffer.append((char) randomLimitedInt);
-	    }
-	    String generatedString = buffer.toString();
-	    
-	    return generatedString;
 	}
 }

@@ -12,13 +12,7 @@ public class Quit implements ICommand<MessageEvent>
 	@Override
 	public void exe(MessageEvent event, String[] args) throws Exception
 	{
-		MessageHandler.channelAction(event, "cries");
-		Thread.sleep(2000);
-		MessageHandler.sendChannelMessage(event,"Really?");
-		Thread.sleep(2000);
-		MessageHandler.sendChannelMessage(event, "...");
-		Thread.sleep(1000);
-		MessageHandler.sendChannelMessage(event, "bye guys :(");
+		MessageHandler.sendChannelMessage(event, "Bye guys!");
 		Core.bot.sendIRC().quitServer();
 		System.exit(1);
 	}

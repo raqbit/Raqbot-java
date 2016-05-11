@@ -1,14 +1,15 @@
 package me.justramon.ircbot.justabotx.commands;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.List;
 
 import org.pircbotx.hooks.events.MessageEvent;
 
 import me.justramon.ircbot.justabotx.core.ICommand;
 import me.justramon.ircbot.justabotx.features.Logging;
+import me.justramon.ircbot.justabotx.features.RequestBlackListHandler;
 import me.justramon.ircbot.justabotx.util.MessageHandler;
+import me.justramon.ircbot.justabotx.util.StringUtils;
 
 public class Request implements ICommand<MessageEvent>
 {
@@ -16,7 +17,10 @@ public class Request implements ICommand<MessageEvent>
 	@Override
 	public void exe(MessageEvent event, String[] args) throws Exception
 	{
-		parsetimeunit(event, args);
+		if(!RequestBlackListHandler.isBlackListed(event))
+		{
+			parsetimeunit(event, args);
+		}
 	}
 
 	@Override
@@ -104,7 +108,7 @@ public class Request implements ICommand<MessageEvent>
 				if(!sentSpacer)
 					event.getUser().send().message("--------------------" + event.getChannel().getName() + "--------------------");
 
-				event.getUser().send().message(new Date(getTimestamp(line)) + " " + getMessage(line));
+				event.getUser().send().message(StringUtils.getTimeAndDateStamp(line) + " " + getMessage(line));
 				found = true;
 				sentSpacer = true;
 			}

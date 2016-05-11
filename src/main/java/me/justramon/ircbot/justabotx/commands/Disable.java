@@ -14,14 +14,12 @@ public class Disable implements ICommand<MessageEvent>
 	{
 			if(Core.enabled)
 			{
-				MessageHandler.respond(event, "Why u do dis?");
-				MessageHandler.channelAction(event, "walks into the corner.");
+				MessageHandler.respond(event, "Disabled.");
 				Core.enabled = false;
 			}
 			else
 			{
-				event.respond("I am already disabled!!!");
-				MessageHandler.channelAction(event, "walks back into his corner");
+				MessageHandler.respond(event, "I am already disabled.");
 			}
 	}
 

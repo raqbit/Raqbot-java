@@ -89,3 +89,6 @@ config.yml
 
 # logs
 logs/
+
+# requestblacklists
+requestblacklists/

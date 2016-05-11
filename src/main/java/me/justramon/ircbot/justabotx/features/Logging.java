@@ -42,7 +42,7 @@ public class Logging extends ListenerAdapter
 		
 		List<String> loglines = readLogLines(log);
 		
-		loglines.add(System.currentTimeMillis() + " <" + (!Core.dev ? ConfigHandler.config.nick : ConfigHandler.config.devnick) + "> " +  event.getUser() + ", " + message);
+		loglines.add(System.currentTimeMillis() + " <" + (!Core.dev ? ConfigHandler.config.nick : ConfigHandler.config.devnick) + "> " +  event.getUser().getNick() + ", " + message);
 		
 		writeLogLines(log, loglines);
 		loglines = null;
@@ -95,7 +95,7 @@ public class Logging extends ListenerAdapter
 		File logfolder = new File("logs");
 
 		if(!logfolder.exists())
-			logfolder.mkdirs();
+			logfolder.mkdir();
 
 
 		if(!log.exists())
