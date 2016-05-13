@@ -6,7 +6,7 @@ import me.justramon.ircbot.justabotx.core.ICommand;
 import me.justramon.ircbot.justabotx.util.MessageHandler;
 import me.justramon.ircbot.justabotx.util.StringUtils;
 
-public class ForDuckSake implements ICommand<MessageEvent>
+public class ForDucksSake implements ICommand<MessageEvent>
 {
 
 	@Override

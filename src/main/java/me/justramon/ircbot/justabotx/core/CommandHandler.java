@@ -9,7 +9,7 @@ import me.justramon.ircbot.justabotx.commands.About;
 import me.justramon.ircbot.justabotx.commands.Clear;
 import me.justramon.ircbot.justabotx.commands.Disable;
 import me.justramon.ircbot.justabotx.commands.Enable;
-import me.justramon.ircbot.justabotx.commands.ForDuckSake;
+import me.justramon.ircbot.justabotx.commands.ForDucksSake;
 import me.justramon.ircbot.justabotx.commands.ForceShow;
 import me.justramon.ircbot.justabotx.commands.Help;
 import me.justramon.ircbot.justabotx.commands.Nick;
@@ -38,7 +38,7 @@ public class CommandHandler extends ListenerAdapter
 		commands.add(new Reload());
 		commands.add(new Help());
 		commands.add(new Request());
-		commands.add(new ForDuckSake());
+		commands.add(new ForDucksSake());
 		commands.add(new Nick());
 		commands.add(new Source());
 		commands.add(new Nick());
