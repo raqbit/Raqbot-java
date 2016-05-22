@@ -13,7 +13,6 @@ public class XtraFunc
 		{
 			if(channelName.equals(channel))
 			{
-				System.out.println("Success");
 				return true;
 			}
 		}

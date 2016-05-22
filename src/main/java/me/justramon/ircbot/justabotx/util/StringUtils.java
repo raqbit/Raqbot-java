@@ -7,7 +7,8 @@ import java.util.TimeZone;
 
 public class StringUtils
 {
-	public static String arrayToString(String[] args){
+	public static String arrayToString(String[] args)
+	{
 		String string = "";
 
 		for(int i = 0; i < args.length; i++){
@@ -17,16 +18,15 @@ public class StringUtils
 		return string;
 	}
 
-	public static String[] trimArray(String[] args, int trimAmount){
-		String[] array = new String[args.length - trimAmount];
-
-		if(array.length == 0){ return null; }
-
-		for(int i = 0; i < array.length; i++){
-			array[i] = args[i];
+	public static String[] trimArgrumentsFromCommand(String[] args)
+	{
+		String[] newArgs = new String[args.length - 1];
+		
+		for(int i = 0; i < newArgs.length; i++)
+		{
+			newArgs[i] = args[i + 1];
 		}
-
-		return array;
+		return newArgs;
 	}
 
 	public static String getTimeAndDateStamp(String line)

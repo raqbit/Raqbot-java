@@ -14,10 +14,10 @@ public class ForDucksSake implements ICommand<MessageEvent>
 	{
 		if(args.length > 1 && args[1] != null)
 		{
-			MessageHandler.sendChannelMessage(event, "ffs " + StringUtils.arrayToString(StringUtils.trimArray(args, 1)) + "!");
+			MessageHandler.sendChannelMessage(event, "For fuck's sake " + StringUtils.arrayToString(args) + "!");
 		}
 		else
-			MessageHandler.sendChannelMessage(event, "ffs " + event.getUser().getNick() + " please use this command right!!");
+			MessageHandler.sendChannelMessage(event, "For fuck's sake " + event.getUser().getNick() + " please use this command right!!");
 	}
 
 	@Override

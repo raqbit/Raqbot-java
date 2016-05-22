@@ -4,23 +4,11 @@ import java.util.LinkedList;
 
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
-
-import me.justramon.ircbot.justabotx.commands.About;
-import me.justramon.ircbot.justabotx.commands.Clear;
-import me.justramon.ircbot.justabotx.commands.Disable;
-import me.justramon.ircbot.justabotx.commands.Enable;
-import me.justramon.ircbot.justabotx.commands.ForDucksSake;
-import me.justramon.ircbot.justabotx.commands.ForceShow;
-import me.justramon.ircbot.justabotx.commands.Help;
-import me.justramon.ircbot.justabotx.commands.Nick;
-import me.justramon.ircbot.justabotx.commands.Quit;
-import me.justramon.ircbot.justabotx.commands.Reload;
-import me.justramon.ircbot.justabotx.commands.Request;
-import me.justramon.ircbot.justabotx.commands.Source;
-import me.justramon.ircbot.justabotx.commands.TestCommand;
+import me.justramon.ircbot.justabotx.commands.*;
 import me.justramon.ircbot.justabotx.features.XtraFunc;
 import me.justramon.ircbot.justabotx.util.IDevCommand;
 import me.justramon.ircbot.justabotx.util.Operators;
+import me.justramon.ircbot.justabotx.util.StringUtils;
 
 public class CommandHandler extends ListenerAdapter
 {
@@ -29,7 +17,6 @@ public class CommandHandler extends ListenerAdapter
 
 	public CommandHandler()
 	{
-		devcommands.add(new TestCommand());
 		devcommands.add(new ForceShow());
 		commands.add(new Enable());
 		commands.add(new Disable());
@@ -47,8 +34,8 @@ public class CommandHandler extends ListenerAdapter
 
 	public void onMessage(MessageEvent event) throws Exception
 	{
-		String[] args = event.getMessage().split(" ");
-		String cmdName = args[0];
+		String[] args = StringUtils.trimArgrumentsFromCommand(event.getMessage().split(" "));
+		String cmdName = event.getMessage().split(" ")[0];
 
 		if(cmdName.startsWith("?"))
 		{
@@ -111,7 +98,6 @@ public class CommandHandler extends ListenerAdapter
 							}
 						}
 					}
-
 				}
 			}
 		}
