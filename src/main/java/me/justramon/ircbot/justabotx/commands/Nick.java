@@ -13,7 +13,7 @@ public class Nick implements ICommand<MessageEvent>
 	@Override
 	public void exe(MessageEvent event, String[] args) throws Exception
 	{
-		if(args.length > 1 && args[1] != null)
+		if(args.length == 1 && args[0] != null)
 		{
 			ConfigHandler.setNick(args[1]);
 			Core.bot.sendIRC().changeNick(ConfigHandler.config.nick);

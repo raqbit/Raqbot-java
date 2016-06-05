@@ -13,7 +13,7 @@ public class ForceShow implements IDevCommand<MessageEvent>
 	@Override
 	public void exe(MessageEvent event, String[] args) throws Exception
 	{
-		switch(args[1])
+		switch(args[0])
 		{
 			case "mojang": MojangUpdates.debugForceShow(); break;
 			case "justramon": JRWUpdates.debugForceShow(); break;

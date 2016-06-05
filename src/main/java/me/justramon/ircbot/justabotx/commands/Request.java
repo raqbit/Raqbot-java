@@ -55,7 +55,7 @@ public class Request implements ICommand<MessageEvent>
 	 */
 	public static void parsetimeunit(MessageEvent event, String[] args) throws IOException
 	{
-		switch(args[1].toLowerCase())
+		switch(args[0].toLowerCase())
 		{
 		case "m": evaluate(args, event, "m"); break;
 		case "h": evaluate(args, event, "h"); break;
@@ -75,8 +75,8 @@ public class Request implements ICommand<MessageEvent>
 		long currentTimestamp = event.getTimestamp();
 		try
 		{
-			if(args[2] != null && Integer.parseInt(args[2]) > 1)
-				sendLines(event, currentTimestamp, Integer.parseInt(args[2]), getTypeSpan(type));
+			if(args[1] != null && Integer.parseInt(args[1]) > 1)
+				sendLines(event, currentTimestamp, Integer.parseInt(args[1]), getTypeSpan(type));
 			else
 				sendLines(event, currentTimestamp, 1, getTypeSpan(type));
 		}

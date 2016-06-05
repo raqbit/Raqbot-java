@@ -37,6 +37,10 @@ public class MojangUpdates
 					{
 						Core.bot.sendIRC().message(channel, Colors.BOLD + Colors.GREEN + "Minecraft Snapshot!");
 					}
+					else if(latestPost.getTitle().toLowerCase().contains("pre-release") || latestPost.getTitle().toLowerCase().contains("prerelease"))
+					{
+						Core.bot.sendIRC().message(channel, Colors.BOLD + Colors.YELLOW + "Minecraft Pre-Realease!");
+					}
 					Core.bot.sendIRC().message(channel, Colors.BOLD + "Link: " + Colors.PURPLE + latestPost.getLink());
 				}
 			}
