@@ -24,19 +24,19 @@ public class Request implements ICommand<MessageEvent>
 	}
 
 	@Override
-	public String[] getAliases()
+	public String[] setAliases()
 	{
 		return new String[] {"request", "rq"};
 	}
 
 	@Override
-	public String getInfo()
+	public String setInfo()
 	{
 		return "returns you the messages & actions that have been sent between the given moment and now.";
 	}
 	
 	@Override
-	public String getUsage()
+	public String setUsage()
 	{
 		return "/<command> { M | H | D } <int>";
 	}

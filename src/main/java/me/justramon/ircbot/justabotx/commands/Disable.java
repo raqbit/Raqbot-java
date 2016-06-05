@@ -24,13 +24,13 @@ public class Disable implements ICommand<MessageEvent>
 	}
 
 	@Override
-	public String[] getAliases()
+	public String[] setAliases()
 	{
 		return new String[] {"disable"};
 	}
 
 	@Override
-	public String getInfo()
+	public String setInfo()
 	{
 		return "Disables the bot to where he won't listen to commands.";
 	}

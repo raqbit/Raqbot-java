@@ -18,13 +18,13 @@ public class Quit implements ICommand<MessageEvent>
 	}
 
 	@Override
-	public String[] getAliases()
+	public String[] setAliases()
 	{
 		return new String[] {"stop", "quit", "goaway"};
 	}
 
 	@Override
-	public String getInfo()
+	public String setInfo()
 	{
 		return "Stops the bot.";
 	}

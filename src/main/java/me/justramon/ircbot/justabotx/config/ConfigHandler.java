@@ -84,6 +84,8 @@ public class ConfigHandler
 		
 		config.updateDevChan = config.devchan;
 		
+		config.gameChannels = config.xtrafunc;
+		
 		try
 		{
 			YamlWriter writer = new YamlWriter(new FileWriter(configfile));

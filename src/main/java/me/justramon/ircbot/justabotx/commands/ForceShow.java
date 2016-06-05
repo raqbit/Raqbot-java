@@ -22,7 +22,7 @@ public class ForceShow implements IDevCommand<MessageEvent>
 	}
 
 	@Override
-	public String[] getAliases()
+	public String[] setAliases()
 	{
 		return new String[]{"forceshow", "fs"};
 	}

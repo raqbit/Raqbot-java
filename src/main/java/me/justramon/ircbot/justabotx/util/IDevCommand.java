@@ -6,5 +6,5 @@ public interface IDevCommand<M extends Event>
 {
 	public void exe(M event, String[] args) throws Exception;
 	
-	public String[] getAliases();
+	public String[] setAliases();
 }

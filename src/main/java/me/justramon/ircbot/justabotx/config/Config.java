@@ -16,5 +16,6 @@ public class Config
 	public List<String> jrwUpdateChans;
 	public List<String> mojangUpdateChans;
 	public String updateDevChan;
+	public List<String> gameChannels;
 }
 

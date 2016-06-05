@@ -20,13 +20,13 @@ public class Reload implements ICommand<MessageEvent>
 	}
 
 	@Override
-	public String[] getAliases()
+	public String[] setAliases()
 	{
 		return new String[] {"reload", "rl"};
 	}
 
 	@Override
-	public String getInfo()
+	public String setInfo()
 	{
 		return "Reloads " + Colors.BOLD + Colors.UNDERLINE + "some" + Colors.NORMAL + " config options like for example the bot's nick.";
 	}

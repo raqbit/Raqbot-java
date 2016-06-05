@@ -4,14 +4,14 @@ public interface ICommand<MessageEvent>
 {
 	public void exe(MessageEvent event, String[] args) throws Exception;
 	
-	public String[] getAliases();
+	public String[] setAliases();
 	
-	public default String getUsage()
+	public default String setUsage()
 	{
 		return "?<command>";
 	}
 	
-	public String getInfo();
+	public String setInfo();
 	
 	public default boolean xtraFunc()
 	{

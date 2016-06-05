@@ -15,7 +15,7 @@ public class TestCommand implements IDevCommand<MessageEvent>
 	}
 
 	@Override
-	public String[] getAliases()
+	public String[] setAliases()
 	{
 		return new String[] {"testcmd"};
 	}

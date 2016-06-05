@@ -19,7 +19,10 @@ import me.justramon.ircbot.justabotx.commands.Request;
 import me.justramon.ircbot.justabotx.commands.Source;
 import me.justramon.ircbot.justabotx.commands.TestCommand;
 import me.justramon.ircbot.justabotx.features.XtraFunc;
+import me.justramon.ircbot.justabotx.features.gamemode.GameModeHandler;
+import me.justramon.ircbot.justabotx.features.gamemode.IGame;
 import me.justramon.ircbot.justabotx.util.IDevCommand;
+import me.justramon.ircbot.justabotx.util.MessageHandler;
 import me.justramon.ircbot.justabotx.util.Operators;
 
 public class CommandHandler extends ListenerAdapter
@@ -56,7 +59,7 @@ public class CommandHandler extends ListenerAdapter
 			{
 				if (Core.enabled || cmd instanceof Enable || cmd instanceof Disable)
 				{
-					for (String s : cmd.getAliases())
+					for (String s : cmd.setAliases())
 					{
 						if (cmdName.equalsIgnoreCase("?" + s))
 						{
@@ -96,7 +99,7 @@ public class CommandHandler extends ListenerAdapter
 			{
 				if(Core.enabled)
 				{
-					for(String s : cmd.getAliases())
+					for(String s : cmd.setAliases())
 					{
 						if (cmdName.equalsIgnoreCase("?" + s))
 						{
@@ -113,6 +116,48 @@ public class CommandHandler extends ListenerAdapter
 					}
 
 				}
+			}
+		}
+		else if(cmdName.startsWith("@"))
+		{
+			String channel = event.getChannel().getName();
+
+			if(cmdName.equalsIgnoreCase("@" + "disable") && Operators.isOp(event))
+			{
+				if(GameModeHandler.isPlaying(channel))
+				{
+					GameModeHandler.disableGameMode(channel);
+				}
+			}
+
+			if(cmdName.equalsIgnoreCase("@" + "enable") && Operators.isOp(event))
+			{
+				if(!GameModeHandler.isPlaying(channel))
+				{
+					GameModeHandler.enableGameMode(channel);
+				}
+				else
+					MessageHandler.respond(event, "This channel is already in game mode!");
+			}
+			else
+			{
+				if(GameModeHandler.isPlaying(channel))
+				{
+					for(IGame game : GameModeHandler.games)
+					{
+						for(String s : game.setCommands())
+						{
+							if(cmdName.equalsIgnoreCase("@" + s))
+							{
+								game.exe(event, args);
+								System.gc();
+								return;
+							}
+						}
+					}
+				}
+				else
+					MessageHandler.respond(event, "This channel is not in game mode!");
 			}
 		}
 	}

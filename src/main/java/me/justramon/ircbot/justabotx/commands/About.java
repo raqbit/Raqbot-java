@@ -20,13 +20,13 @@ public class About implements ICommand<MessageEvent>
 	}
 
 	@Override
-	public String[] getAliases()
+	public String[] setAliases()
 	{
 		return new String[] {"about"};
 	}
 
 	@Override
-	public String getInfo()
+	public String setInfo()
 	{
 		return "Gives you some info about the bot.";
 	}

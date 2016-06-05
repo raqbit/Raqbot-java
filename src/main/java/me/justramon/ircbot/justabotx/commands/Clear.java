@@ -17,13 +17,13 @@ public class Clear implements ICommand<MessageEvent>
 	}
 
 	@Override
-	public String[] getAliases()
+	public String[] setAliases()
 	{
 		return new String[]{"clear", "cl"};
 	}
 
 	@Override
-	public String getInfo()
+	public String setInfo()
 	{
 		return "Clears the log of the channel the command is executed in.";
 	}
