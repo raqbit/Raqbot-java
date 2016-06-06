@@ -12,7 +12,7 @@ public class ForDucksSake implements ICommand<MessageEvent>
 	@Override
 	public void exe(MessageEvent event, String[] args) throws Exception
 	{
-		if(args.length > 1 && args[1] != null)
+		if(args[0] != null)
 		{
 			MessageHandler.sendChannelMessage(event, "For fuck's sake " + StringUtils.arrayToString(args) + "!");
 		}
@@ -21,13 +21,13 @@ public class ForDucksSake implements ICommand<MessageEvent>
 	}
 
 	@Override
-	public String[] getAliases()
+	public String[] setAliases()
 	{
 		return new String[] {"ffs"};
 	}
 
 	@Override
-	public String getInfo()
+	public String setInfo()
 	{
 		return "You'll figure it out :P";
 	}
