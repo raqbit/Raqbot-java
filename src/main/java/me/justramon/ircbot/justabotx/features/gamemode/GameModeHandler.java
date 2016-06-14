@@ -1,5 +1,6 @@
 package me.justramon.ircbot.justabotx.features.gamemode;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import me.justramon.ircbot.justabotx.config.ConfigHandler;
@@ -7,8 +8,8 @@ import me.justramon.ircbot.justabotx.core.Core;
 
 public class GameModeHandler
 {
-	private static List<String> chansPlaying;
-	public static List<IGame> games;
+	private static LinkedList<String> chansPlaying = new LinkedList<String>();
+	public static LinkedList<IGame> games = new LinkedList<IGame>();
 
 	public static boolean isPlaying(String channel)
 	{
@@ -23,11 +24,13 @@ public class GameModeHandler
 		return false;
 	}
 
-	public static void enableGameMode(String channel)
+	public static void enableGameMode(String channel, String game)
 	{
+		//TODO: FIX!!
 		if(hasGameModeEnabled(channel))
 		{
 			chansPlaying.add(channel);
+			System.out.println(chansPlaying);
 			Core.bot.sendIRC().message(channel, "GameMode enabled.");
 		}
 		else

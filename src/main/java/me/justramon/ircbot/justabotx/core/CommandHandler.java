@@ -108,7 +108,7 @@ public class CommandHandler extends ListenerAdapter
 		{
 			String channel = event.getChannel().getName();
 
-			if(cmdName.equalsIgnoreCase("@" + "disable") && Operators.isOp(event))
+			if(cmdName.equalsIgnoreCase("@disable") && Operators.isOp(event))
 			{
 				if(GameModeHandler.isPlaying(channel))
 				{
@@ -116,14 +116,24 @@ public class CommandHandler extends ListenerAdapter
 				}
 			}
 
-			if(cmdName.equalsIgnoreCase("@" + "enable") && Operators.isOp(event))
+			if(cmdName.equalsIgnoreCase("@game") && Operators.isOp(event))
 			{
 				if(!GameModeHandler.isPlaying(channel))
 				{
-					GameModeHandler.enableGameMode(channel);
+					if(args.length == 1)
+					{
+						GameModeHandler.enableGameMode(channel, args[1]);
+					}
+					else
+					{
+						MessageHandler.respond(event, "Please pass a game that you want to play.");
+						//TODO: list all games
+					}
 				}
 				else
-					MessageHandler.respond(event, "This channel is already in game mode!");
+				{
+					MessageHandler.respond(event, "This channel is already playing a game!");
+				}
 			}
 			else
 			{
