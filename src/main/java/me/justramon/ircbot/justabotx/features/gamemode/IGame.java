@@ -4,9 +4,9 @@ import org.pircbotx.hooks.events.MessageEvent;
 
 public interface IGame
 {
-	public void exe(MessageEvent event, String[] args) throws Exception;
+	public void exe(String cmdName, MessageEvent event, String[] args) throws Exception;
 	
-	public String setInfo();
+	public String getInfo();
 	
-	public String[] setCommands();
+	public String[] getCommands();
 }

@@ -25,13 +25,13 @@ public class Enable implements ICommand<MessageEvent>
 		}
 
 	@Override
-	public String[] setAliases()
+	public String[] getAliases()
 	{
 		return new String[] {"enable"};
 	}
 
 	@Override
-	public String setInfo()
+	public String getInfo()
 	{
 		return "Enables the bot. When executed he will start listening for commands.";
 	}

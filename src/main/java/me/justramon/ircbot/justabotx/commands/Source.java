@@ -15,13 +15,13 @@ public class Source implements ICommand<MessageEvent>
 	}
 
 	@Override
-	public String[] setAliases()
+	public String[] getAliases()
 	{
 		return new String[] {"source", "github", "src"};
 	}
 
 	@Override
-	public String setInfo()
+	public String getInfo()
 	{
 		return "Returns you the github link for the sourcecode of this bot.";
 	}

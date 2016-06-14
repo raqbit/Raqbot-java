@@ -14,6 +14,8 @@ import me.justramon.ircbot.justabotx.util.StringUtils;
 public class Request implements ICommand<MessageEvent>
 {
 
+	//TODO: Make it stop :P
+	
 	@Override
 	public void exe(MessageEvent event, String[] args) throws Exception
 	{
@@ -24,21 +26,21 @@ public class Request implements ICommand<MessageEvent>
 	}
 
 	@Override
-	public String[] setAliases()
+	public String[] getAliases()
 	{
 		return new String[] {"request", "rq"};
 	}
 
 	@Override
-	public String setInfo()
+	public String getInfo()
 	{
 		return "returns you the messages & actions that have been sent between the given moment and now.";
 	}
 	
 	@Override
-	public String setUsage()
+	public String getUsage()
 	{
-		return "/<command> { M | H | D } <int>";
+		return "?<command> { M | H | D } <int>";
 	}
 	
 	@Override

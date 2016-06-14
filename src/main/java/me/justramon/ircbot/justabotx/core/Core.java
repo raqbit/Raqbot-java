@@ -11,6 +11,7 @@ import org.pircbotx.exception.IrcException;
 import me.justramon.ircbot.justabotx.config.ConfigHandler;
 import me.justramon.ircbot.justabotx.features.Logging;
 import me.justramon.ircbot.justabotx.features.blogupdates.BlogUpdateHandler;
+import me.justramon.ircbot.justabotx.features.gamemode.GameModeHandler;
 import me.justramon.ircbot.justabotx.util.NotImportant.Passwords;
 
 /**
@@ -29,6 +30,7 @@ public class Core
 	{
 		// Loading the configuration file.
 		ConfigHandler.loadConfig();
+		new GameModeHandler();
 		
 		Executors.newScheduledThreadPool(1).scheduleWithFixedDelay(BlogUpdateHandler.timer, 1, 1, TimeUnit.MINUTES);
 		

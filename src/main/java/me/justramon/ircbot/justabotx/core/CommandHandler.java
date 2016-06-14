@@ -46,7 +46,7 @@ public class CommandHandler extends ListenerAdapter
 			{
 				if (Core.enabled || cmd instanceof Enable || cmd instanceof Disable)
 				{
-					for (String s : cmd.setAliases())
+					for (String s : cmd.getAliases())
 					{
 						if (cmdName.equalsIgnoreCase("?" + s))
 						{
@@ -56,7 +56,7 @@ public class CommandHandler extends ListenerAdapter
 								{
 									cmd.exe(event, args);
 									System.gc();
-									return;
+									break;
 								}
 							}
 							else
@@ -67,14 +67,14 @@ public class CommandHandler extends ListenerAdapter
 									{
 										cmd.exe(event, args);
 										System.gc();
-										return;
+										break;
 									}
 								}
 								else
 								{
 									cmd.exe(event, args);
 									System.gc();
-									return;
+									break;
 								}
 							}
 						}
@@ -86,7 +86,7 @@ public class CommandHandler extends ListenerAdapter
 			{
 				if(Core.enabled)
 				{
-					for(String s : cmd.setAliases())
+					for(String s : cmd.getAliases())
 					{
 						if (cmdName.equalsIgnoreCase("?" + s))
 						{
@@ -96,7 +96,7 @@ public class CommandHandler extends ListenerAdapter
 								{
 									cmd.exe(event, args);
 									System.gc();
-									return;
+									break;
 								}
 							}
 						}
@@ -104,7 +104,7 @@ public class CommandHandler extends ListenerAdapter
 				}
 			}
 		}
-		else if(cmdName.startsWith("@"))
+		else if(cmdName.startsWith("@") && Core.enabled)
 		{
 			String channel = event.getChannel().getName();
 
@@ -115,14 +115,13 @@ public class CommandHandler extends ListenerAdapter
 					GameModeHandler.disableGameMode(channel);
 				}
 			}
-
-			if(cmdName.equalsIgnoreCase("@game") && Operators.isOp(event))
+			else if(cmdName.equalsIgnoreCase("@game") && Operators.isOp(event))
 			{
 				if(!GameModeHandler.isPlaying(channel))
 				{
 					if(args.length == 1)
 					{
-						GameModeHandler.enableGameMode(channel, args[1]);
+						GameModeHandler.enableGameMode(channel, args[0]);
 					}
 					else
 					{
@@ -135,26 +134,36 @@ public class CommandHandler extends ListenerAdapter
 					MessageHandler.respond(event, "This channel is already playing a game!");
 				}
 			}
-			else
+			else if(GameModeHandler.isPlaying(channel))
 			{
-				if(GameModeHandler.isPlaying(channel))
+				boolean gamecmd = false;
+				for(IGame game : GameModeHandler.games)
 				{
-					for(IGame game : GameModeHandler.games)
+					for(String s : game.getCommands())
 					{
-						for(String s : game.setCommands())
+						if(cmdName.equalsIgnoreCase("@" + s))
 						{
-							if(cmdName.equalsIgnoreCase("@" + s))
+							gamecmd = true;
+							try
 							{
-								game.exe(event, args);
-								System.gc();
-								return;
+								game.exe(cmdName, event, args);
 							}
+							catch(Exception e)
+							{
+								e.printStackTrace();
+							}
+							System.gc();
+							break;
 						}
 					}
 				}
-				else
-					MessageHandler.respond(event, "This channel is not in game mode!");
+				if(!gamecmd)
+				{
+					MessageHandler.respond(event, "That is not a valid game command.");
+				}
 			}
+			else
+				MessageHandler.respond(event, "This channel is not in game mode!");
 		}
 	}
 }

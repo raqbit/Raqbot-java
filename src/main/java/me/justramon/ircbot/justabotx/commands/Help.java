@@ -25,28 +25,28 @@ public class Help implements ICommand<MessageEvent>
 
 		for(ICommand<MessageEvent> cmd : CommandHandler.commands)
 		{
-			String aliases = Arrays.toString(cmd.setAliases());
+			String aliases = Arrays.toString(cmd.getAliases());
 			aliases = aliases.substring(1, aliases.length()-1);
 			if(Operators.isOpCommand(cmd))
 			{
-				sndmsg(event.getUser(), cmd.setUsage().replace("<command>", aliases) + " - " + cmd.setInfo() + " - " + Colors.BOLD + "[OP]" );
+				sndmsg(event.getUser(), cmd.getUsage().replace("<command>", aliases) + " - " + cmd.getInfo() + " - " + Colors.BOLD + "[OP]" );
 			}
 			else
 			{
-				sndmsg(event.getUser(), cmd.setUsage().replace("<command>", aliases) + " - " + cmd.setInfo());
+				sndmsg(event.getUser(), cmd.getUsage().replace("<command>", aliases) + " - " + cmd.getInfo());
 			}
 		}
 		sndmsg(event.getUser(), "--------------------------------------");
 	}
 
 	@Override
-	public String[] setAliases()
+	public String[] getAliases()
 	{
 		return new String[] {"help"};
 	}
 
 	@Override
-	public String setInfo()
+	public String getInfo()
 	{
 		return "Shows you this help menu.";
 	}

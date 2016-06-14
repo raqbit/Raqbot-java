@@ -23,19 +23,19 @@ public class Nick implements ICommand<MessageEvent>
 	}
 
 	@Override
-	public String[] setAliases()
+	public String[] getAliases()
 	{
 		return new String[] {"nick", "setnick"};
 	}
 
 	@Override
-	public String setInfo()
+	public String getInfo()
 	{
 		return "Set's the bot's nick to the nick given.";
 	}
 	
 	@Override
-	public String setUsage()
+	public String getUsage()
 	{
 		return "?<command> <New Nickname>";
 	}

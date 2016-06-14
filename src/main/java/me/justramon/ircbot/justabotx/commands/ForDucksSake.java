@@ -21,13 +21,13 @@ public class ForDucksSake implements ICommand<MessageEvent>
 	}
 
 	@Override
-	public String[] setAliases()
+	public String[] getAliases()
 	{
 		return new String[] {"ffs"};
 	}
 
 	@Override
-	public String setInfo()
+	public String getInfo()
 	{
 		return "You'll figure it out :P";
 	}

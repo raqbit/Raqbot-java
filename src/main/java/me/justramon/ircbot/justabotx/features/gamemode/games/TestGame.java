@@ -9,22 +9,22 @@ public class TestGame implements IGame
 {
 
 	@Override
-	public void exe(MessageEvent event, String[] args) throws Exception
+	public void exe(String cmdName, MessageEvent event, String[] args) throws Exception
 	{
-		if(args[0].equals("test"))
+		if(cmdName.equals("test"))
 		{
 			MessageHandler.respond(event, "123");
 		}
 	}
 
 	@Override
-	public String setInfo()
+	public String getInfo()
 	{
 		return "Simple Test Game";
 	}
 
 	@Override
-	public String[] setCommands()
+	public String[] getCommands()
 	{
 		return new String[]{"test"};
 	}
