@@ -8,5 +8,7 @@ public interface IGame
 	
 	public String getInfo();
 	
+	public String getName();
+	
 	public String[] getCommands();
 }

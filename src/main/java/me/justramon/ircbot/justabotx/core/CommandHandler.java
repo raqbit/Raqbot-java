@@ -121,12 +121,25 @@ public class CommandHandler extends ListenerAdapter
 				{
 					if(args.length == 1)
 					{
-						GameModeHandler.enableGameMode(channel, args[0]);
+						boolean installed = false;
+						for(IGame game : GameModeHandler.games)
+						{
+							if(args[0].equalsIgnoreCase(game.getName()))
+							{
+								installed = true;
+								GameModeHandler.enableGameMode(channel, args[0]);
+							}
+						}
+						if(!installed)
+						{
+							MessageHandler.respond(event, "That is not a valid game.");
+							MessageHandler.sendChannelMessage(event, "Currently installed: " + GameModeHandler.listAllGames());
+						}
 					}
 					else
 					{
-						MessageHandler.respond(event, "Please pass a game that you want to play.");
-						//TODO: list all games
+						MessageHandler.respond(event, "Please pass an installed game that you want to play.");
+						MessageHandler.sendChannelMessage(event, "Currently installed: " + GameModeHandler.listAllGames());
 					}
 				}
 				else
@@ -141,26 +154,18 @@ public class CommandHandler extends ListenerAdapter
 				{
 					for(String s : game.getCommands())
 					{
-						if(cmdName.equalsIgnoreCase("@" + s))
+						if(GameModeHandler.currentlyPlaying.get(event.getChannel().getName()).equalsIgnoreCase(game.getName()))
 						{
-							gamecmd = true;
-							try
+							if(cmdName.equalsIgnoreCase("@" + s))
 							{
+								gamecmd = true;
 								game.exe(cmdName, event, args);
 							}
-							catch(Exception e)
-							{
-								e.printStackTrace();
-							}
-							System.gc();
-							break;
 						}
 					}
 				}
 				if(!gamecmd)
-				{
 					MessageHandler.respond(event, "That is not a valid game command.");
-				}
 			}
 			else
 				MessageHandler.respond(event, "This channel is not in game mode!");
