@@ -6,7 +6,6 @@ import org.pircbotx.hooks.events.MessageEvent;
 import me.justramon.ircbot.justabotx.config.ConfigHandler;
 import me.justramon.ircbot.justabotx.core.Core;
 import me.justramon.ircbot.justabotx.core.ICommand;
-import me.justramon.ircbot.justabotx.features.gamemode.GameModeHandler;
 import me.justramon.ircbot.justabotx.util.MessageHandler;
 
 public class Reload implements ICommand<MessageEvent>

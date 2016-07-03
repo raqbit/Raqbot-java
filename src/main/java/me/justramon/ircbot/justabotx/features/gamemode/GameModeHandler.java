@@ -5,8 +5,6 @@ import java.util.LinkedList;
 
 import me.justramon.ircbot.justabotx.config.ConfigHandler;
 import me.justramon.ircbot.justabotx.core.Core;
-import me.justramon.ircbot.justabotx.features.gamemode.games.TestGame;
-import me.justramon.ircbot.justabotx.features.gamemode.games.TestGame2;
 
 public class GameModeHandler
 {
@@ -16,10 +14,12 @@ public class GameModeHandler
 
 	public GameModeHandler()
 	{
-		games.add(new TestGame());
-		games.add(new TestGame2());
+		if(Core.dev)
+		{
+			
+		}
 	}
-	
+
 	public static boolean isPlaying(String channel)
 	{
 		if(!(chansPlaying == null))
@@ -33,13 +33,14 @@ public class GameModeHandler
 		return false;
 	}
 
-	public static void enableGameMode(String channel, String game)
+	public static void enableGameMode(String channel, String game) throws Exception
 	{
 		if(hasGameModeEnabled(channel))
 		{
 			chansPlaying.add(channel);
 			currentlyPlaying.put(channel, game);
-			Core.bot.sendIRC().message(channel, "GameMode enabled.");
+			getGameByName(game).setup(channel);
+			Core.bot.sendIRC().message(channel, "Game: " + game + " enabled.");
 		}
 		else
 			Core.bot.sendIRC().message(channel, "This channel does not have GameMode enabled.");
@@ -49,7 +50,7 @@ public class GameModeHandler
 	{
 		chansPlaying.remove(channel);
 		currentlyPlaying.remove(channel);
-		Core.bot.sendIRC().message(channel, "GameMode disabled.");
+		Core.bot.sendIRC().message(channel, "Game disabled.");
 	}
 
 	private static boolean hasGameModeEnabled(String channel)
@@ -61,7 +62,7 @@ public class GameModeHandler
 		}
 		return false;
 	}
-	
+
 	public static String listAllGames()
 	{
 		String list = "";
@@ -76,5 +77,17 @@ public class GameModeHandler
 		else
 			list = "None.";
 		return list;
+	}
+	
+	public static IGame getGameByName(String gameName)
+	{
+		for(IGame game : games)
+		{
+			if(game.getName().equalsIgnoreCase(gameName))
+			{
+				return game;
+			}
+		}
+		return null;
 	}
 }

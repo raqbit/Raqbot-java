@@ -20,7 +20,6 @@ public class CommandHandler extends ListenerAdapter
 
 	public CommandHandler()
 	{
-		devcommands.add(new ForceShow());
 		commands.add(new Enable());
 		commands.add(new Disable());
 		commands.add(new Quit());
@@ -33,6 +32,10 @@ public class CommandHandler extends ListenerAdapter
 		commands.add(new Source());
 		commands.add(new Nick());
 		commands.add(new About());
+		if(Core.dev)
+		{
+			devcommands.add(new ForceShow());
+		}
 	}
 
 	public void onMessage(MessageEvent event) throws Exception
@@ -81,23 +84,19 @@ public class CommandHandler extends ListenerAdapter
 					}
 				}
 			}
-
-			for(IDevCommand<MessageEvent> cmd : devcommands)
+			if(Core.enabled)
 			{
-				if(Core.enabled)
+				for(IDevCommand<MessageEvent> cmd : devcommands)
 				{
 					for(String s : cmd.getAliases())
 					{
 						if (cmdName.equalsIgnoreCase("?" + s))
 						{
-							if(Core.dev)
+							if(Operators.isOp(event))
 							{
-								if(Operators.isOp(event))
-								{
-									cmd.exe(event, args);
-									System.gc();
-									break;
-								}
+								cmd.exe(event, args);
+								System.gc();
+								break;
 							}
 						}
 					}
@@ -113,6 +112,7 @@ public class CommandHandler extends ListenerAdapter
 				if(GameModeHandler.isPlaying(channel))
 				{
 					GameModeHandler.disableGameMode(channel);
+					System.gc();
 				}
 				else
 				{	
@@ -163,7 +163,8 @@ public class CommandHandler extends ListenerAdapter
 							if(cmdName.equalsIgnoreCase("@" + s))
 							{
 								gamecmd = true;
-								game.exe(cmdName, event, args);
+								game.exeCommand(cmdName, event, args);
+								System.gc();
 							}
 						}
 					}

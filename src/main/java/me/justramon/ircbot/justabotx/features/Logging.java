@@ -49,9 +49,25 @@ public class Logging extends ListenerAdapter
 		System.gc();
 	}
 	
+	
+	
 	public static void logMyChannelMessage(MessageEvent event, String message)
 	{
 		File log = new File("logs/" + event.getChannel().getName() + ".jabxlog");
+		checkFiles(log);
+		
+		List<String> loglines = readLogLines(log);
+		
+		loglines.add(System.currentTimeMillis() + " <" + (!Core.dev ? ConfigHandler.config.nick : ConfigHandler.config.devnick) + "> " + message);
+		
+		writeLogLines(log, loglines);
+		loglines = null;
+		System.gc();
+	}
+	
+	public static void logMyChannelMessage(String channel, String message)
+	{
+		File log = new File("logs/" + channel + ".jabxlog");
 		checkFiles(log);
 		
 		List<String> loglines = readLogLines(log);
