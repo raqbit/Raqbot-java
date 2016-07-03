@@ -16,7 +16,6 @@ public class Reload implements ICommand<MessageEvent>
 	public void exe(MessageEvent event, String[] args) throws Exception
 	{
 		ConfigHandler.loadConfig();
-		new GameModeHandler();
 		Core.bot.sendIRC().changeNick(!Core.dev ? ConfigHandler.config.nick : ConfigHandler.config.devnick);
 		MessageHandler.respond(event, "Config Reloaded.");
 	}

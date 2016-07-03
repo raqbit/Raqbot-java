@@ -114,6 +114,10 @@ public class CommandHandler extends ListenerAdapter
 				{
 					GameModeHandler.disableGameMode(channel);
 				}
+				else
+				{	
+					MessageHandler.respond(event, "This channel is currently not playing a game.");
+				}
 			}
 			else if(cmdName.equalsIgnoreCase("@game") && Operators.isOp(event))
 			{
@@ -168,7 +172,7 @@ public class CommandHandler extends ListenerAdapter
 					MessageHandler.respond(event, "That is not a valid game command.");
 			}
 			else
-				MessageHandler.respond(event, "This channel is not in game mode!");
+				MessageHandler.respond(event, "This channel is currently not playing a game.");
 		}
 	}
 }
