@@ -41,7 +41,6 @@ public class GameModeHandler
 		{
 			chansPlaying.add(channel);
 			currentlyPlaying.put(channel, game);
-			Core.bot.sendIRC().message(channel, "Game: " + game + " enabled.");
 			getGameByName(game).setup(channel);
 		}
 		else

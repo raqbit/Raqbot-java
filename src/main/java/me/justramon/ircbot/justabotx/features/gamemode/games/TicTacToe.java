@@ -12,18 +12,25 @@ public class TicTacToe implements IGame
 	private String[] board;
 	private boolean xTurn;
 	private boolean won = false;
-	
+
 	@Override
-	public void setup(String channel)
+	public void setup(String channel) throws Exception
 	{
-		board = new String[]{"-", "-", "-", "-", "-", "-", "-", "-", "-"};
-		xTurn = true;
 		Core.bot.sendIRC().message(channel, "The field is labeled 0-8 from top left to bottom right. Command: @set <label> (@set 4 would set your symbol to the middle field)");
 		Core.bot.sendIRC().message(channel, "Decide who of you is playing X and who is playing O, then let player X start the game.");
+		restart(channel);
+	}
+	
+	@Override
+	public void restart(String channel) throws Exception
+	{
+		won = false;
+		board = new String[]{"-", "-", "-", "-", "-", "-", "-", "-", "-"};
+		xTurn = true;
 		sendBoard(channel);
 		Core.bot.sendIRC().message(channel, "It's X's turn!");
 	}
-	
+
 	@Override
 	public void exeCommand(String cmdName, MessageEvent event, String[] args) throws Exception
 	{
@@ -32,32 +39,47 @@ public class TicTacToe implements IGame
 			Core.bot.sendIRC().message(event.getChannel().getName(), "This game is over!");
 			return;
 		}
-		
+
 		try
 		{
-			int place = Integer.parseInt(args[0]);
-			
-			if(board[place].equals("-"))
+			if(args.length == 1)
 			{
-				board[place] = xTurn ? "X" : "O";
-				xTurn = !xTurn;
-				sendBoard(event.getChannel().getName());
-				
-				if(!(winner = checkWin()).equals(""))
+				int place = Integer.parseInt(args[0]);
+
+				if(place >= 0 && place <= 8)
 				{
-					MessageHandler.sendChannelMessage(event, "Congratulations, " + winner + "! You won!");
-					won = true;
+					if(board[place].equals("-"))
+					{
+						board[place] = xTurn ? "X" : "O";
+						xTurn = !xTurn;
+						sendBoard(event.getChannel().getName());
+
+						if(!(winner = checkWin()).equals(""))
+						{
+							MessageHandler.sendChannelMessage(event, "Congratulations, " + winner + "! You won!");
+							Core.bot.send().message(event.getChannel().getName(), "Use @disable to disable the game, or use @restart for another round!");
+							won = true;
+						}
+						else
+						{
+							Core.bot.sendIRC().message(event.getChannel().getName(), "It's " + (xTurn ? "X" : "O") + "'s turn!");
+						}
+
+						return;
+					}
+					else
+					{
+						Core.bot.sendIRC().message(event.getChannel().getName(), "This place is already full!");
+					}
 				}
 				else
 				{
-					Core.bot.sendIRC().message(event.getChannel().getName(), "It's " + (xTurn ? "X" : "O") + "'s turn!");
+					Core.bot.sendIRC().message(event.getChannel().getName(), "You can only enter numbers from 0 to 8, 0 being the first spot on the board.");
 				}
-				
-				return;
 			}
 			else
 			{
-				Core.bot.sendIRC().message(event.getChannel().getName(), "This place is already full!");
+				Core.bot.sendIRC().message(event.getChannel().getName(), "Please enter a number of a spot to place your symbol on.");
 			}
 		}
 		catch(NumberFormatException e)
@@ -90,7 +112,7 @@ public class TicTacToe implements IGame
 	private String checkWin()
 	{
 		String winner = "";
-		
+
 		//all winning conditions
 		if(board[0] == board[1] && board[1] == board[2])
 		{
@@ -128,10 +150,10 @@ public class TicTacToe implements IGame
 		{
 			winner = "";
 		}
-		
+
 		return winner.equals("-") ? "" : winner;
 	}
-	
+
 	private void sendBoard(String channel)
 	{
 		String output = "";
@@ -141,7 +163,7 @@ public class TicTacToe implements IGame
 		{
 			output += s;
 			count++;
-			
+
 			if(count == 3)
 			{
 				Core.bot.sendIRC().message(channel, output);

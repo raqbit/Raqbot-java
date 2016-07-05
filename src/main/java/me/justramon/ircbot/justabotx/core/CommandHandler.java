@@ -107,22 +107,7 @@ public class CommandHandler extends ListenerAdapter
 		{
 			String channel = event.getChannel().getName();
 
-			if(cmdName.equalsIgnoreCase("@disable"))
-			{
-				if(Operators.isOp(event))
-				{
-					if(GameModeHandler.isPlaying(channel))
-					{
-						GameModeHandler.disableGameMode(channel);
-						System.gc();
-					}
-					else
-					{	
-						MessageHandler.respond(event, "This channel is currently not playing a game.");
-					}
-				}
-			}
-			else if(cmdName.equalsIgnoreCase("@game"))
+			if(cmdName.equalsIgnoreCase("@game"))
 			{
 				if(Operators.isOp(event))
 				{
@@ -157,6 +142,32 @@ public class CommandHandler extends ListenerAdapter
 					}
 				}
 			}
+			else if(cmdName.equalsIgnoreCase("@restart"))
+			{
+				if(GameModeHandler.isPlaying(channel))
+				{
+					GameModeHandler.getGameByName(GameModeHandler.currentlyPlaying.get(channel)).restart(channel);
+				}
+				else
+				{	
+					MessageHandler.respond(event, "This channel is currently not playing a game.");
+				}
+			}
+			else if(cmdName.equalsIgnoreCase("@disable"))
+			{
+				if(Operators.isOp(event))
+				{
+					if(GameModeHandler.isPlaying(channel))
+					{
+						GameModeHandler.disableGameMode(channel);
+						System.gc();
+					}
+					else
+					{	
+						MessageHandler.respond(event, "This channel is currently not playing a game.");
+					}
+				}
+			}
 			else if(GameModeHandler.isPlaying(channel))
 			{
 				boolean gamecmd = false;
@@ -178,8 +189,7 @@ public class CommandHandler extends ListenerAdapter
 				if(!gamecmd)
 					MessageHandler.respond(event, "That is not a valid game command.");
 			}
-			else
-				MessageHandler.respond(event, "This channel is currently not playing a game.");
+			
 		}
 	}
 }
