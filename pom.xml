@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>me.justramon.ircbot.JustABotX</groupId>
 	<artifactId>JustABotX</artifactId>
-	<version>1.10</version>
+	<version>1.10.0.1</version>
 	<dependencies>
 		<dependency>
 			<groupId>org.pircbotx</groupId>

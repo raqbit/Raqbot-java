@@ -109,7 +109,7 @@ public class CommandHandler extends ListenerAdapter
 
 			if(cmdName.equalsIgnoreCase("@game"))
 			{
-				if(Operators.isOp(event))
+				if(Operators.isOp(event) | event.getChannel().getName().equals("#JABXGames"))
 				{
 					if(!GameModeHandler.isPlaying(channel))
 					{
@@ -155,7 +155,7 @@ public class CommandHandler extends ListenerAdapter
 			}
 			else if(cmdName.equalsIgnoreCase("@disable"))
 			{
-				if(Operators.isOp(event))
+				if(Operators.isOp(event)| event.getChannel().getName().equals("#JABXGames"))
 				{
 					if(GameModeHandler.isPlaying(channel))
 					{
