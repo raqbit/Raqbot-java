@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import me.justramon.ircbot.justabotx.config.ConfigHandler;
 import me.justramon.ircbot.justabotx.core.Core;
+import me.justramon.ircbot.justabotx.features.gamemode.games.TicTacToe;
 
 public class GameModeHandler
 {
@@ -14,10 +15,11 @@ public class GameModeHandler
 
 	public GameModeHandler()
 	{
-		if(Core.dev)
+		games.add(new TicTacToe());
+		/*if(Core.dev)
 		{
-			
-		}
+
+		}*/
 	}
 
 	public static boolean isPlaying(String channel)
@@ -39,8 +41,8 @@ public class GameModeHandler
 		{
 			chansPlaying.add(channel);
 			currentlyPlaying.put(channel, game);
-			getGameByName(game).setup(channel);
 			Core.bot.sendIRC().message(channel, "Game: " + game + " enabled.");
+			getGameByName(game).setup(channel);
 		}
 		else
 			Core.bot.sendIRC().message(channel, "This channel does not have GameMode enabled.");
@@ -78,7 +80,7 @@ public class GameModeHandler
 			list = "None.";
 		return list;
 	}
-	
+
 	public static IGame getGameByName(String gameName)
 	{
 		for(IGame game : games)

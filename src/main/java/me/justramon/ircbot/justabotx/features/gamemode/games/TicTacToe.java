@@ -33,7 +33,8 @@ public class TicTacToe implements IGame
 	@Override
 	public String[] getCommands()
 	{
-		// TODO: Add commands for TicTacToe
+		// TODO: Add commands for TicTacToe, for example drawing your X or Y
+		return null;
 	}
 
 }
