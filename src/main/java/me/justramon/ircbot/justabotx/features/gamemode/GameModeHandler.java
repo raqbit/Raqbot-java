@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import me.justramon.ircbot.justabotx.config.ConfigHandler;
 import me.justramon.ircbot.justabotx.core.Core;
+import me.justramon.ircbot.justabotx.features.gamemode.games.Hangman;
 import me.justramon.ircbot.justabotx.features.gamemode.games.TicTacToe;
 
 public class GameModeHandler
@@ -16,6 +17,7 @@ public class GameModeHandler
 	public GameModeHandler()
 	{
 		games.add(new TicTacToe());
+		games.add(new Hangman());
 		/*if(Core.dev)
 		{
 
