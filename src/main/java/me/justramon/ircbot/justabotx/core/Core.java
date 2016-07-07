@@ -76,6 +76,7 @@ public class Core
 			
 			config = new Configuration.Builder()
 					.setName(ConfigHandler.config.nick)
+					.setNickservPassword(Passwords.NICKSERV.getPassword())
 					.setLogin(ConfigHandler.config.login)
 					.setRealName(ConfigHandler.config.realname)
 					.setAutoReconnect(true)
