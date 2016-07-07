@@ -12,7 +12,6 @@ import me.justramon.ircbot.justabotx.config.ConfigHandler;
 import me.justramon.ircbot.justabotx.features.Logging;
 import me.justramon.ircbot.justabotx.features.blogupdates.BlogUpdateHandler;
 import me.justramon.ircbot.justabotx.features.gamemode.GameModeHandler;
-import me.justramon.ircbot.justabotx.util.NotImportant.Passwords;
 
 /**
  * Copyright 2016 JustRamon
@@ -77,7 +76,6 @@ public class Core
 			
 			config = new Configuration.Builder()
 					.setName(ConfigHandler.config.nick)
-					.setNickservPassword(Passwords.NICKSERV.getPassword())
 					.setLogin(ConfigHandler.config.login)
 					.setRealName(ConfigHandler.config.realname)
 					.setAutoReconnect(true)
