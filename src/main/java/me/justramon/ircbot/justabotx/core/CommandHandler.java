@@ -107,48 +107,65 @@ public class CommandHandler extends ListenerAdapter
 		{
 			String channel = event.getChannel().getName();
 
-			if(cmdName.equalsIgnoreCase("@disable") && Operators.isOp(event))
+			if(cmdName.equalsIgnoreCase("@game"))
+			{
+				if(Operators.isOp(event) | event.getChannel().getName().equals("#JABXGames"))
+				{
+					if(!GameModeHandler.isPlaying(channel))
+					{
+						if(args.length == 1)
+						{
+							boolean installed = false;
+							for(IGame game : GameModeHandler.games)
+							{
+								if(args[0].equalsIgnoreCase(game.getName()))
+								{
+									installed = true;
+									GameModeHandler.enableGameMode(channel, args[0]);
+								}
+							}
+							if(!installed)
+							{
+								MessageHandler.respond(event, "That is not a valid game.");
+								MessageHandler.sendChannelMessage(event, "Currently installed: " + GameModeHandler.listAllGames());
+							}
+						}
+						else
+						{
+							MessageHandler.respond(event, "Please pass an installed game that you want to play.");
+							MessageHandler.sendChannelMessage(event, "Currently installed: " + GameModeHandler.listAllGames());
+						}
+					}
+					else
+					{
+						MessageHandler.respond(event, "This channel is already playing a game!");
+					}
+				}
+			}
+			else if(cmdName.equalsIgnoreCase("@restart"))
 			{
 				if(GameModeHandler.isPlaying(channel))
 				{
-					GameModeHandler.disableGameMode(channel);
-					System.gc();
+					GameModeHandler.getGameByName(GameModeHandler.currentlyPlaying.get(channel)).restart(channel);
 				}
 				else
 				{	
 					MessageHandler.respond(event, "This channel is currently not playing a game.");
 				}
 			}
-			else if(cmdName.equalsIgnoreCase("@game") && Operators.isOp(event))
+			else if(cmdName.equalsIgnoreCase("@disable"))
 			{
-				if(!GameModeHandler.isPlaying(channel))
+				if(Operators.isOp(event)| event.getChannel().getName().equals("#JABXGames"))
 				{
-					if(args.length == 1)
+					if(GameModeHandler.isPlaying(channel))
 					{
-						boolean installed = false;
-						for(IGame game : GameModeHandler.games)
-						{
-							if(args[0].equalsIgnoreCase(game.getName()))
-							{
-								installed = true;
-								GameModeHandler.enableGameMode(channel, args[0]);
-							}
-						}
-						if(!installed)
-						{
-							MessageHandler.respond(event, "That is not a valid game.");
-							MessageHandler.sendChannelMessage(event, "Currently installed: " + GameModeHandler.listAllGames());
-						}
+						GameModeHandler.disableGameMode(channel);
+						System.gc();
 					}
 					else
-					{
-						MessageHandler.respond(event, "Please pass an installed game that you want to play.");
-						MessageHandler.sendChannelMessage(event, "Currently installed: " + GameModeHandler.listAllGames());
+					{	
+						MessageHandler.respond(event, "This channel is currently not playing a game.");
 					}
-				}
-				else
-				{
-					MessageHandler.respond(event, "This channel is already playing a game!");
 				}
 			}
 			else if(GameModeHandler.isPlaying(channel))
@@ -172,8 +189,7 @@ public class CommandHandler extends ListenerAdapter
 				if(!gamecmd)
 					MessageHandler.respond(event, "That is not a valid game command.");
 			}
-			else
-				MessageHandler.respond(event, "This channel is currently not playing a game.");
+			
 		}
 	}
 }
