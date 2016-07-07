@@ -25,6 +25,13 @@ public class Hangman implements IGame
 	private boolean loaded;
 
 	@Override
+	public void setup(String channel) throws Exception
+	{
+		Core.bot.sendIRC().message(channel, "Use @guess letter to guess a letter. When you guess a wrong letter, your hangman will be built one step further.");
+		Core.bot.sendIRC().message(channel, "If he is complete, you lose. If you guess the word before, you win. This is how the word looks:");
+		restart(channel);
+	}
+	@Override
 	public void restart(String channel) throws Exception
 	{
 		try
@@ -36,8 +43,6 @@ public class Hangman implements IGame
 			words = FileUtils.readLines(new File("words.txt"));
 			currentWord = words.get(new Random().nextInt(words.size()));
 			guessed = new char[currentWord.length()];
-			Core.bot.sendIRC().message(channel, "Use @guess letter to guess a letter. When you guess a wrong letter, your hangman will be built one step further.");
-			Core.bot.sendIRC().message(channel, "If he is complete, you lose. If you guess the word before, you win. This is how the word looks:");
 			sendWord(channel);
 		}
 		catch(IOException e)
