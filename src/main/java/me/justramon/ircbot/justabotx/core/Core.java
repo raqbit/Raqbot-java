@@ -22,7 +22,7 @@ import me.justramon.ircbot.justabotx.util.NotImportant.Passwords;
 public class Core
 {
 	public static PircBotX bot;
-	public static String version = "1.10.0.1";
+	public static String version = "1.10.0.2";
 	public static boolean dev = false;
 	public static boolean enabled = true;
 
@@ -65,10 +65,6 @@ public class Core
 					.buildConfiguration();
 			
 			bot = new PircBotX(devconfig);
-			
-			devconfig = null;
-			System.gc();
-			
 			bot.startBot()/*.addLove(Integer.MAX_VALUE)*/;
 		}
 		else
@@ -92,11 +88,7 @@ public class Core
 
 					.buildConfiguration();
 			
-			bot = new PircBotX(config);
-			
-			config = null;
-			System.gc();
-			
+			bot = new PircBotX(config);			
 			bot.startBot()/*.addLove(Integer.MAX_VALUE)*/;
 		}
 	}

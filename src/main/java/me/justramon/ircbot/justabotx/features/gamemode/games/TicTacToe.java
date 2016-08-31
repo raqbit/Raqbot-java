@@ -15,10 +15,16 @@ public class TicTacToe implements IGame
 	private int filledFields;
 
 	@Override
-	public void restart(String channel) throws Exception
+	public void setup(String channel) throws Exception
 	{
 		Core.bot.sendIRC().message(channel, "The field is labeled 1-9 from top left to bottom right. Command: @set <label> (@set 5 would set your symbol to the middle field)");
 		Core.bot.sendIRC().message(channel, "Decide who of you is playing X and who is playing O, then let player X start the game.");
+		restart(channel);
+	}
+		
+	@Override
+	public void restart(String channel) throws Exception
+	{
 		filledFields = 0;
 		finished = false;
 		board = new String[]{"-", "-", "-", "-", "-", "-", "-", "-", "-"};

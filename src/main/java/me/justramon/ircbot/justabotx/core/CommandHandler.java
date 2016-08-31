@@ -58,7 +58,6 @@ public class CommandHandler extends ListenerAdapter
 								if(XtraFunc.hasXtraFuncEnabled(event.getChannel().getName()))
 								{
 									cmd.exe(event, args);
-									System.gc();
 									break;
 								}
 							}
@@ -69,14 +68,12 @@ public class CommandHandler extends ListenerAdapter
 									if(Operators.isOp(event))
 									{
 										cmd.exe(event, args);
-										System.gc();
 										break;
 									}
 								}
 								else
 								{
 									cmd.exe(event, args);
-									System.gc();
 									break;
 								}
 							}
@@ -95,7 +92,6 @@ public class CommandHandler extends ListenerAdapter
 							if(Operators.isOp(event))
 							{
 								cmd.exe(event, args);
-								System.gc();
 								break;
 							}
 						}
@@ -109,11 +105,11 @@ public class CommandHandler extends ListenerAdapter
 
 			if(cmdName.equalsIgnoreCase("@game"))
 			{
-				if(Operators.isOp(event) | event.getChannel().getName().equals("#JABXGames"))
+				if(Operators.isOp(event) | event.getChannel().getName().equals("#JustRamon"))
 				{
 					if(!GameModeHandler.isPlaying(channel))
 					{
-						if(args.length == 1)
+						if(args.length == 1 || args.length == 2)
 						{
 							boolean installed = false;
 							for(IGame game : GameModeHandler.games)
@@ -121,6 +117,10 @@ public class CommandHandler extends ListenerAdapter
 								if(args[0].equalsIgnoreCase(game.getName()))
 								{
 									installed = true;
+									if(args.length == 2)
+									{
+										MessageHandler.sendChannelMessage(event, args[1] + ": " + event.getUser().getNick() + " wants to play a game with you!");
+									}
 									GameModeHandler.enableGameMode(channel, args[0]);
 								}
 							}
@@ -160,7 +160,6 @@ public class CommandHandler extends ListenerAdapter
 					if(GameModeHandler.isPlaying(channel))
 					{
 						GameModeHandler.disableGameMode(channel);
-						System.gc();
 					}
 					else
 					{	
@@ -181,7 +180,6 @@ public class CommandHandler extends ListenerAdapter
 							{
 								gamecmd = true;
 								game.exeCommand(cmdName, event, args);
-								System.gc();
 							}
 						}
 					}
