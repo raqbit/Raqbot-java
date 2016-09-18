@@ -85,17 +85,18 @@ public class ConfigHandler
 		config.updateDevChan = config.devchan;
 		
 		config.gameChannels = config.xtrafunc;
-		
-		try
-		{
-			YamlWriter writer = new YamlWriter(new FileWriter(configfile));
-			writer.write(config);
-			writer.close();
-		} 
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
+
+        save();
+//		try
+//		{
+//			YamlWriter writer = new YamlWriter(new FileWriter(configfile));
+//			writer.write(config);
+//			writer.close();
+//		}
+//		catch (IOException e)
+//		{
+//			e.printStackTrace();
+//		}
 	}
 	
 	public static void setNick(String newNick)
@@ -109,16 +110,34 @@ public class ConfigHandler
 			config.nick = newNick;
 		else
 			config.devnick = newNick;
-		
-		try
-		{
-			YamlWriter writer = new YamlWriter(new FileWriter(configfile));
-			writer.write(config);
-			writer.close();
-		} 
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
+
+        save();
+//		try
+//		{
+//			YamlWriter writer = new YamlWriter(new FileWriter(configfile));
+//			writer.write(config);
+//			writer.close();
+//		}
+//		catch (IOException e)
+//		{
+//			e.printStackTrace();
+//		}
 	}
+
+	public static String getNick() {
+        return Core.dev ? config.devnick : config.nick;
+    }
+
+	public static void save() {
+        try
+        {
+            YamlWriter writer = new YamlWriter(new FileWriter(configfile));
+            writer.write(config);
+            writer.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }
