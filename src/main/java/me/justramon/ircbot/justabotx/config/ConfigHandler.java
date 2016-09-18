@@ -87,16 +87,6 @@ public class ConfigHandler
 		config.gameChannels = config.xtrafunc;
 
         save();
-//		try
-//		{
-//			YamlWriter writer = new YamlWriter(new FileWriter(configfile));
-//			writer.write(config);
-//			writer.close();
-//		}
-//		catch (IOException e)
-//		{
-//			e.printStackTrace();
-//		}
 	}
 	
 	public static void setNick(String newNick)
@@ -112,16 +102,6 @@ public class ConfigHandler
 			config.devnick = newNick;
 
         save();
-//		try
-//		{
-//			YamlWriter writer = new YamlWriter(new FileWriter(configfile));
-//			writer.write(config);
-//			writer.close();
-//		}
-//		catch (IOException e)
-//		{
-//			e.printStackTrace();
-//		}
 	}
 
 	public static String getNick() {
