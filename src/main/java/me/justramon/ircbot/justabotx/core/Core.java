@@ -16,80 +16,74 @@ import me.justramon.ircbot.justabotx.util.NotImportant.Passwords;
 
 /**
  * Copyright 2016 JustRamon
- * @author Ramon
  *
+ * @author Ramon
  */
-public class Core
-{
-	public static PircBotX bot;
-	public static String version = "1.10.0.2";
-	public static boolean dev = false;
-	public static boolean enabled = true;
+public class Core {
+    public static PircBotX bot;
+    public static String version = "1.10.0.3";
+    public static boolean dev = false;
+    public static boolean enabled = true;
 
-	public static void main(String[] args) throws IOException, IrcException
-	{
-		// Loading the configuration file.
-		ConfigHandler.loadConfig();
-		new GameModeHandler();
-		
-		Executors.newScheduledThreadPool(1).scheduleWithFixedDelay(BlogUpdateHandler.timer, 1, 1, TimeUnit.MINUTES);
-		
-		// Creating the bot.
-		createBot(args);
-	}
-	
-	public static void createBot(String[] args) throws IOException, IrcException
-	{
-		// Bot configs
-		if(args.length > 0 && args[0].equals("-dev"))
-		{
-			dev = true;
-			
-			Configuration devconfig;
-			
-			devconfig = new Configuration.Builder()
-					.setName(args.length > 1 ? args[1] : ConfigHandler.config.devnick)
-					.addAutoJoinChannel(args.length > 2 ? args[2] : ConfigHandler.config.devchan)
-					.setLogin(ConfigHandler.config.login)
-					.setRealName(ConfigHandler.config.realname)
-					.setAutoReconnect(true)
-					.addServer(ConfigHandler.config.serverhostname)
-					.setAutoNickChange(true)
-					.setCapEnabled(true)
+    public static void main(String[] args) throws IOException, IrcException {
+        // Loading the configuration file.
+        ConfigHandler.loadConfig();
+        new GameModeHandler();
 
-					//Listeners
-					.addListener(new Logging())
-					.addListener(new CommandHandler())
-					.addListener(new ConnectionHandler())
+        Executors.newScheduledThreadPool(1).scheduleWithFixedDelay(BlogUpdateHandler.timer, 1, 1, TimeUnit.MINUTES);
 
-					.buildConfiguration();
-			
-			bot = new PircBotX(devconfig);
-			bot.startBot()/*.addLove(Integer.MAX_VALUE)*/;
-		}
-		else
-		{
-			Configuration config;
-			
-			config = new Configuration.Builder()
-					.setName(ConfigHandler.config.nick)
-					.setNickservPassword(Passwords.NICKSERV.getPassword())
-					.setLogin(ConfigHandler.config.login)
-					.setRealName(ConfigHandler.config.realname)
-					.setAutoReconnect(true)
-					.addServer(ConfigHandler.config.serverhostname)
-					.setAutoNickChange(true)
-					.setCapEnabled(true)
+        // Creating the bot.
+        createBot(args);
+    }
 
-					//Listeners
-					.addListener(new Logging())
-					.addListener(new CommandHandler())
-					.addListener(new ConnectionHandler())
+    public static void createBot(String[] args) throws IOException, IrcException {
+        // Bot configs
+        if (args.length > 0 && args[0].equals("-dev")) {
+            dev = true;
 
-					.buildConfiguration();
-			
-			bot = new PircBotX(config);			
-			bot.startBot()/*.addLove(Integer.MAX_VALUE)*/;
-		}
-	}
+            Configuration devconfig;
+
+            devconfig = new Configuration.Builder()
+                    .setName(args.length > 1 ? args[1] : ConfigHandler.config.devnick)
+                    .addAutoJoinChannel(args.length > 2 ? args[2] : ConfigHandler.config.devchan)
+                    .setLogin(ConfigHandler.config.login)
+                    .setRealName(ConfigHandler.config.realname)
+                    .setAutoReconnect(true)
+                    .addServer(ConfigHandler.config.serverhostname)
+                    .setAutoNickChange(true)
+                    .setCapEnabled(true)
+
+                    //Listeners
+                    .addListener(new Logging())
+                    .addListener(new CommandHandler())
+                    .addListener(new ConnectionHandler())
+
+                    .buildConfiguration();
+
+            bot = new PircBotX(devconfig);
+            bot.startBot()/*.addLove(Integer.MAX_VALUE)*/;
+        } else {
+            Configuration config;
+
+            config = new Configuration.Builder()
+                    .setName(ConfigHandler.config.nick)
+                    .setNickservPassword(Passwords.NICKSERV.getPassword())
+                    .setLogin(ConfigHandler.config.login)
+                    .setRealName(ConfigHandler.config.realname)
+                    .setAutoReconnect(true)
+                    .addServer(ConfigHandler.config.serverhostname)
+                    .setAutoNickChange(true)
+                    .setCapEnabled(true)
+
+                    //Listeners
+                    .addListener(new Logging())
+                    .addListener(new CommandHandler())
+                    .addListener(new ConnectionHandler())
+
+                    .buildConfiguration();
+
+            bot = new PircBotX(config);
+            bot.startBot()/*.addLove(Integer.MAX_VALUE)*/;
+        }
+    }
 }

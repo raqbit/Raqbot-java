@@ -14,60 +14,49 @@ import com.esotericsoftware.yamlbeans.YamlWriter;
 
 import me.justramon.ircbot.justabotx.util.StringUtils;
 
-public class RequestBlackListHandler
-{
-	public static boolean isBlackListed(MessageEvent event)
-	{
-		for(String user : loadBlackList(event.getChannel().getName()))
-		{
-			if(user.equals(event.getUser().getNick()))
-				return true;
-		}
-		return false;
-	}
-	
-	public static List<String> loadBlackList(String channel)
-	{
-		File blacklistfolder = new File("requestblacklists/");
-		
-		if(!new File("requestblacklists").exists())
-			blacklistfolder.mkdir();
-		
-		File blacklistfile = new File("requestblacklists/" + channel + ".yml");
-			
-		if(!blacklistfile.exists())
-		{
-			try
-			{
-				blacklistfile.createNewFile();
-				RequestBlackList blacklist = new RequestBlackList();
-				
-				List<String> blacklistlist = new ArrayList<String>();
-				blacklistlist.add(StringUtils.genrandstring(10));
-				blacklist.blacklist = blacklistlist;
-				
-				YamlWriter writer = new YamlWriter(new FileWriter(blacklistfile));
-				writer.write(blacklist);
-				writer.close();
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
+public class RequestBlackListHandler {
+    public static boolean isBlackListed(MessageEvent event) {
+        for (String user : loadBlackList(event.getChannel().getName())) {
+            if (user.equals(event.getUser().getNick()))
+                return true;
+        }
+        return false;
+    }
 
-		try
-		{
-			YamlReader blacklistreader = new YamlReader(new FileReader(blacklistfile));
-			List<String> blacklistreaderlist = blacklistreader.read(RequestBlackList.class).blacklist;
-			blacklistreader.close();
-			return blacklistreaderlist;
-		} 
-		catch (IOException e)
-		{
-			e.printStackTrace();
-			System.gc();
-			return null;
-		}
-	}
+    public static List<String> loadBlackList(String channel) {
+        File blacklistfolder = new File("requestblacklists/");
+
+        if (!new File("requestblacklists").exists())
+            blacklistfolder.mkdir();
+
+        File blacklistfile = new File("requestblacklists/" + channel + ".yml");
+
+        if (!blacklistfile.exists()) {
+            try {
+                blacklistfile.createNewFile();
+                RequestBlackList blacklist = new RequestBlackList();
+
+                List<String> blacklistlist = new ArrayList<String>();
+                blacklistlist.add(StringUtils.genrandstring(10));
+                blacklist.blacklist = blacklistlist;
+
+                YamlWriter writer = new YamlWriter(new FileWriter(blacklistfile));
+                writer.write(blacklist);
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        try {
+            YamlReader blacklistreader = new YamlReader(new FileReader(blacklistfile));
+            List<String> blacklistreaderlist = blacklistreader.read(RequestBlackList.class).blacklist;
+            blacklistreader.close();
+            return blacklistreaderlist;
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.gc();
+            return null;
+        }
+    }
 }
