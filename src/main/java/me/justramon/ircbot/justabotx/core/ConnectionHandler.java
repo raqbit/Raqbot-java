@@ -6,19 +6,15 @@ import org.pircbotx.hooks.events.ConnectEvent;
 import me.justramon.ircbot.justabotx.config.ConfigHandler;
 import me.justramon.ircbot.justabotx.features.RequestBlackListHandler;
 
-public class ConnectionHandler extends ListenerAdapter
-{
+public class ConnectionHandler extends ListenerAdapter {
 
-	public void onConnect(ConnectEvent event)
-	{
+    public void onConnect(ConnectEvent event) {
 
-		if(!Core.dev)
-		{
-			for(String s : ConfigHandler.config.channels)
-			{
-				Core.bot.sendIRC().joinChannel(s);
-				RequestBlackListHandler.loadBlackList(s);
-			}
-		}
-	}
+        if (!Core.dev) {
+            for (String s : ConfigHandler.config.channels) {
+                Core.bot.sendIRC().joinChannel(s);
+                RequestBlackListHandler.loadBlackList(s);
+            }
+        }
+    }
 }
