@@ -12,7 +12,12 @@ public class Operator implements ICommand<MessageEvent> {
     @Override
     public void exe(MessageEvent event, String[] args) throws Exception {
         if (args.length == 0) {
-            MessageHandler.respond(event, "Not a valid first argument, valid options are [List/Add/Remove]");
+            MessageHandler.respond(event, "Please give a first argument, valid options are [List/Add/Remove]");
+            return;
+        }
+
+        if (args.length < 2) {
+            MessageHandler.respond(event, "Please give a username too!");
             return;
         }
 
@@ -66,7 +71,7 @@ public class Operator implements ICommand<MessageEvent> {
 
     @Override
     public String getUsage() {
-        return "?<command> [list/add/remove] <nickname> [nickname ...]";
+        return "?<command> <list/add/remove> <nickname> [nickname ...]";
     }
 
     @Override
