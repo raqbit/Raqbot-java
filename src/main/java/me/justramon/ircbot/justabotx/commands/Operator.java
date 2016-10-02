@@ -1,51 +1,81 @@
 package me.justramon.ircbot.justabotx.commands;
 
-import me.justramon.ircbot.justabotx.core.CommandHandler;
-import org.pircbotx.hooks.events.MessageEvent;
-
 import me.justramon.ircbot.justabotx.config.ConfigHandler;
 import me.justramon.ircbot.justabotx.core.Core;
 import me.justramon.ircbot.justabotx.core.ICommand;
 import me.justramon.ircbot.justabotx.util.MessageHandler;
+import me.justramon.ircbot.justabotx.util.StringUtils;
+import org.pircbotx.hooks.events.MessageEvent;
 
-public class Nick implements ICommand<MessageEvent> {
+public class Operator implements ICommand<MessageEvent> {
 
     @Override
     public void exe(MessageEvent event, String[] args) throws Exception {
-        if (args.length == 2 && args[1].length() > 0) {
-            if (args[0].equalsIgnoreCase("dev") || args[0].equalsIgnoreCase("wip")) {
-                ConfigHandler.config.devnick = args[1].trim();
-            } else if (args[0].equalsIgnoreCase("def") || args[0].equalsIgnoreCase("default")) {
-                ConfigHandler.config.nick = args[1].trim();
-            }
+        if (args.length == 0) {
+            MessageHandler.respond(event, "Not a valid first argument, valid options are [List/Add/Remove]");
+            return;
+        }
 
-            ConfigHandler.save();
-            Core.bot.sendIRC().changeNick(ConfigHandler.getNick());
-        } else if (args.length == 1 && args[0] != null) {
-            ConfigHandler.setNick(args[0].trim());
-            Core.bot.sendIRC().changeNick(ConfigHandler.getNick());
-        } else
-            MessageHandler.respond(event, "please give the new nick.");
+        String cmd = args[0].toLowerCase();
+        switch (cmd) {
+            case "list":
+                MessageHandler.respond(event, "[" + StringUtils.listToString(ConfigHandler.config.operators) + "]");
+                break;
+
+            case "add":
+                for (int i = 1; i < args.length; i++) {
+                    if (args[i].isEmpty())
+                        continue;
+
+                    ConfigHandler.config.operators.add(args[i]);
+                }
+
+                ConfigHandler.save();
+                String addedPeople = StringUtils.arrayToString(StringUtils.trimArgrumentsFromCommand(args));
+                MessageHandler.respond(event, "Added [" + addedPeople + "]");
+                break;
+
+            case "remove":
+                for (int i = 1; i < args.length; i++) {
+                    if (args[i].isEmpty())
+                        continue;
+
+                    ConfigHandler.config.operators.remove(args[i]);
+                }
+
+                ConfigHandler.save();
+
+                String removedPeople = StringUtils.arrayToString(StringUtils.trimArgrumentsFromCommand(args));
+                MessageHandler.respond(event, "Removed [" + removedPeople + "]");
+                break;
+
+            default:
+                MessageHandler.respond(event, "Not a valid first argument, valid options are [List/Add/Remove]");
+        }
     }
 
     @Override
     public String[] getAliases() {
-        return new String[]{"nick", "setnick"};
+        return new String[]{"operator"};
     }
 
     @Override
     public String getInfo() {
-        return "Set's the bot's nick to the nick given.";
+        return "List/Add/Remove bot operators";
     }
 
     @Override
     public String getUsage() {
-        return "?<command> [dev(devnick)/def(default nick)] <New Nickname>";
+        return "?<command> [list/add/remove] <nickname> [nickname ...]";
     }
-
 
     @Override
     public boolean xtraFunc() {
         return false;
+    }
+
+    @Override
+    public boolean isOperatorCommand() {
+        return true;
     }
 }

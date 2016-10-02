@@ -30,6 +30,8 @@ public class CommandHandler extends ListenerAdapter {
         commands.add(new Source());
         commands.add(new Nick());
         commands.add(new About());
+        commands.add(new Operator());
+
         if (Core.dev) {
             devcommands.add(new ForceShow());
         }
