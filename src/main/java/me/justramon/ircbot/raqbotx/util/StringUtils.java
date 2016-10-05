@@ -2,6 +2,7 @@ package me.justramon.ircbot.raqbotx.util;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Random;
 import java.util.TimeZone;
 
@@ -11,6 +12,16 @@ public class StringUtils {
 
         for (int i = 0; i < args.length; i++) {
             string += args[i] + ((i != (args.length - 1)) ? " " : "");
+        }
+
+        return string;
+    }
+
+    public static String listToString(List<String> args) {
+        String string = "";
+
+        for (int i = 0; i < args.size(); i++) {
+            string += args.get(i) + ((i != (args.size() - 1)) ? " " : "");
         }
 
         return string;
