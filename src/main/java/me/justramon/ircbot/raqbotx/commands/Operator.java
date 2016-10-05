@@ -4,14 +4,19 @@ import me.justramon.ircbot.raqbotx.config.ConfigHandler;
 import me.justramon.ircbot.raqbotx.core.ICommand;
 import me.justramon.ircbot.raqbotx.util.MessageHandler;
 import me.justramon.ircbot.raqbotx.util.StringUtils;
+import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
 
 public class Operator implements ICommand<MessageEvent> {
 
+    private void sendpm(User user, String message) {
+        user.send().message(message);
+    }
+
     @Override
     public void exe(MessageEvent event, String[] args) throws Exception {
         if (args.length == 0) {
-            MessageHandler.respond(event, "Please give a first argument, valid options are [List/Add/Remove]");
+            sendpm(event.getUser(),  "Please give a first argument, valid options are [List/Add/Remove]");
             return;
         }
 
@@ -19,12 +24,12 @@ public class Operator implements ICommand<MessageEvent> {
         String cmd = args[0].toLowerCase();
         switch (cmd) {
             case "list":
-                MessageHandler.respond(event, "[" + StringUtils.listToString(ConfigHandler.config.operators) + "]");
+                sendpm(event.getUser(), "[" + StringUtils.listToString(ConfigHandler.config.operators) + "]");
                 break;
 
             case "add":
                 if (args.length < 2) {
-                    MessageHandler.respond(event, "Please give a username too!");
+                    sendpm(event.getUser(), "Please give a username too!");
                     return;
                 }
 
@@ -37,12 +42,12 @@ public class Operator implements ICommand<MessageEvent> {
 
                 ConfigHandler.save();
                 String addedPeople = StringUtils.arrayToString(StringUtils.trimArgrumentsFromCommand(args));
-                MessageHandler.respond(event, "Added [" + addedPeople + "]");
+                sendpm(event.getUser(), "Added [" + addedPeople + "]");
                 break;
 
             case "remove":
                 if (args.length < 2) {
-                    MessageHandler.respond(event, "Please give a username too!");
+                    sendpm(event.getUser(), "Please give a username too!");
                     return;
                 }
 
@@ -56,11 +61,11 @@ public class Operator implements ICommand<MessageEvent> {
                 ConfigHandler.save();
 
                 String removedPeople = StringUtils.arrayToString(StringUtils.trimArgrumentsFromCommand(args));
-                MessageHandler.respond(event, "Removed [" + removedPeople + "]");
+                sendpm(event.getUser(),  "Removed [" + removedPeople + "]");
                 break;
 
             default:
-                MessageHandler.respond(event, "Not a valid first argument, valid options are [List/Add/Remove]");
+                sendpm(event.getUser(), "Not a valid first argument, valid options are [List/Add/Remove]");
         }
     }
 
