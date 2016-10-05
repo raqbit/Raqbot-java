@@ -15,10 +15,6 @@ public class Operator implements ICommand<MessageEvent> {
             return;
         }
 
-        if (args.length < 2) {
-            MessageHandler.respond(event, "Please give a username too!");
-            return;
-        }
 
         String cmd = args[0].toLowerCase();
         switch (cmd) {
@@ -27,6 +23,11 @@ public class Operator implements ICommand<MessageEvent> {
                 break;
 
             case "add":
+                if (args.length < 2) {
+                    MessageHandler.respond(event, "Please give a username too!");
+                    return;
+                }
+
                 for (int i = 1; i < args.length; i++) {
                     if (args[i].isEmpty())
                         continue;
@@ -40,6 +41,11 @@ public class Operator implements ICommand<MessageEvent> {
                 break;
 
             case "remove":
+                if (args.length < 2) {
+                    MessageHandler.respond(event, "Please give a username too!");
+                    return;
+                }
+
                 for (int i = 1; i < args.length; i++) {
                     if (args[i].isEmpty())
                         continue;
