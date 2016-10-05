@@ -56,4 +56,24 @@ public class StringUtils {
 
         return generatedString;
     }
+
+    //
+    public static String joinNiceString(List<String> strings) {
+        StringBuilder stringbuilder = new StringBuilder();
+        int i = 0;
+        for (String s : strings) {
+            if (i > 0) {
+                if (i == strings.size() - 1) {
+                    stringbuilder.append(" and ");
+                } else {
+                    stringbuilder.append(", ");
+                }
+            }
+
+            stringbuilder.append(s);
+            i++;
+        }
+
+        return stringbuilder.toString();
+    }
 }

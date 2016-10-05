@@ -7,6 +7,8 @@ import me.justramon.ircbot.raqbotx.util.StringUtils;
 import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
 
+import java.util.Arrays;
+
 public class Operator implements ICommand<MessageEvent> {
 
     private void sendpm(User user, String message) {
@@ -16,7 +18,7 @@ public class Operator implements ICommand<MessageEvent> {
     @Override
     public void exe(MessageEvent event, String[] args) throws Exception {
         if (args.length == 0) {
-            sendpm(event.getUser(),  "Please give a first argument, valid options are [List/Add/Remove]");
+            sendpm(event.getUser(), "Please give a first argument, valid options are [List/Add/Remove]");
             return;
         }
 
@@ -24,12 +26,13 @@ public class Operator implements ICommand<MessageEvent> {
         String cmd = args[0].toLowerCase();
         switch (cmd) {
             case "list":
-                sendpm(event.getUser(), "[" + StringUtils.listToString(ConfigHandler.config.operators) + "]");
+                String operators = StringUtils.joinNiceString(ConfigHandler.config.operators);
+                sendpm(event.getUser(), "List of bot operators: " + operators + "");
                 break;
 
             case "add":
                 if (args.length < 2) {
-                    sendpm(event.getUser(), "Please give a username too!");
+                    sendpm(event.getUser(), "Please give a username to add to the bot operator list!");
                     return;
                 }
 
@@ -41,13 +44,13 @@ public class Operator implements ICommand<MessageEvent> {
                 }
 
                 ConfigHandler.save();
-                String addedPeople = StringUtils.arrayToString(StringUtils.trimArgrumentsFromCommand(args));
-                sendpm(event.getUser(), "Added [" + addedPeople + "]");
+                String addedPeople = StringUtils.joinNiceString(Arrays.asList(StringUtils.trimArgrumentsFromCommand(args)));
+                sendpm(event.getUser(), "Added " + addedPeople + " to the operator's list");
                 break;
 
             case "remove":
                 if (args.length < 2) {
-                    sendpm(event.getUser(), "Please give a username too!");
+                    sendpm(event.getUser(), "Please give a username to add to the bot operator list!");
                     return;
                 }
 
@@ -61,7 +64,7 @@ public class Operator implements ICommand<MessageEvent> {
                 ConfigHandler.save();
 
                 String removedPeople = StringUtils.arrayToString(StringUtils.trimArgrumentsFromCommand(args));
-                sendpm(event.getUser(),  "Removed [" + removedPeople + "]");
+                sendpm(event.getUser(),  "Removed " + removedPeople + " from the bot operator list");
                 break;
 
             default:
