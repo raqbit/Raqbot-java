@@ -176,7 +176,7 @@
 
    END OF TERMS AND CONDITIONS
 
-   Copyright 2016 JustRamon
+   Copyright 2016 Raqbit
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

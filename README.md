@@ -1,3 +1,3 @@
-# JustABotX
-JustRamon's IRC bot.
+# RaqbotX
+Raqbit's IRC bot.
 Prefix is '?'
