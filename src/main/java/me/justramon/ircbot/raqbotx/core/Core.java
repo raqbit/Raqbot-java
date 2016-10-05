@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Core {
     public static PircBotX bot;
-    public static String version = "1.10.0.4";
+    public static String version = "1.10.0.5";
     public static boolean dev = false;
     public static boolean enabled = true;
 
