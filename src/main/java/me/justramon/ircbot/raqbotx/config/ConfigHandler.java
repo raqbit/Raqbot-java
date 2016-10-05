@@ -37,7 +37,7 @@ public class ConfigHandler {
             e.printStackTrace();
         }
 
-        Config config = new Config();
+        config = new Config();
 
         config.nick = "RaqbotX";
         config.devnick = "QbotXDev";
