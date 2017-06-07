@@ -109,3 +109,5 @@ modules.xml
 config.yml
 logs/
 /src/main/java/me/justramon/ircbot/raqbotx/util/NotImportant.java
+target/
+src/main/resources

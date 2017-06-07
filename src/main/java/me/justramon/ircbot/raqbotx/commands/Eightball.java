@@ -53,6 +53,10 @@ public class Eightball implements ICommand<MessageEvent> {
     public String getInfo() {
         return "Get your very own predictions or questions answered using the magic 8-ball";
     }
+    @Override
+    public String getUsage() {
+        return "?<command> question [note: has to end with a question mark]";
+    }
 
     @Override
     public boolean xtraFunc() {
